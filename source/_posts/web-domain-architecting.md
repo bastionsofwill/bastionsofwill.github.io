@@ -1,6 +1,7 @@
 ---
 title: 도메인 구조의 설계
 tags:
+  - opinion
   - TIL
 date: 2021-07-14 16:32:51
 ---
