@@ -1,8 +1,8 @@
 ---
 title: 한 권으로 읽는 컴퓨터 구조와 프로그래밍
 tags:
-- book
-- fundamental
+    - book
+    - fundamental
 ---
 # Computer Hardware - What it is and how it's built
 ## 1. The Internal Language of Computers
