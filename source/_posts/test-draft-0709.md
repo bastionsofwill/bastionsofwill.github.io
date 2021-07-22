@@ -25,5 +25,8 @@ const a = {
 console.log(a.cfa);
 ```
 
+### test image
+![](/images/testimg.png)
+
 ### youtube embed
 {% youtube AIqBubK6ZLc %}
