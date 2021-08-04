@@ -4,22 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>test_draft_0709 | bastionsofwill</title>
+  <title>The Secret Life of Programs - 04. Computer anatomy | bastionsofwill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="This is a test draft and will be published right away. h1h2h3codeblock: bashbash1$ cheilproxy  codeblock: js123456console.log(&quot;hello, world!&quot;);const a &#x3D; &amp;#123;    cfa: 235;    cccs: 23634;&amp;#">
+  <meta name="description" content="4. Computer AnatomyCPU- Arithmatic Logic Unit: 연산자와 피연산자를 입력받아 결과값과 결과 코드를 리턴 - Shifter: 조합 논리(Combinational Logic)만으로는 구현할 수 없는 Shift 연산을 수행 - Excecution Unit     메모리에서 명령과 피연산자를 가져와서 ALU에 전달하고 리턴값을">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test_draft_0709">
-<meta property="og:url" content="https://bastionsofwill.github.io/2021/07/09/test-draft-0709/index.html">
+<meta property="og:title" content="The Secret Life of Programs - 04. Computer anatomy">
+<meta property="og:url" content="https://bastionsofwill.github.io/2021/08/01/tslof-04/index.html">
 <meta property="og:site_name" content="bastionsofwill">
-<meta property="og:description" content="This is a test draft and will be published right away. h1h2h3codeblock: bashbash1$ cheilproxy  codeblock: js123456console.log(&quot;hello, world!&quot;);const a &#x3D; &amp;#123;    cfa: 235;    cccs: 23634;&amp;#">
+<meta property="og:description" content="4. Computer AnatomyCPU- Arithmatic Logic Unit: 연산자와 피연산자를 입력받아 결과값과 결과 코드를 리턴 - Shifter: 조합 논리(Combinational Logic)만으로는 구현할 수 없는 Shift 연산을 수행 - Excecution Unit     메모리에서 명령과 피연산자를 가져와서 ALU에 전달하고 리턴값을">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://bastionsofwill.github.io/images/testimg.png">
-<meta property="article:published_time" content="2021-07-09T11:09:56.000Z">
+<meta property="article:published_time" content="2021-08-01T13:17:04.000Z">
 <meta property="article:modified_time" content="2021-08-04T16:26:55.507Z">
 <meta property="article:author" content="JY">
-<meta property="article:tag" content="test">
+<meta property="article:tag" content="book">
+<meta property="article:tag" content="fundamental">
+<meta property="article:tag" content="the-secret-life-of-programs">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bastionsofwill.github.io/images/testimg.png">
   
     <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
   
@@ -76,10 +76,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-test-draft-0709" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-tslof-04" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/07/09/test-draft-0709/" class="article-date">
-  <time class="dt-published" datetime="2021-07-09T11:09:56.000Z" itemprop="datePublished">2021-07-09</time>
+    <a href="/2021/08/01/tslof-04/" class="article-date">
+  <time class="dt-published" datetime="2021-08-01T13:17:04.000Z" itemprop="datePublished">2021-08-01</time>
 </a>
     
   </div>
@@ -90,7 +90,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      test_draft_0709
+      The Secret Life of Programs - 04. Computer anatomy
     </h1>
   
 
@@ -98,21 +98,30 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>This is a test draft and will be published right away.</p>
-<h1 id="h1"><a href="#h1" class="headerlink" title="h1"></a>h1</h1><h2 id="h2"><a href="#h2" class="headerlink" title="h2"></a>h2</h2><h3 id="h3"><a href="#h3" class="headerlink" title="h3"></a>h3</h3><h3 id="codeblock-bash"><a href="#codeblock-bash" class="headerlink" title="codeblock: bash"></a>codeblock: bash</h3><figure class="highlight bash"><figcaption><span>bash</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cheilproxy</span><br></pre></td></tr></table></figure>
+        <h2 id="4-Computer-Anatomy"><a href="#4-Computer-Anatomy" class="headerlink" title="4. Computer Anatomy"></a>4. Computer Anatomy</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><pre><code>- Arithmatic Logic Unit: 연산자와 피연산자를 입력받아 결과값과 결과 코드를 리턴
+- Shifter: 조합 논리(Combinational Logic)만으로는 구현할 수 없는 Shift 연산을 수행
+- Excecution Unit
+    메모리에서 명령과 피연산자를 가져와서 ALU에 전달하고 리턴값을 메모리에 저장
+    메모리에서 실행해야하는 명령의 위치를 기억하기 위해 메모리 위치를 참조하는 PC(Program Counter)를 사용
+</code></pre>
+<h3 id="명령어-집합"><a href="#명령어-집합" class="headerlink" title="명령어 집합"></a>명령어 집합</h3><pre><code>- 명령어(instruction)를 네 필드(opcode, 두 개의 operand, result)로 나누어 표시한다면, 1) operand와 result 필드에 들어가는 주소 값으로 쓸 수 있는 비트가 부족하며, 2) 한 번에 여러 메모리 주소에 접근해야 한다는 문제점으로 인해 작동하기 어렵다.
+- 따라서 opcode와 주소로만 구성된 single-address 명령어를 사용하며, 이를 위해 누산기(accumulator)라는 레지스터를 사용한다.
+- 그럼에도 모든 메모리 주소 영역을 명령어에 담을 수 없으므로 3종류의 주소 지정 모드(즉시, 직접, 간접)를 통해 참조할 수 있는 주소의 영역을 확장한다.
+- 따라서 명령어의 구성은 아래 이미지와 같이 나타낼 수 있다.
+![](/images/instruction_set.png)
+</code></pre>
+<h3 id="메모리-입-출력-CPU-명령어"><a href="#메모리-입-출력-CPU-명령어" class="headerlink" title="메모리 + 입/출력 + CPU + 명령어"></a>메모리 + 입/출력 + CPU + 명령어</h3><pre><code>- 컴퓨터는 메모리에서 명령어를 가져오는 상태(fetch)와 명령을 실행하는 상태(execute)를 반복한다.
+- 즉, 프로그램 카운터 값을 메모리의 주소 버스에 먹이고, 메모리의 값(수행해야 하는 명령어)을 다시 명령어 레지스터에 먹여 명령어를 저장
+</code></pre>
 
-<h3 id="codeblock-js"><a href="#codeblock-js" class="headerlink" title="codeblock: js"></a>codeblock: js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;hello, world!&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> a = &#123;</span><br><span class="line">    <span class="attr">cfa</span>: <span class="number">235</span>;</span><br><span class="line">    cccs: <span class="number">23634</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a.cfa);</span><br></pre></td></tr></table></figure>
-
-<h3 id="test-image"><a href="#test-image" class="headerlink" title="test image"></a>test image</h3><p><img src="/images/testimg.png"></p>
-<h3 id="youtube-embed"><a href="#youtube-embed" class="headerlink" title="youtube embed"></a>youtube embed</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/AIqBubK6ZLc" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/07/09/test-draft-0709/" data-id="ckrxpdycq000a1juv1n1oc36e" data-title="test_draft_0709" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslof-04/" data-id="ckrxpdycs000b1juv8wn55ik9" data-title="The Secret Life of Programs - 04. Computer anatomy" class="article-share-link">공유</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li></ul>
 
     </footer>
   </div>
@@ -120,15 +129,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/07/14/web-domain-architecting/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/08/01/tslof-05/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">최신</strong>
       <div class="article-nav-title">
         
-          도메인 구조의 설계
+          tslof-05
         
       </div>
     </a>
   
+  
+    <a href="/2021/07/22/email-traking/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">Email open tracking and link click tracking</div>
+    </a>
   
 </nav>
 
