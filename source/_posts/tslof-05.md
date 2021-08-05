@@ -1,5 +1,5 @@
 ---
-title: tslof-05
+title: The Secret Life of Programs - 05. Computer Architecture
 tags:
   - book
   - fundamental
@@ -7,7 +7,6 @@ tags:
 date: 2021-08-01 13:18:02
 ---
 
-## 5. Computer Architecture
 ### 프로시저, 서브루틴, 함수
     - 함수를 호출, 실행하고 다시 원래 자리로 돌아오기 위해서는 어디서 함수를 호출하였는지를 기억해야 하는데, 이는 바로 프로그램 카운터의 값이다.
     - 반환 주소를 저장하고, 이를 간접 호출하여 분기해서 돌아오는 과정은 많은 작업이 필요하므로 대부분의 기계는 이를 구현한 명령어를 제공한다.

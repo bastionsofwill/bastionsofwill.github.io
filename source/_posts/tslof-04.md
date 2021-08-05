@@ -1,5 +1,5 @@
 ---
-title: The Secret Life of Programs - 04. Computer anatomy
+title: The Secret Life of Programs - 04. Computer Anatomy
 tags:
   - book
   - fundamental
@@ -7,7 +7,6 @@ tags:
 date: 2021-08-01 13:17:04
 ---
 
-## 4. Computer Anatomy
 ### CPU
     - Arithmatic Logic Unit: 연산자와 피연산자를 입력받아 결과값과 결과 코드를 리턴
     - Shifter: 조합 논리(Combinational Logic)만으로는 구현할 수 없는 Shift 연산을 수행
