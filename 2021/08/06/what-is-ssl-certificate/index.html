@@ -13,14 +13,14 @@
 <meta property="og:site_name" content="bastionsofwill">
 <meta property="og:description" content="SSL&#x2F;TLS란? SSL(Secure Socket Layer)은 암호 기반의 인터넷 보안 프로토콜 여러 번의 보완이 있었으며, 넷스케이프와 무관한 IETF가 이를 관리하면서 TLS(Transport Layer Security)로 이름이 변경 HTTP가 이를 사용하여 HTTPS(HTTP over TLS)를 제공하며, SNMP, FTP 등 다른 프로토콜에서도">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://bastionsofwill.github.io/images/Chain_OF_Trust.png">
+<meta property="og:image" content="https://bastionsofwill.github.io/images/Chain_Of_Trust.png">
 <meta property="article:published_time" content="2021-08-06T16:28:37.000Z">
-<meta property="article:modified_time" content="2021-08-06T07:46:34.145Z">
+<meta property="article:modified_time" content="2021-08-06T08:04:09.636Z">
 <meta property="article:author" content="JY">
 <meta property="article:tag" content="infrastructure">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bastionsofwill.github.io/images/Chain_OF_Trust.png">
+<meta name="twitter:image" content="https://bastionsofwill.github.io/images/Chain_Of_Trust.png">
   
     <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
   
@@ -221,7 +221,7 @@
 <li>클라이언트는 접속할 서버에서 보낸 인증서 내용 확인 후 신뢰할 수 있는 CA의 서명을 확인</li>
 <li>클라이언트가 전달받은 leaf 인증서를 서명한 중간 CA 정보와, 중간 CA를 서명한 root CA가 이미 신뢰하는 root CA의 목록에 있는지 차례대로 확인(Chain of Trust)하여 검증</li>
 <li>따라서, 중간 CA 정보를 클라이언트에 전달하지 못하면 root CA에 대한 신뢰관계를 검증하지 못할 수도(대부분 클라이언트들은 신뢰하는 중간 CA 정보도 설정하기 때문에 문제가 없는 경우가 많음) 있기 때문에 중간 CA 정보를 설정하는 것이 좋음</li>
-<li>root CA와 중간 CA를 굳이 분리하는 것은 신뢰구조 전체가 무너지는 것을 방지하기 위함이며, root CA는 중간 CA를 서명하기 위해서만 제한적으로 사용되고 실제 발급되는 leaf 인증서의 발급(서명)에는 중간 CA를 사용하는 구조가 보편적.<br><img src="/images/Chain_OF_Trust.png"></li>
+<li>root CA와 중간 CA를 굳이 분리하는 것은 신뢰구조 전체가 무너지는 것을 방지하기 위함이며, root CA는 중간 CA를 서명하기 위해서만 제한적으로 사용되고 실제 발급되는 leaf 인증서의 발급(서명)에는 중간 CA를 사용하는 구조가 보편적.<br><img src="/images/Chain_Of_Trust.png"></li>
 <li>CSR(Cross Signed Root): 클라이언트의 신뢰하는 root CA 목록에 해당 root CA가 포함되지 않을 수 있는데(클라이언트 환경이 오래되었거나, root CA가 비교적 최근에 작성되었을 경우), 이 경우 대부분의 클라이언트가 신뢰하는 root CA에게 별도로 서명을 받아두기도 하며 이를 CSR이라 한다.</li>
 <li>SNI(Server Name Indication): 여러 도메인을 하나의 웹 서버로 서비스할 때, 접속하고자 하는 호스트네임을 요청하여 적절한 인증서를 받아 오기 위해 SNI를 지원하는 클라이언트 환경이 요구될 수 있다.</li>
 </ul>
@@ -253,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="cks01ogya001e3bou50d6cb6h" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="cks02b2yn000f2dnj2bpvfkl6" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
       
       
       
