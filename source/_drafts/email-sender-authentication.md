@@ -2,24 +2,24 @@
 title: 이메일 발신자 인증
 tags:
     - email
-    - DNS
+    - network
 ---
 출처:
 RFC 5782: DNS Blacklists and Whitelists
-    - https://datatracker.ietf.org/doc/html/rfc5782
+- https://datatracker.ietf.org/doc/html/rfc5782
 
 Wikipedia
-    - https://en.wikipedia.org/wiki/Mail_Abuse_Prevention_System
-    - https://en.wikipedia.org/wiki/Domain_Name_System-based_blackhole_list
+- https://en.wikipedia.org/wiki/Mail_Abuse_Prevention_System
+- https://en.wikipedia.org/wiki/Domain_Name_System-based_blackhole_list
 
 KISA 불법스팸대응센터
-    - http://spam.kisa.or.kr
+- http://spam.kisa.or.kr
 
 SendGrid Document
-    - https://docs.sendgrid.com/ui/account-and-settings/spf-records
-    - https://docs.sendgrid.com/ui/account-and-settings/dkim-records
+- https://docs.sendgrid.com/ui/account-and-settings/spf-records
+- https://docs.sendgrid.com/ui/account-and-settings/dkim-records
 
-# DNSBL과 KISA-RBL
+## DNSBL과 KISA-RBL
 DNSBL(DNS-based blackhole list)은 DNS 쿼리를 통해 발송 IP 주소가 스팸 블랙리스트에 등재되어 있는지 확인할 수 있는 서비스이다. MAPS(Mail Abuse Preventation System)에서 만들고 관리하던 스팸 발송 이력이 있거나 수상한 IP의 리스트인 RBL(Real-time Blackhole List)에서 출발하였으며, DNS 기반의 DNSBL을 만들어 해당 도메인으로부터 발송되는 메일을 차단할 수 있도록 발전하였다. 이후 각자의 정책에 따라 여러 종류의 RBL이 만들어지면서 RBL과 DNSBL이라는 용어는 일반화되고 혼용되는 상황이다.
 KISA-RBL은 KISA(한국인터넷진흥원)에서 무료로 관리/운영하는 실시간 스팸차단리스트이다. 국내외의 스팸 정보를 실시간으로 취합/분석하여 1시간마다 업데이트하며, 일 10만건 이하의 수신량이 발생하는 메일 서버에서 사용이 가능하다.
 
