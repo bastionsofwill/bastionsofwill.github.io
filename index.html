@@ -71,6 +71,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hexo-travis-ghpage" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/11/17/hexo-travis-ghpage/" class="article-date">
+  <time class="dt-published" datetime="2021-11-17T16:17:58.000Z" itemprop="datePublished">2021-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/11/17/hexo-travis-ghpage/">Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Hexo란"><a href="#Hexo란" class="headerlink" title="Hexo란?"></a>Hexo란?</h2><p>Hexo는 GitHub Pages를 사용한 블로깅에 자주 사용되는 Jekyll과 비슷한 블로깅 프레임워크이다. Ruby Gem 형태로 사용되어 Ruby 개발환경을 세팅해야 하는 Jekyll에 비해 내 환경에 이미 설치되어있던 Node.js와 Git 두 요구사항에 의존하는 점이 마음에 들어서 사용하게 되었다.</p>
+<p>Hexo는 지정 폴더의 리소스를 관리하여 블로그 애셋을 생성/배포하는 방식으로 작동한다.<br><code>hexo init &lt;folder&gt;</code> 명령어로 블로깅에 사용할 폴더를 초기화하면 아래와 같은 형태의 구조를 갖추게 된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<p>draft 폴더에 마크다운 파일을 생성하고 <code>hexo publish</code> 명령어로 이를 post로 옮겨서 게시글 작성을 관리할 수 있으며, scaffolds를 통해 사전에 정의해둔 포맷으로 게시글을 생성할 수 있다. 각 게시글 상단에 Front-matter라는 YAML 또는 JSON 형식의 메타데이터를 입력하여 해당 게시글의 제목, 태그 등의 정보를 지정할 수 있다.<br>게시글 작성을 마치고 _post 폴더로 옮긴 다음에는 .md 형식의 파일을 HTML, CSS, JS로 구성된 정적 페이지로의 변환하는 과정이 필요하다. 이를 수행하는 명령어가 <code>hexo generate</code>로, 로컬 환경에서 이를 실행한 후 호스팅하는 방식으로 사용할 수도 있겠지만, hexo는 다양한 방식의 보다 편리한 배포 및 관리를 지원한다.</p>
+<h2 id="GitHub-Pages와-Travis-CI를-사용한-블로그-퍼블리싱"><a href="#GitHub-Pages와-Travis-CI를-사용한-블로그-퍼블리싱" class="headerlink" title="GitHub Pages와 Travis CI를 사용한 블로그 퍼블리싱"></a>GitHub Pages와 Travis CI를 사용한 블로그 퍼블리싱</h2><p>hexo는 git, heroku 등 다양한 환경에 맞는 배포 툴을 지원하지만, GitHub Pages를 사용하는 Hexo의 공식 튜토리얼에서는 Travis CI라는 CI 툴을 사용하여 배포를 진행한다.<br>Travis CI에 GitHub Pages 리포지토리(<strong><em>username</em>.github.io</strong>) 권한을 부여한 후, <code>.travis.yml</code> 파일을 리포지토리에 추가하여 <code>main</code> 브랜치에서 <code>gh-pages</code> 브랜치로의 배포를 자동화할 수 있다. <code>.travis.yml</code> 파일에는 <code>hexo generate</code> 명령어를 사용하여 정적 파일을 생성하는 스크립트가 설정되어 있다. 이후 리포지토리 설정에서 <code>gh-pages</code> 브랜치 내용을 GitHub Pages 사이트 소스로 설정하면, <strong><em>username</em>.github.io</strong>로 사용자의 블로그를 호스팅할 수 있다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/ko/docs/setup">https://hexo.io/ko/docs/setup</a><br><a target="_blank" rel="noopener" href="https://hexo.io/ko/docs/github-pages">https://hexo.io/ko/docs/github-pages</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="ckw374caa000f1vsud9arb2es" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-video-through-web-0" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/10/05/video-through-web-0/" class="article-date">
@@ -105,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="ckw3311zk000k1yuv1ovj65dv" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="ckw374cag000m1vsu2e3q3aad" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
       
       
       
@@ -295,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="ckw3311zt000n1yuv6rlk3u3i" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="ckw374caj000p1vsug7qm493i" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
       
       
       
@@ -377,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-05/" data-id="ckw3311zi000i1yuv8u1i4fzf" data-title="The Secret Life of Programs - 05. Computer Architecture" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-05/" data-id="ckw374caf000k1vsu56fthxze" data-title="The Secret Life of Programs - 05. Computer Architecture" class="article-share-link">공유</a>
       
       
       
@@ -440,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-04/" data-id="ckw3311zg000f1yuv1pev8zou" data-title="The Secret Life of Programs - 04. Computer Anatomy" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-04/" data-id="ckw374cac000i1vsu1h0s4gty" data-title="The Secret Life of Programs - 04. Computer Anatomy" class="article-share-link">공유</a>
       
       
       
@@ -492,7 +538,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/07/22/email-tracking/" data-id="ckw3311zf000d1yuv4i173659" data-title="이메일 개봉/링크 클릭 추적하기" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/07/22/email-tracking/" data-id="ckw374ca9000d1vsu7rwvd9u5" data-title="이메일 개봉/링크 클릭 추적하기" class="article-share-link">공유</a>
       
       
       
@@ -541,7 +587,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/07/14/web-domain-architecting/" data-id="ckw3311zs000m1yuv9jro6u0s" data-title="도메인 구조의 설계" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/07/14/web-domain-architecting/" data-id="ckw374cai000n1vsu0ixk5ym1" data-title="도메인 구조의 설계" class="article-share-link">공유</a>
       
       
       
@@ -568,7 +614,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
     </div>
   </div>
 
@@ -578,7 +624,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그 클라우드</h3>
     <div class="widget tagcloud">
-      <a href="/tags/TIL/" style="font-size: 10px;">TIL</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 20px;">fundamental</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/opinion/" style="font-size: 10px;">opinion</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 20px;">the-secret-life-of-programs</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TIL/" style="font-size: 10px;">TIL</a> <a href="/tags/Travis-CI/" style="font-size: 10px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 20px;">fundamental</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/opinion/" style="font-size: 10px;">opinion</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 20px;">the-secret-life-of-programs</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
     </div>
   </div>
 
@@ -587,7 +633,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">아카이브</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">10월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">8월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">7월 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">11월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">10월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">8월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">7월 2021</a></li></ul>
     </div>
   </div>
 
@@ -598,6 +644,10 @@
     <h3 class="widget-title">최근 포스트</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/11/17/hexo-travis-ghpage/">Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영</a>
+          </li>
         
           <li>
             <a href="/2021/10/05/video-through-web-0/">Adobe Flash와 ActiveX</a>
@@ -613,10 +663,6 @@
         
           <li>
             <a href="/2021/08/01/tslop-04/">The Secret Life of Programs - 04. Computer Anatomy</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/22/email-tracking/">이메일 개봉/링크 클릭 추적하기</a>
           </li>
         
       </ul>

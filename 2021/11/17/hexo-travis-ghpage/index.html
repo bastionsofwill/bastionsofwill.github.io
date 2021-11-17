@@ -4,24 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>The Secret Life of Programs - 04. Computer Anatomy | bastionsofwill</title>
+  <title>Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영 | bastionsofwill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="CPU Arithmatic Logic Unit: 연산자와 피연산자를 입력받아 결과값과 결과 코드를 리턴 Shifter: 조합 논리(Combinational Logic)만으로는 구현할 수 없는 Shift 연산을 수행 Excecution Unit 메모리에서 명령과 피연산자를 가져와서 ALU에 전달하고 리턴값을 메모리에 저장 메모리에서 실행해야하는 명령의 위치를">
+  <meta name="description" content="Hexo란?Hexo는 GitHub Pages를 사용한 블로깅에 자주 사용되는 Jekyll과 비슷한 블로깅 프레임워크이다. Ruby Gem 형태로 사용되어 Ruby 개발환경을 세팅해야 하는 Jekyll에 비해 내 환경에 이미 설치되어있던 Node.js와 Git 두 요구사항에 의존하는 점이 마음에 들어서 사용하게 되었다. Hexo는 지정 폴더의 리소스를 관리하">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The Secret Life of Programs - 04. Computer Anatomy">
-<meta property="og:url" content="https://bastionsofwill.github.io/2021/08/01/tslop-04/index.html">
+<meta property="og:title" content="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영">
+<meta property="og:url" content="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/index.html">
 <meta property="og:site_name" content="bastionsofwill">
-<meta property="og:description" content="CPU Arithmatic Logic Unit: 연산자와 피연산자를 입력받아 결과값과 결과 코드를 리턴 Shifter: 조합 논리(Combinational Logic)만으로는 구현할 수 없는 Shift 연산을 수행 Excecution Unit 메모리에서 명령과 피연산자를 가져와서 ALU에 전달하고 리턴값을 메모리에 저장 메모리에서 실행해야하는 명령의 위치를">
+<meta property="og:description" content="Hexo란?Hexo는 GitHub Pages를 사용한 블로깅에 자주 사용되는 Jekyll과 비슷한 블로깅 프레임워크이다. Ruby Gem 형태로 사용되어 Ruby 개발환경을 세팅해야 하는 Jekyll에 비해 내 환경에 이미 설치되어있던 Node.js와 Git 두 요구사항에 의존하는 점이 마음에 들어서 사용하게 되었다. Hexo는 지정 폴더의 리소스를 관리하">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://bastionsofwill.github.io/images/instruction_set.png">
-<meta property="article:published_time" content="2021-08-01T13:17:04.000Z">
+<meta property="article:published_time" content="2021-11-17T16:17:58.000Z">
 <meta property="article:modified_time" content="2021-11-17T07:21:00.280Z">
 <meta property="article:author" content="JY">
-<meta property="article:tag" content="book">
-<meta property="article:tag" content="fundamental">
-<meta property="article:tag" content="the-secret-life-of-programs">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Travis CI">
+<meta property="article:tag" content="GitHub Pages">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bastionsofwill.github.io/images/instruction_set.png">
   
     <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
   
@@ -78,10 +76,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-tslop-04" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-hexo-travis-ghpage" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/08/01/tslop-04/" class="article-date">
-  <time class="dt-published" datetime="2021-08-01T13:17:04.000Z" itemprop="datePublished">2021-08-01</time>
+    <a href="/2021/11/17/hexo-travis-ghpage/" class="article-date">
+  <time class="dt-published" datetime="2021-11-17T16:17:58.000Z" itemprop="datePublished">2021-11-17</time>
 </a>
     
   </div>
@@ -92,7 +90,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      The Secret Life of Programs - 04. Computer Anatomy
+      Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영
     </h1>
   
 
@@ -100,38 +98,21 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><ul>
-<li>Arithmatic Logic Unit: 연산자와 피연산자를 입력받아 결과값과 결과 코드를 리턴</li>
-<li>Shifter: 조합 논리(Combinational Logic)만으로는 구현할 수 없는 Shift 연산을 수행</li>
-<li>Excecution Unit<ul>
-<li>메모리에서 명령과 피연산자를 가져와서 ALU에 전달하고 리턴값을 메모리에 저장</li>
-<li>메모리에서 실행해야하는 명령의 위치를 기억하기 위해 메모리 위치를 참조하는 PC(Program Counter)를 사용</li>
-</ul>
-</li>
-</ul>
-<h2 id="명령어-집합"><a href="#명령어-집합" class="headerlink" title="명령어 집합"></a>명령어 집합</h2><ul>
-<li>명령어(instruction)를 네 필드(opcode, 두 개의 operand, result)로 나누어 표시한다면 아래 2가지 문제점으로 인하여 명령어를 처리하기 어렵다.<ol>
-<li>operand와 result 필드에 들어가는 주소 값으로 쓸 수 있는 비트가 부족</li>
-<li>한 번에 여러 메모리 주소에 접근해야 함</li>
-</ol>
-</li>
-<li>따라서 opcode와 주소로만 구성된 single-address 명령어를 사용하며, 이를 위해 누산기(accumulator)라는 레지스터를 사용한다.</li>
-<li>그럼에도 모든 메모리 주소 영역을 명령어에 담을 수 없으므로 3종류의 주소 지정 모드(즉시, 직접, 간접)를 통해 참조할 수 있는 주소의 영역을 확장한다.</li>
-<li>따라서 명령어의 구성은 아래 이미지와 같이 나타낼 수 있다.<br><img src="/images/instruction_set.png"></li>
-</ul>
-<h2 id="메모리-입-출력-CPU-명령어"><a href="#메모리-입-출력-CPU-명령어" class="headerlink" title="메모리 + 입/출력 + CPU + 명령어"></a>메모리 + 입/출력 + CPU + 명령어</h2><ul>
-<li>컴퓨터는 메모리에서 명령어를 가져오는 상태(fetch)와 명령을 실행하는 상태(execute)를 반복</li>
-<li>즉, 컴퓨터의 처리 방식은 프로그램 카운터 값을 메모리의 주소 버스에 먹이고, 메모리의 값(수행해야 하는 명령어)을 다시 명령어 레지스터에 먹여 명령어를 저장하는 절차의 반복</li>
-</ul>
+        <h2 id="Hexo란"><a href="#Hexo란" class="headerlink" title="Hexo란?"></a>Hexo란?</h2><p>Hexo는 GitHub Pages를 사용한 블로깅에 자주 사용되는 Jekyll과 비슷한 블로깅 프레임워크이다. Ruby Gem 형태로 사용되어 Ruby 개발환경을 세팅해야 하는 Jekyll에 비해 내 환경에 이미 설치되어있던 Node.js와 Git 두 요구사항에 의존하는 점이 마음에 들어서 사용하게 되었다.</p>
+<p>Hexo는 지정 폴더의 리소스를 관리하여 블로그 애셋을 생성/배포하는 방식으로 작동한다.<br><code>hexo init &lt;folder&gt;</code> 명령어로 블로깅에 사용할 폴더를 초기화하면 아래와 같은 형태의 구조를 갖추게 된다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
+<p>draft 폴더에 마크다운 파일을 생성하고 <code>hexo publish</code> 명령어로 이를 post로 옮겨서 게시글 작성을 관리할 수 있으며, scaffolds를 통해 사전에 정의해둔 포맷으로 게시글을 생성할 수 있다. 각 게시글 상단에 Front-matter라는 YAML 또는 JSON 형식의 메타데이터를 입력하여 해당 게시글의 제목, 태그 등의 정보를 지정할 수 있다.<br>게시글 작성을 마치고 _post 폴더로 옮긴 다음에는 .md 형식의 파일을 HTML, CSS, JS로 구성된 정적 페이지로의 변환하는 과정이 필요하다. 이를 수행하는 명령어가 <code>hexo generate</code>로, 로컬 환경에서 이를 실행한 후 호스팅하는 방식으로 사용할 수도 있겠지만, hexo는 다양한 방식의 보다 편리한 배포 및 관리를 지원한다.</p>
+<h2 id="GitHub-Pages와-Travis-CI를-사용한-블로그-퍼블리싱"><a href="#GitHub-Pages와-Travis-CI를-사용한-블로그-퍼블리싱" class="headerlink" title="GitHub Pages와 Travis CI를 사용한 블로그 퍼블리싱"></a>GitHub Pages와 Travis CI를 사용한 블로그 퍼블리싱</h2><p>hexo는 git, heroku 등 다양한 환경에 맞는 배포 툴을 지원하지만, GitHub Pages를 사용하는 Hexo의 공식 튜토리얼에서는 Travis CI라는 CI 툴을 사용하여 배포를 진행한다.<br>Travis CI에 GitHub Pages 리포지토리(<strong><em>username</em>.github.io</strong>) 권한을 부여한 후, <code>.travis.yml</code> 파일을 리포지토리에 추가하여 <code>main</code> 브랜치에서 <code>gh-pages</code> 브랜치로의 배포를 자동화할 수 있다. <code>.travis.yml</code> 파일에는 <code>hexo generate</code> 명령어를 사용하여 정적 파일을 생성하는 스크립트가 설정되어 있다. 이후 리포지토리 설정에서 <code>gh-pages</code> 브랜치 내용을 GitHub Pages 사이트 소스로 설정하면, <strong><em>username</em>.github.io</strong>로 사용자의 블로그를 호스팅할 수 있다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/ko/docs/setup">https://hexo.io/ko/docs/setup</a><br><a target="_blank" rel="noopener" href="https://hexo.io/ko/docs/github-pages">https://hexo.io/ko/docs/github-pages</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-04/" data-id="ckw374cac000i1vsu1h0s4gty" data-title="The Secret Life of Programs - 04. Computer Anatomy" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="ckw374caa000f1vsud9arb2es" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li></ul>
 
     </footer>
   </div>
@@ -139,19 +120,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/08/01/tslop-05/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">최신</strong>
-      <div class="article-nav-title">
-        
-          The Secret Life of Programs - 05. Computer Architecture
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/07/22/email-tracking/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/10/05/video-through-web-0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">이전</strong>
-      <div class="article-nav-title">이메일 개봉/링크 클릭 추적하기</div>
+      <div class="article-nav-title">Adobe Flash와 ActiveX</div>
     </a>
   
 </nav>
