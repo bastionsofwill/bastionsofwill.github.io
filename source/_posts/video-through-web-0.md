@@ -3,7 +3,6 @@ title: Adobe Flash와 ActiveX
 tags:
   - web
   - history
-  - legacy
 date: 2021-10-05 19:48:36
 ---
 
