@@ -9,6 +9,19 @@ tags:
 ## h2
 ### h3
 
+### Emphasis
+**bold**
+__also bold__
+*italic*
+_also italic_
+*__bold and italic__*
+
+### quoute
+>quote1
+
+>qoute2
+>>quote inside quote
+
 ### ul
 - foods
     - pizza
@@ -64,3 +77,13 @@ console.log(a.cfa);
 
 ### youtube embed
 {% youtube AIqBubK6ZLc %}
+
+### Link
+[Google](http://www.google.co.kr "구글")
+<http://google.com/>
+
+### Reference link
+[Google][1]
+[Naver][2]
+[1]: http://google.com/ “구글”
+[2]: http://naver.com/ “네이버”
