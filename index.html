@@ -71,6 +71,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-what-is-dependabot" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/11/19/what-is-dependabot/" class="article-date">
+  <time class="dt-published" datetime="2021-11-19T18:03:25.000Z" itemprop="datePublished">2021-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/11/19/what-is-dependabot/">Dependabot은 무엇일까?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="내-main-브랜치에-무슨-짓이야"><a href="#내-main-브랜치에-무슨-짓이야" class="headerlink" title="내 main 브랜치에 무슨 짓이야"></a>내 main 브랜치에 무슨 짓이야</h3><p>Github 리포지토리에 Dependabot이라는 봇이 main 브랜치를 내가 생성한 적이 없는 브랜치와 머지하는 PR을 작성하였다.<br><img src="/images/dpdb_pr.png"><br>PR을 확인해보니 package-lock.json, package.json, yarn.lock 3개의 파일이 변경된 것을 확인할 수 있었는데, PR의 제목처럼 hexo-renderer-marked라는 패키지의 버전을 업데이트하면서 생긴 변경임을 확인할 수 있었다.</p>
+<h3 id="Dependabot이란"><a href="#Dependabot이란" class="headerlink" title="Dependabot이란?"></a>Dependabot이란?</h3><p>Dependabot은 Bump<a target="_blank" rel="noopener" href="https://github.com/gocardless/bump">1</a>라는 프로젝트로부터 출발한, 프로젝트의 의존성을 최신으로 유지하는 툴이다. 핵심 기능을 담당하는 Dependabot Core는 Ruby Gem들의 집합으로 Ruby, Python, JavaScript 등 넓은 범위의 언어를 지원하며, 리포지토리에 존재하는 코드의 의존성을 확인하여 업데이트 후 빌드하여 PR을 생성하는 기능을 수행한다.<br><img src="/images/dpdb_pr.png"><a target="_blank" rel="noopener" href="https://github.com/dependabot/dependabot-core">2</a><br><code>.github/dependabot.yml</code> 파일을 통해 업데이트 스케줄, 최대 open된 PR의 개수 등을 추가로 설정할 수 있다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.nearform.com/blog/automatic-dependency-bump/">https://www.nearform.com/blog/automatic-dependency-bump/</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/dependabot/dependabot-core">https://github.com/dependabot/dependabot-core</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="ckw65wxs4000n32qu4n4b0aj3" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hexo-travis-ghpage" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/11/17/hexo-travis-ghpage/" class="article-date">
@@ -103,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="ckw65m9v6000f4hoyb8ucf4qf" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="ckw65wxrw000d32qudtwma81g" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
       
       
       
@@ -151,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="ckw65m9vc000m4hoydeag7q37" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="ckw65wxs2000k32qu4pm6ehk9" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
       
       
       
@@ -341,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="ckw65m9vn001t4hoygjzgdsw2" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="ckw65wxs5000p32qu8zahahwt" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
       
       
       
@@ -423,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-05/" data-id="ckw65m9vb000k4hoy28h20arx" data-title="The Secret Life of Programs - 05. Computer Architecture" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-05/" data-id="ckw65wxrz000i32qu4i587t83" data-title="The Secret Life of Programs - 05. Computer Architecture" class="article-share-link">공유</a>
       
       
       
@@ -486,7 +532,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-04/" data-id="ckw65m9v8000i4hoy2y1sefos" data-title="The Secret Life of Programs - 04. Computer Anatomy" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-04/" data-id="ckw65wxrx000f32qubs7f70em" data-title="The Secret Life of Programs - 04. Computer Anatomy" class="article-share-link">공유</a>
       
       
       
@@ -538,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/07/22/email-tracking/" data-id="ckw65m9v6000d4hoy74qua768" data-title="이메일 개봉/링크 클릭 추적하기" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/07/22/email-tracking/" data-id="ckw65wxrv000b32qudqll7to8" data-title="이메일 개봉/링크 클릭 추적하기" class="article-share-link">공유</a>
       
       
       
@@ -587,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/07/14/web-domain-architecting/" data-id="ckw65m9ve000n4hoydvp2goly" data-title="도메인 구조의 설계" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/07/14/web-domain-architecting/" data-id="ckw65wxs3000m32qua2yr2mwu" data-title="도메인 구조의 설계" class="article-share-link">공유</a>
       
       
       
@@ -614,7 +660,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
     </div>
   </div>
 
@@ -624,7 +670,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그 클라우드</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TIL/" style="font-size: 10px;">TIL</a> <a href="/tags/Travis-CI/" style="font-size: 10px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 20px;">fundamental</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/opinion/" style="font-size: 10px;">opinion</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 20px;">the-secret-life-of-programs</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TIL/" style="font-size: 10px;">TIL</a> <a href="/tags/Travis-CI/" style="font-size: 10px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 20px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/opinion/" style="font-size: 10px;">opinion</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 20px;">the-secret-life-of-programs</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
     </div>
   </div>
 
@@ -646,6 +692,10 @@
       <ul>
         
           <li>
+            <a href="/2021/11/19/what-is-dependabot/">Dependabot은 무엇일까?</a>
+          </li>
+        
+          <li>
             <a href="/2021/11/17/hexo-travis-ghpage/">Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영</a>
           </li>
         
@@ -659,10 +709,6 @@
         
           <li>
             <a href="/2021/08/01/tslop-05/">The Secret Life of Programs - 05. Computer Architecture</a>
-          </li>
-        
-          <li>
-            <a href="/2021/08/01/tslop-04/">The Secret Life of Programs - 04. Computer Anatomy</a>
           </li>
         
       </ul>

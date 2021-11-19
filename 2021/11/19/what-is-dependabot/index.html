@@ -4,15 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>태그: history | bastionsofwill</title>
+  <title>Dependabot은 무엇일까? | bastionsofwill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="bastionsofwill">
-<meta property="og:url" content="https://bastionsofwill.github.io/tags/history/index.html">
+  <meta name="description" content="내 main 브랜치에 무슨 짓이야Github 리포지토리에 Dependabot이라는 봇이 main 브랜치를 내가 생성한 적이 없는 브랜치와 머지하는 PR을 작성하였다.PR을 확인해보니 package-lock.json, package.json, yarn.lock 3개의 파일이 변경된 것을 확인할 수 있었는데, PR의 제목처럼 hexo-renderer-marke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dependabot은 무엇일까?">
+<meta property="og:url" content="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/index.html">
 <meta property="og:site_name" content="bastionsofwill">
+<meta property="og:description" content="내 main 브랜치에 무슨 짓이야Github 리포지토리에 Dependabot이라는 봇이 main 브랜치를 내가 생성한 적이 없는 브랜치와 머지하는 PR을 작성하였다.PR을 확인해보니 package-lock.json, package.json, yarn.lock 3개의 파일이 변경된 것을 확인할 수 있었는데, PR의 제목처럼 hexo-renderer-marke">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://bastionsofwill.github.io/images/dpdb_pr.png">
+<meta property="og:image" content="https://bastionsofwill.github.io/images/dpdb_pr.png">
+<meta property="article:published_time" content="2021-11-19T18:03:25.000Z">
+<meta property="article:modified_time" content="2021-11-19T09:10:32.420Z">
 <meta property="article:author" content="JY">
+<meta property="article:tag" content="github">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bastionsofwill.github.io/images/dpdb_pr.png">
   
     <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
   
@@ -69,39 +77,60 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/10/05/video-through-web-0/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-10-05T19:48:36.000Z" itemprop="datePublished">10월 5</time>
+        <section id="main"><article id="post-what-is-dependabot" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/11/19/what-is-dependabot/" class="article-date">
+  <time class="dt-published" datetime="2021-11-19T18:03:25.000Z" itemprop="datePublished">2021-11-19</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/05/video-through-web-0/">Adobe Flash와 ActiveX</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Dependabot은 무엇일까?
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="내-main-브랜치에-무슨-짓이야"><a href="#내-main-브랜치에-무슨-짓이야" class="headerlink" title="내 main 브랜치에 무슨 짓이야"></a>내 main 브랜치에 무슨 짓이야</h3><p>Github 리포지토리에 Dependabot이라는 봇이 main 브랜치를 내가 생성한 적이 없는 브랜치와 머지하는 PR을 작성하였다.<br><img src="/images/dpdb_pr.png"><br>PR을 확인해보니 package-lock.json, package.json, yarn.lock 3개의 파일이 변경된 것을 확인할 수 있었는데, PR의 제목처럼 hexo-renderer-marked라는 패키지의 버전을 업데이트하면서 생긴 변경임을 확인할 수 있었다.</p>
+<h3 id="Dependabot이란"><a href="#Dependabot이란" class="headerlink" title="Dependabot이란?"></a>Dependabot이란?</h3><p>Dependabot은 Bump<a target="_blank" rel="noopener" href="https://github.com/gocardless/bump">1</a>라는 프로젝트로부터 출발한, 프로젝트의 의존성을 최신으로 유지하는 툴이다. 핵심 기능을 담당하는 Dependabot Core는 Ruby Gem들의 집합으로 Ruby, Python, JavaScript 등 넓은 범위의 언어를 지원하며, 리포지토리에 존재하는 코드의 의존성을 확인하여 업데이트 후 빌드하여 PR을 생성하는 기능을 수행한다.<br><img src="/images/dpdb_pr.png"><a target="_blank" rel="noopener" href="https://github.com/dependabot/dependabot-core">2</a><br><code>.github/dependabot.yml</code> 파일을 통해 업데이트 스케줄, 최대 open된 PR의 개수 등을 추가로 설정할 수 있다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.nearform.com/blog/automatic-dependency-bump/">https://www.nearform.com/blog/automatic-dependency-bump/</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/dependabot/dependabot-core">https://github.com/dependabot/dependabot-core</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="ckw65wxs4000n32qu4n4b0aj3" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/17/hexo-travis-ghpage/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
