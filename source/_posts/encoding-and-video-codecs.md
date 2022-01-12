@@ -1,5 +1,5 @@
 ---
-title: encoding-and-video-codecs
+title: 인코딩과 비디오 코덱
 tags:
   - streaming
 date: 2022-01-12 13:04:09
