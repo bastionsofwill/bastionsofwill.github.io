@@ -9,6 +9,7 @@ tags:
 ## h2
 ### h3
 
+
 ### Emphasis
 **bold**
 __also bold__
@@ -19,8 +20,13 @@ _also italic_
 ### quoute
 >quote1
 
->qoute2
+>quote2
 >>quote inside quote
+
+### superscript and underscript
+(e^x^)' = e^x^
+S~n~ = a~1~ + a~2~ + ... + a~n~
+
 
 ### ul
 - foods
