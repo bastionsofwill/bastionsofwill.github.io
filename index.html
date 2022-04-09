@@ -71,6 +71,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cntda-01" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/10/cntda-01/" class="article-date">
+  <time class="dt-published" datetime="2022-04-10T00:07:16.000Z" itemprop="datePublished">2022-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/10/cntda-01/">주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="구성요소로-본-인터넷"><a href="#구성요소로-본-인터넷" class="headerlink" title="구성요소로 본 인터넷"></a>구성요소로 본 인터넷</h2><ul>
+<li>인터넷은 여러 개의 컴퓨팅 장치(종단 시스템)를 연결하는 컴퓨터 네트워크</li>
+<li>종단 시스템은 통신 링크(물리 매체)와 패킷 스위치의 네트워크로 연결</li>
+<li>packet &#x3D; segment(데이터의 조각) + header</li>
+<li>가장 널리 사용되는 패킷 스위치는 라우터와 링크-레이어 스위치로, 최종 목적지 방향으로 패킷을 전달하는 역할을 수행하며, 링크-레이어 스위치는 주로 액세스 네트워크에서, 라우터는 네트워크 코어에서 사용</li>
+</ul>
+<h2 id="서비스-측면에서-본-인터넷"><a href="#서비스-측면에서-본-인터넷" class="headerlink" title="서비스 측면에서 본 인터넷"></a>서비스 측면에서 본 인터넷</h2><ul>
+<li>인터넷에 접속된 종단 시스템(출발지)은 인터넷 인프라 구조에게 다른 종단 시스템(목적지)에서 수행되는 프로그램에 데이터를 어떻게 전달하도록 요구하는지 명시하는 API(Application Programing Interface)를 제공</li>
+<li>API는 송신 프로그램이 따라야 하는 규칙의 집합이며, 인터넷은 이 규칙에 따라 데이터를 목적지로 전달</li>
+</ul>
+<h2 id="액세스-네트워크-네트워크-코어"><a href="#액세스-네트워크-네트워크-코어" class="headerlink" title="액세스 네트워크, 네트워크 코어"></a>액세스 네트워크, 네트워크 코어</h2><ul>
+<li>액세스 네트워크: 종단 시스템 간 경로 중 출발지와 첫 번째 라우터를 연결하는 네트워크</li>
+<li>네트워크 코어: 패킷 스위치와 링크의 메시(mesh)</li>
+<li>링크, 스위치의 네트워크를 통한 데이터의 전송에는 회선 교환과 패킷 교환 방식이 존재</li>
+</ul>
+<h2 id="인터넷-프로토콜-스택"><a href="#인터넷-프로토콜-스택" class="headerlink" title="인터넷 프로토콜 스택"></a>인터넷 프로토콜 스택</h2><ul>
+<li>네트워크 프로토콜은 레이어 구조를 가지며, 각 프로토콜은 한 레이어에 속하며, 상위 레이어는 하위 레이어의 서비스를 이용할 수 있다.</li>
+<li>인터넷 프로토콜 스택은 Application, Transport, Network, Link, Physical 5개 레이어로 구성된다.<h3 id="Application-Layer"><a href="#Application-Layer" class="headerlink" title="Application Layer"></a>Application Layer</h3></li>
+<li>인터넷에서 사용하는 애플리케이션 계층 프로토콜은 대표적으로 HTTP, SMTP, FTP등이 있다.</li>
+<li>애플리케이션 레이어에서의 정보 패킷을 메시지(message)라 부른다.<h3 id="Transport-Layer"><a href="#Transport-Layer" class="headerlink" title="Transport Layer"></a>Transport Layer</h3></li>
+<li>애플리케이션 레이어로부터 전달받은 메시지를 전송하는 서비스를 제공한다.</li>
+<li>인터넷에서는 TCP, UDP 2가지의 트랜스포트 프로토콜이 사용된다.</li>
+<li>트랜스포트 레이어에서의 정보 패킷을 세그먼트(segment)라 부른다.<h3 id="Network-Layer"><a href="#Network-Layer" class="headerlink" title="Network Layer"></a>Network Layer</h3></li>
+<li>출발지 호스트의 트랜스포트 레이어로부터 전달받은 세그먼트를 목적지 호스트의 트랜스포트 레이어로 전송하는 서비스를 제공한다.</li>
+<li>네트워크 레이어에서의 정보 패킷을 데이터그램(datagram)이라 부른다.</li>
+<li>IP는 데이터그램의 필드 및 네트워크 요소(종단 시스템 및 라우터)가 각 필드에 어떻게 동작하는지 정의하는, 유일한 프로토콜이다.</li>
+<li>라우팅 프로토콜 역시 네트워크 레이어에 속하며, 인터넷은 다양한 라우팅 프로토콜을 가지고 있다.<h3 id="Link-Layer"><a href="#Link-Layer" class="headerlink" title="Link Layer"></a>Link Layer</h3></li>
+<li>한 노드(호스트 또는 패킷 스위치)에서 다른 노드로 패킷을 전달하는 서비스를 제공한다.</li>
+<li>이더넷, 와이파이, DOCSIS(Data Over Cable Service Interface Specification) 등이 있다.</li>
+<li>링크 레이어에서의 정보 패킷을 프레임(frame)이라 부른다.<h3 id="Physical-Layer"><a href="#Physical-Layer" class="headerlink" title="Physical Layer"></a>Physical Layer</h3></li>
+<li>한 노드에서 다른 노드로 프레임 내부의 각 비트를 전달하는 기능을 담당한다.</li>
+</ul>
+<h2 id="캡슐화-Encapsulation"><a href="#캡슐화-Encapsulation" class="headerlink" title="캡슐화(Encapsulation)"></a>캡슐화(Encapsulation)</h2><p><img src="/images/network_layers.png"></p>
+<ul>
+<li>패킷은 각 레이어를 거치면서, 상위 계층에서 받은 정보에 헤더를 추가하면서 데이터를 캡슐화한다.</li>
+</ul>
+<h2 id="네트워크-공격"><a href="#네트워크-공격" class="headerlink" title="네트워크 공격"></a>네트워크 공격</h2><ul>
+<li>호스트에서 악성코드 실행</li>
+<li>네트워크 인프라 공격(DoS)</li>
+<li>패킷 탐지(Sniffing)</li>
+<li>패킷 위장(Spoofing)</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl1s1e94k000qcprj9n8xa8z3" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Weekend-Study/" rel="tag">Weekend Study</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/book/" rel="tag">book</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-encoding-and-video-codecs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/01/12/encoding-and-video-codecs/" class="article-date">
@@ -108,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl1rzmy3p000tdjqldumh98nt" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl1s1e94n000vcprj8jdda1j4" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
       
       
       
@@ -155,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl1rzmy3r000ydjqlc809ednn" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl1s1e94o000zcprjckk9ea6o" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
       
       
       
@@ -201,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl1rzmy3v0018djqleltnch1d" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl1s1e94x001acprj0bxg1xk6" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
       
       
       
@@ -247,7 +329,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl1rzmy3q000vdjqlf811cewt" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl1s1e94o000xcprj1fzlc47f" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
       
       
       
@@ -295,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl1rzmy3u0014djql3n5i1wts" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl1s1e94u0017cprjcjcuh2mv" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
       
       
       
@@ -485,7 +567,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="cl1rzmy3y001adjql1jo7c87t" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="cl1s1e94y001ccprj18qieoak" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
       
       
       
@@ -567,7 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-05/" data-id="cl1rzmy3t0012djqlcqblefmo" data-title="The Secret Life of Programs - 05. Computer Architecture" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-05/" data-id="cl1s1e94s0014cprjgviqcwai" data-title="The Secret Life of Programs - 05. Computer Architecture" class="article-share-link">공유</a>
       
       
       
@@ -630,7 +712,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-04/" data-id="cl1rzmy3s000zdjql309cg57a" data-title="The Secret Life of Programs - 04. Computer Anatomy" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/01/tslop-04/" data-id="cl1s1e94p0012cprja7qg6znu" data-title="The Secret Life of Programs - 04. Computer Anatomy" class="article-share-link">공유</a>
       
       
       
@@ -682,7 +764,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/07/22/email-tracking/" data-id="cl1rzmy3o000qdjqlfsfrhuj3" data-title="이메일 개봉/링크 클릭 추적하기" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/07/22/email-tracking/" data-id="cl1s1e94m000tcprj874j1zra" data-title="이메일 개봉/링크 클릭 추적하기" class="article-share-link">공유</a>
       
       
       
@@ -696,56 +778,12 @@
 
 
   
-    <article id="post-web-domain-architecting" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/07/14/web-domain-architecting/" class="article-date">
-  <time class="dt-published" datetime="2021-07-14T16:32:51.000Z" itemprop="datePublished">2021-07-14</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/14/web-domain-architecting/">도메인 구조의 설계</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>잘 설계된 도메인 구조는 아래와 같은 강점을 갖는다.</p>
-<h2 id="1-Mental-model의-통일"><a href="#1-Mental-model의-통일" class="headerlink" title="1. Mental model의 통일"></a>1. Mental model의 통일</h2><p>서비스의 계층과 구조를 명확하게 정의하여, 사람들이 서비스를 이해하는 mental model을 통일하는 데 큰 역할을 한다. 이는 서비스의 구조가 복잡하면 복잡할수록 굉장한 강점으로 작용하며, 서비스 사용자(end-user)는 물론 서비스 기획&#x2F;운영 측면의 효율을 크게 향상시킬 수 있다.</p>
-<h2 id="2-SEO-x2F-SMO"><a href="#2-SEO-x2F-SMO" class="headerlink" title="2. SEO &#x2F; SMO"></a>2. SEO &#x2F; SMO</h2><p>검색 엔진이 데이터를 수집하는 방식에 맞게 도메인 구조를 설계하여 SEO&#x2F;SMO를 효과적으로 진행할 수 있다.</p>
-<h2 id="3-Analytics"><a href="#3-Analytics" class="headerlink" title="3. Analytics"></a>3. Analytics</h2><p>데이터를 효과적으로 수집하기 위해서는 이를 사전에 고려한 도메인 설계가 중요하다.<br>이를 바꿔 말하면, 도메인 구조를 잘 설계하기 위해서는</p>
-<ol>
-<li>서비스에 대한 명확한 이해</li>
-<li>검색 엔진에 대한 지식</li>
-<li>서비스 데이터 분석의 목적,방법론과 Analytics 툴에 대한 지식<br>과 같은, 서비스와 기반 기술에 대한 이해와 지식이 필요하다.</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/07/14/web-domain-architecting/" data-id="cl1rzmy3v0017djqlcx9md1ar" data-title="도메인 구조의 설계" class="article-share-link">공유</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">다음 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -758,7 +796,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Weekend-Study/" rel="tag">Weekend Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
     </div>
   </div>
 
@@ -768,7 +806,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그 클라우드</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TIL/" style="font-size: 10px;">TIL</a> <a href="/tags/Travis-CI/" style="font-size: 10px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 20px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/opinion/" style="font-size: 10px;">opinion</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 20px;">the-secret-life-of-programs</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TIL/" style="font-size: 10px;">TIL</a> <a href="/tags/Travis-CI/" style="font-size: 10px;">Travis CI</a> <a href="/tags/Weekend-Study/" style="font-size: 10px;">Weekend Study</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 15px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/opinion/" style="font-size: 10px;">opinion</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 15px;">the-secret-life-of-programs</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
     </div>
   </div>
 
@@ -777,7 +815,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">아카이브</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">12월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">11월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">10월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">8월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">7월 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">4월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">12월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">11월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">10월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">8월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">7월 2021</a></li></ul>
     </div>
   </div>
 
@@ -788,6 +826,10 @@
     <h3 class="widget-title">최근 포스트</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/04/10/cntda-01/">주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷</a>
+          </li>
         
           <li>
             <a href="/2022/01/12/encoding-and-video-codecs/">인코딩과 비디오 코덱</a>
@@ -803,10 +845,6 @@
         
           <li>
             <a href="/2021/11/17/hexo-travis-ghpage/">Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/05/video-through-web-0/">Adobe Flash와 ActiveX</a>
           </li>
         
       </ul>
