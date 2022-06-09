@@ -14,7 +14,7 @@
 <meta property="og:description" content="이게 대체 뭔 소리야123#!&#x2F;bin&#x2F;bashset -eo pipefailID&#x3D;$(dd if&#x3D;&#x2F;dev&#x2F;random bs&#x3D;8 count&#x3D;1 2&gt;&#x2F;dev&#x2F;null | od -An -tx1 | tr -d &amp;#x27; \t\n&amp;#x27;) AWS Lambda를 공부하던 중에 샘플 코드에 위와 같은 내용이 있었다.이를 이해하는 데 제법 오랜 시간이 걸렸으나 그">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2022-06-09T17:53:10.000Z">
-<meta property="article:modified_time" content="2022-06-09T08:54:25.336Z">
+<meta property="article:modified_time" content="2022-06-09T12:40:30.707Z">
 <meta property="article:author" content="JY">
 <meta property="article:tag" content="unix">
 <meta property="article:tag" content="shell">
@@ -138,9 +138,12 @@
 <li>캐릭터 디바이스<ul>
 <li>byte 단위로 데이터를 전송하는 디바이스</li>
 <li>리눅스 파일 모드에서 c로 표시</li>
-<li>키보드, 마우스 등<br>하지만 물리적 디바이스와 연결되지 않는 디바이스 파일도 있는데, 이를 pseudo-device라고 한다. 커널 레벨에서 동작하는 기능들을 제공하는데, &#x2F;dev 디렉토리에 있는 대표적인 pseudo-device들은 아래와 같다.</li>
+<li>키보드, 마우스 등</li>
 </ul>
 </li>
+</ul>
+<p>하지만 물리적 디바이스와 연결되지 않는 디바이스 파일도 있는데, 이를 pseudo-device라고 한다. 커널 레벨에서 동작하는 기능들을 제공하는데, &#x2F;dev 디렉토리에 있는 대표적인 pseudo-device들은 아래와 같다.</p>
+<ul>
 <li><code>/dev/null</code>: 모든 입력을 버리는 블랙홀과 같다. 출력(읽기)을 하면 <em>EOF</em>를 반환한다.</li>
 <li><code>/dev/zero</code>: 마찬가지로 모든 입력을 무시하며, 출력 시 <em>null</em> 문자의 stream을 반환한다.</li>
 <li><code>/dev/full</code>: 입력 시도시 <em>ENOSPC</em>(disk full) 에러를 반환하며, 출력 시 <em>null</em> 문자의 stream을 반환한다.</li>
@@ -170,7 +173,7 @@
 <li><code>-d</code>: 입력값 중 특정 charater set을 지우고 출력한다.</li>
 </ul>
 <h2 id="그래서-이게-뭔-소리라고"><a href="#그래서-이게-뭔-소리라고" class="headerlink" title="그래서 이게 뭔 소리라고?"></a>그래서 이게 뭔 소리라고?</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
-<p>이 스크립트는 bash로 실행되는 프로그램이며, &#x2F;bin&#x2F;bash를 실행하라.</p>
+<p>이 스크립트는 bash로 실행되는 프로그램이다. &#x2F;bin&#x2F;bash를 실행한다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -eo pipefail</span><br></pre></td></tr></table></figure>
 <p>pipe 중 하나라도 fail(exit code가 0이 아님)이면 프로세스를 중단하라.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID=$(<span class="built_in">dd</span> <span class="keyword">if</span>=/dev/random bs=8 count=1 2&gt;/dev/null | <span class="built_in">od</span> -An -tx1 | <span class="built_in">tr</span> -d <span class="string">&#x27; \t\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
@@ -180,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl46saa5w0018eop2a7tp8can" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl470d1eb0018c2p4c794gxlv" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       

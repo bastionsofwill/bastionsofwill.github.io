@@ -134,9 +134,12 @@
 <li>캐릭터 디바이스<ul>
 <li>byte 단위로 데이터를 전송하는 디바이스</li>
 <li>리눅스 파일 모드에서 c로 표시</li>
-<li>키보드, 마우스 등<br>하지만 물리적 디바이스와 연결되지 않는 디바이스 파일도 있는데, 이를 pseudo-device라고 한다. 커널 레벨에서 동작하는 기능들을 제공하는데, &#x2F;dev 디렉토리에 있는 대표적인 pseudo-device들은 아래와 같다.</li>
+<li>키보드, 마우스 등</li>
 </ul>
 </li>
+</ul>
+<p>하지만 물리적 디바이스와 연결되지 않는 디바이스 파일도 있는데, 이를 pseudo-device라고 한다. 커널 레벨에서 동작하는 기능들을 제공하는데, &#x2F;dev 디렉토리에 있는 대표적인 pseudo-device들은 아래와 같다.</p>
+<ul>
 <li><code>/dev/null</code>: 모든 입력을 버리는 블랙홀과 같다. 출력(읽기)을 하면 <em>EOF</em>를 반환한다.</li>
 <li><code>/dev/zero</code>: 마찬가지로 모든 입력을 무시하며, 출력 시 <em>null</em> 문자의 stream을 반환한다.</li>
 <li><code>/dev/full</code>: 입력 시도시 <em>ENOSPC</em>(disk full) 에러를 반환하며, 출력 시 <em>null</em> 문자의 stream을 반환한다.</li>
@@ -166,7 +169,7 @@
 <li><code>-d</code>: 입력값 중 특정 charater set을 지우고 출력한다.</li>
 </ul>
 <h2 id="그래서-이게-뭔-소리라고"><a href="#그래서-이게-뭔-소리라고" class="headerlink" title="그래서 이게 뭔 소리라고?"></a>그래서 이게 뭔 소리라고?</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
-<p>이 스크립트는 bash로 실행되는 프로그램이며, &#x2F;bin&#x2F;bash를 실행하라.</p>
+<p>이 스크립트는 bash로 실행되는 프로그램이다. &#x2F;bin&#x2F;bash를 실행한다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -eo pipefail</span><br></pre></td></tr></table></figure>
 <p>pipe 중 하나라도 fail(exit code가 0이 아님)이면 프로세스를 중단하라.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID=$(<span class="built_in">dd</span> <span class="keyword">if</span>=/dev/random bs=8 count=1 2&gt;/dev/null | <span class="built_in">od</span> -An -tx1 | <span class="built_in">tr</span> -d <span class="string">&#x27; \t\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
@@ -176,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl46saa5w0018eop2a7tp8can" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl470d1eb0018c2p4c794gxlv" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
@@ -284,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl46saa5x001aeop2decfejw8" data-title="Terraform Language 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl470d1ec001ac2p486ntaitm" data-title="Terraform Language 기초" class="article-share-link">공유</a>
       
       
       
@@ -413,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl46saa5p000xeop2g4bjh05u" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl470d1e5000xc2p4grg8arvd" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
       
       
       
@@ -495,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl46saa5o000veop2dejt4aww" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl470d1e4000vc2p43zihh4tr" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
       
       
       
@@ -546,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl46saa5s0011eop2feiw2xsg" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl470d1e80011c2p46xz31ffq" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
       
       
       
@@ -593,7 +596,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl46saa5v0016eop2efvl7oxc" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl470d1eb0016c2p48p104624" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
       
       
       
@@ -639,7 +642,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl46saa61001keop253w476qo" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl470d1eg001kc2p44677apgo" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
       
       
       
@@ -685,7 +688,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl46saa5t0013eop2bufuf2zh" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl470d1e90013c2p46ud08j5d" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
       
       
       
@@ -733,7 +736,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl46saa5z001heop27gyfc7wu" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl470d1ef001hc2p4573fcc1u" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
       
       
       
@@ -923,7 +926,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="cl46saa6c0034eop2fxuk9s32" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="cl470d1eh001mc2p464ha52a0" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
       
       
       
