@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>쉘 스크립트 기초 | bastionsofwill</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="이게 대체 뭔 소리야123#!&#x2F;bin&#x2F;bashset -eo pipefailID&#x3D;$(dd if&#x3D;&#x2F;dev&#x2F;random bs&#x3D;8 count&#x3D;1 2&gt;&#x2F;dev&#x2F;null | od -An -tx1 | tr -d &amp;#x27; \t\n&amp;#x27;) AWS Lambda를 공부하던 중에 샘플 코드에 위와 같은 내용이 있었다.이를 이해하는 데 제법 오랜 시간이 걸렸으나 그">
+<meta property="og:type" content="article">
+<meta property="og:title" content="쉘 스크립트 기초">
+<meta property="og:url" content="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/index.html">
+<meta property="og:site_name" content="bastionsofwill">
+<meta property="og:description" content="이게 대체 뭔 소리야123#!&#x2F;bin&#x2F;bashset -eo pipefailID&#x3D;$(dd if&#x3D;&#x2F;dev&#x2F;random bs&#x3D;8 count&#x3D;1 2&gt;&#x2F;dev&#x2F;null | od -An -tx1 | tr -d &amp;#x27; \t\n&amp;#x27;) AWS Lambda를 공부하던 중에 샘플 코드에 위와 같은 내용이 있었다.이를 이해하는 데 제법 오랜 시간이 걸렸으나 그">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2022-06-09T17:53:10.000Z">
+<meta property="article:modified_time" content="2022-06-09T08:54:25.336Z">
+<meta property="article:author" content="JY">
+<meta property="article:tag" content="unix">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">bastionsofwill</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bastionsofwill.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-magical-shell-script" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/09/magical-shell-script/" class="article-date">
+  <time class="dt-published" datetime="2022-06-09T17:53:10.000Z" itemprop="datePublished">2022-06-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      쉘 스크립트 기초
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="이게-대체-뭔-소리야"><a href="#이게-대체-뭔-소리야" class="headerlink" title="이게 대체 뭔 소리야"></a>이게 대체 뭔 소리야</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -eo pipefail</span><br><span class="line">ID=$(<span class="built_in">dd</span> <span class="keyword">if</span>=/dev/random bs=8 count=1 2&gt;/dev/null | <span class="built_in">od</span> -An -tx1 | <span class="built_in">tr</span> -d <span class="string">&#x27; \t\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>AWS Lambda를 공부하던 중에 샘플 코드에 위와 같은 내용이 있었다.<br>이를 이해하는 데 제법 오랜 시간이 걸렸으나 그 과정에서 알게 된 것이 많다.</p>
+<p>하향식으로 접근하면, 위 코드(쉘 스크립트)는 3개 행으로 구성되어 있으며, 아래와 같은 내용으로 구성된다.</p>
+<ul>
+<li>1행: shebang</li>
+<li>2행: <code>set</code> 명령어와 그 옵션</li>
+<li>3행: <code>$</code>, <code>|</code>, <code>dd</code>, <code>dev/random</code>, <code>2&gt;/dev/null</code>, <code>od</code>, <code>tr</code></li>
+</ul>
+<p>특히 3행은 외계어나 다름없어 보인다. 이를 하나씩 뜯어서 살펴보자.</p>
+<h2 id="Shebang"><a href="#Shebang" class="headerlink" title="Shebang"></a>Shebang</h2><p><code>#</code>과 <code>!</code>의 조합으로 시작되기 때문에 이러한 이름이 붙었다.<br>따라서 ‘셔뱅’이라고 읽으며, <em>sha-bang</em>, <em>hash-bang</em>이라고도 한다. 프로그램으로서 실행되는 스크립트임을 알리기 위해 스크립트 시작점에 작성하는 문자열이며, 나머지 부분은 인터프리터 지시자로 해석된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br></pre></td></tr></table></figure>
+<p>특정 경로에 존재하는 어떤 스크립트의 첫 행이 위와 같다면, Unix-like OS는 그 스크립트를 프로그램으로 인식하며, 지정한 인터프리터, 즉 <code>/bin/bash</code>를 실행하면서 해당 스크립트가 위치한 경로가 그 인수로 전달된다.</p>
+<h2 id="set-eo-pipefail"><a href="#set-eo-pipefail" class="headerlink" title="set -eo pipefail"></a>set -eo pipefail</h2><p><code>set</code>은 로컬 환경변수의 조회 및 쉘 환경 설정 기능을 수행한다. 환경변수를 조회한다는 점에서 <code>env</code>명령어와 유사하지만, <code>env</code>명령어는 글로벌 환경변수의 조회만 가능하다는 점에서 그 차이가 있다.</p>
+<ul>
+<li><code>-e</code>옵션: 오류 발생 시 프로세스 중단</li>
+<li><code>-o pipefail</code>옵션: pipe 오류 코드 승계<br>즉, <code>set -eo pipefail</code> 명령을 실행하면, 이후 실행되는 pipe로 연결된 스크립트 중 하나만 non-zero exit code를 반환하여도 프로세스가 중단된다.</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title="|"></a>|</h2><p>파이프 명령어로, 파이프 왼쪽에 위치한 (출력)값을 오른쪽에 위치한 명령어의 입력으로 전달한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -al | grep <span class="string">&quot;yml&quot;</span></span><br></pre></td></tr></table></figure>
+<p>예를 들어, 위 스크립트는 <code>|</code> 왼쪽의 <code>ls -al</code>의 출력을 오른쪽 <code>grep &quot;yml&quot;</code>의 입력으로 전달한다.<br>따라서, <code>ls-al</code>의 출력값은 cli로 출력되지 않고 <code>grep &quot;yml&quot;</code>의 입력로 전달되며, 결과적으로 현재 디렉토리에 존재하는 파일과 디렉토리의 리스트(<code>ls -al</code>의 출력) <em>중에서</em> <code>yml</code>이라는 문자열을 포함하는 행만 출력된다.</p>
+<h2 id="와-명령어-치환-Command-Substitution"><a href="#와-명령어-치환-Command-Substitution" class="headerlink" title="$와 명령어 치환(Command Substitution)"></a>$와 명령어 치환(Command Substitution)</h2><p>쉘 스크립트에서 <code>$</code>는 변수를 가리키기 위해 사용된다. 예를 들어, <code>$VAR</code>또는 <code>$&#123;VAR&#125;</code>과 같이 VAR라는 변수의 값에 접근할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">cat</span> file.txt)</span><br></pre></td></tr></table></figure>
+<p>하지만 위의 예시에서 <code>$</code>는 변수의 값에 접근하기 위해 사용된 것이 아니라, 명령어 치환을 위해 사용되었다. <code>$(command)</code>형태의 스크립트는 자기 자신을 subshell 환경에서 <code>command</code> 명령어를 실행한 표준 출력으로 대체한다.<br>(다만 예시는 <code>$(&lt; file)</code>와 동치이며, <code>&lt;</code>를 사용하는 것이 더 빠르다.)</p>
+<h2 id="dd"><a href="#dd" class="headerlink" title="dd"></a>dd</h2><p>dd 명령어는 stdin을 stdout으로 복사하는 역할을 한다.</p>
+<ul>
+<li><code>bs=n</code>: input, output 블록 사이즈를 n byte로 설정한다.(디폴트: 512바이트)</li>
+<li><code>count=n</code>: n개의 블록만 처리한다.</li>
+<li><code>if=file</code> stdin 대신 file로부터 input을 받는다.<br>즉, &#x2F;dev&#x2F;random이라는 파일로부터 8바이트의 블록 1개를 읽어와서 출력하는 것으로 해석할 수 있다.<br>그런데 &#x2F;dev&#x2F;random은 뭘까…?</li>
+</ul>
+<h2 id="x2F-dev-x2F-random-x2F-dev-x2F-null"><a href="#x2F-dev-x2F-random-x2F-dev-x2F-null" class="headerlink" title="&#x2F;dev&#x2F;random, &#x2F;dev&#x2F;null"></a>&#x2F;dev&#x2F;random, &#x2F;dev&#x2F;null</h2><p>리눅스 파일 시스템에서는 모든 대상을 파일 또는 디렉토리로 추상화하여 관리한다. 디바이스에 입력&#x2F;출력을 실행하는 것은 해당 디바이스를 추상화한 파일에 쓰기&#x2F;읽기를 수행하는 것과 같다.<br>&#x2F;dev 디렉토리는 스페셜 파일 또는 디바이스 파일이 위치한 디렉토리이다. 대부분의 디바이스의 종류는 아래와 같이 크게 2가지로 나뉜다.</p>
+<ul>
+<li>블록 디바이스<ul>
+<li>블록&#x2F;섹터 등의 단위로 데이터를 전송하는 디바이스</li>
+<li>주로 데이터를 저장하는 역할을 수행</li>
+<li>리눅스 파일 모드에서 b로 표시</li>
+<li>하드디스크, CD&#x2F;DVD 등</li>
+</ul>
+</li>
+<li>캐릭터 디바이스<ul>
+<li>byte 단위로 데이터를 전송하는 디바이스</li>
+<li>리눅스 파일 모드에서 c로 표시</li>
+<li>키보드, 마우스 등<br>하지만 물리적 디바이스와 연결되지 않는 디바이스 파일도 있는데, 이를 pseudo-device라고 한다. 커널 레벨에서 동작하는 기능들을 제공하는데, &#x2F;dev 디렉토리에 있는 대표적인 pseudo-device들은 아래와 같다.</li>
+</ul>
+</li>
+<li><code>/dev/null</code>: 모든 입력을 버리는 블랙홀과 같다. 출력(읽기)을 하면 <em>EOF</em>를 반환한다.</li>
+<li><code>/dev/zero</code>: 마찬가지로 모든 입력을 무시하며, 출력 시 <em>null</em> 문자의 stream을 반환한다.</li>
+<li><code>/dev/full</code>: 입력 시도시 <em>ENOSPC</em>(disk full) 에러를 반환하며, 출력 시 <em>null</em> 문자의 stream을 반환한다.</li>
+<li><code>/dev/random</code>: 입력한 데이터는 엔트로피 풀에 추가되며, 출력 시 커널의 암호학적 유사난수 생성기(CSPRNG)에서 생성된 데이터를 출력한다.</li>
+</ul>
+<h2 id="2-gt"><a href="#2-gt" class="headerlink" title="2&gt;"></a>2&gt;</h2><p>컴퓨터 프로그램은 실행 환경과 통신하기 위한 <code>stdin</code>, <code>stdout</code>, <code>stderr</code>라는 3개의 데이터 스트림을 가지며, 각각 0, 1, 2라는 정수 file descriptor 값을 갖는다. 즉, 2&gt;는 표준 에러의 출력을 지정하는 스크립트이다.</p>
+<h2 id="od"><a href="#od" class="headerlink" title="od"></a>od</h2><p>Octal Dump의 약어로, 특정 입력을 사용자가 지정한 포맷으로 출력한다.</p>
+<ul>
+<li><code>-A</code>: 입력의 주소값을 출력하는 방식을 지정한다. <code>d</code>, <code>o</code>, <code>x</code>, <code>n</code> 네 옵션이 있으며, 각각 decimal, octal, hexadecimal, no address이다.</li>
+<li><code>-t</code>: 출력 포맷을 지정한다.<ul>
+<li>a: ascii</li>
+<li>c: default char set</li>
+<li>d&#x2F;o&#x2F;u&#x2F;x: signed decimal&#x2F;octal&#x2F;unsigned decimal&#x2F;hexadecimal. 아래 size 지정자와 같이 쓰일 수 있다.<ul>
+<li>C: char, 1 byte</li>
+<li>S: short, 2 byte</li>
+<li>I: Int, 4 byte</li>
+<li>L: Long, 8 byte</li>
+<li>1&#x2F;2&#x2F;4&#x2F;8: 10진수로 나타낸 바이트 수.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h2><p>translate. 입력값을 가공하여 출력한다.</p>
+<ul>
+<li><code>-C</code>&#x2F;<code>-c</code>: 입력값 중 특정 charater set을 <em>제외한</em> 나머지를 지정한 값으로 바꾼 값을 출력한다.</li>
+<li><code>-d</code>: 입력값 중 특정 charater set을 지우고 출력한다.</li>
+</ul>
+<h2 id="그래서-이게-뭔-소리라고"><a href="#그래서-이게-뭔-소리라고" class="headerlink" title="그래서 이게 뭔 소리라고?"></a>그래서 이게 뭔 소리라고?</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br></pre></td></tr></table></figure>
+<p>이 스크립트는 bash로 실행되는 프로그램이며, &#x2F;bin&#x2F;bash를 실행하라.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -eo pipefail</span><br></pre></td></tr></table></figure>
+<p>pipe 중 하나라도 fail(exit code가 0이 아님)이면 프로세스를 중단하라.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID=$(<span class="built_in">dd</span> <span class="keyword">if</span>=/dev/random bs=8 count=1 2&gt;/dev/null | <span class="built_in">od</span> -An -tx1 | <span class="built_in">tr</span> -d <span class="string">&#x27; \t\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>ID라는 변수에 세개의 쉘 스크립트를 아래와 같이 조합하여 할당한다.<br>1) 8 byte 크기의 랜덤한 값을<br>2) 1 byte 단위로 16진수 형태로 변환한 뒤<br>3) 공백, 탭, 개행문자를 제거한 값</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/1-create-bucket.sh">https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/1-create-bucket.sh</a><br><a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki/%EC%85%94%EB%B1%85">https://ko.wikipedia.org/wiki/%EC%85%94%EB%B1%85</a><br><a target="_blank" rel="noopener" href="https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_set">https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_set</a><br><a target="_blank" rel="noopener" href="https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_set_-e">https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_set_-e</a><br><a target="_blank" rel="noopener" href="https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_set_-euxo_pipefail">https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_set_-euxo_pipefail</a><br><a target="_blank" rel="noopener" href="https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_env,/_set_%EC%B0%A8%EC%9D%B4%EC%A0%90">https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_env,\_set_%EC%B0%A8%EC%9D%B4%EC%A0%90</a><br><a target="_blank" rel="noopener" href="https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html">https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html</a><br><a target="_blank" rel="noopener" href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html">https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Device_file">https://en.wikipedia.org/wiki/Device_file</a><br><a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki//dev/random">https://ko.wikipedia.org/wiki//dev/random</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Standard_streams">https://en.wikipedia.org/wiki/Standard_streams</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl46saa5w0018eop2a7tp8can" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unix/" rel="tag">unix</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/04/20/terraform-lang-basics/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">Terraform Language 기초</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TIL/" rel="tag">TIL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Terraform/" rel="tag">Terraform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Weekend-Study/" rel="tag">Weekend Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opinion/" rel="tag">opinion</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TIL/" style="font-size: 10px;">TIL</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 10px;">Travis CI</a> <a href="/tags/Weekend-Study/" style="font-size: 15px;">Weekend Study</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 15px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 15px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/opinion/" style="font-size: 10px;">opinion</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 15px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">6월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">4월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">12월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">11월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">10월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">8월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">7월 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/09/magical-shell-script/">쉘 스크립트 기초</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/terraform-lang-basics/">Terraform Language 기초</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/11/cntda-02/">주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/10/cntda-01/">주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/12/encoding-and-video-codecs/">인코딩과 비디오 코덱</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 JY<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
