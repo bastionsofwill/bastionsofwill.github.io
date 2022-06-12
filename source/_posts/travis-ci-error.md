@@ -107,6 +107,8 @@ ERROR:  Error installing dpl-pages:
 에러 로그를 다시 살펴보면, `dpl-pages`를 설치하다가 에러가 발생하였고,  `multipart-post`가 요구하는 ruby 버전이 2.6.0 이상인 것이 문제임을 알 수 있었다. 
 
 첫번째로 든 의문은, '`dpl-pages`, `multipart-post`는 또 뭔데?'였다. '배포 작업을 수행하기 위해 필요한 무언가' 정도로만 추정이 되는 상황이었으므로, Travis CI가 배포하는 방식에 대한 지식이 필요했다.
+
+이전에 생각없이 hexo tutorial을 복붙하면서, 나는 인지하지 못한 채 Travis CI의 GitHub Pages Deployment 기능을 사용하고 있었다. 
 ```yml
 deploy:
   provider: pages
@@ -117,8 +119,9 @@ deploy:
     branch: main
   local-dir: public
 ```
-이전에 생각없이 hexo tutorial을 복붙하면서, 나는 인지하지 못한 채 Travis CI의 GitHub Pages Deployment 기능을 사용하고 있었다. 
-해당 기능에 대한 Travis CI 문서 확인 결과, Travis CI는 배포 관련 작업을 수행할 때 dpl을 사용하는 것을 알 수 있었다. 하지만 여기서 결국 `dpl-pages`, `multipart-post`에 대한 내용은 결국 찾지 못했는데, ruby에 대한 지식이 없는 상황에서 dpl의 문서에는 관련 내용이 없기 때문이다. 하지만 dpl은 rubygem으로 publish/관리되고 있다는 내용이 있었으므로, rubygems.org에서 dpl, dpl-pages, multipart-post라는 gem은 찾을 수 있었다.
+위의 yml 파일이 관련 설정으로, `provider: pages`를 비롯한 설정을 통해 `hexo generate`의 결과물인 public 디렉토리 하위 파일들을 타겟 브랜치(지정하지 않았으므로 기본값인 `gh-pages` 브랜치)에 push하는 기능이다.
+
+해당 기능에 대한 Travis CI 문서 확인 결과, dpl이라는 루비 코드를 사용하는 것을 알 수 있었다. 하지만 여기서 결국 `dpl-pages`, `multipart-post`에 대한 내용은 결국 찾지 못했는데, ruby에 대한 지식이 없는 상황에서 dpl의 문서에는 관련 내용이 없기 때문이다. 하지만 dpl은 rubygem으로 publish/관리되고 있다는 내용이 있었으므로, dpl, dpl-pages, multipart-post라는 gem에 대한 기본적인 정보는 찾을 수 있었다.
 
 ## 갈림길
 ```bash
@@ -146,16 +149,14 @@ ERROR:  Error installing dpl-pages:
 
 ## 고마워요, ioquatix!
 따라서, `multipart-post`를 관리하는 고수님들의 빠른 조치(https://github.com/socketry/multipart-post/pull/95) 덕에, 나는 아무 것도 하지 않아도 저절로 문제가 해결되는 기쁨을 누렸다. 실제로 아무 조치 없이 빌드를 재실행한 결과, 빌드에 성공하였다. 
-내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 알아서 default로 사용하는 ruby 버전을 업그레이드 해주길 바라면서, 성공한 빌드 로그로 포스트를 마친다.
+내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 알아서 default로 사용하는 ruby 버전을 업그레이드 해주길 바라면서, 또 이 포스트의 속편을 바로 작성해야 하는 일이 없기를 바라면서 성공한 빌드 로그로 포스트를 마친다.
 
 ```bash
-4.03s
-dpl.1
 Installing deploy dependencies
 Logged in as @bastionsofwill (bastionsofwill)
-dpl.2
+
 Preparing deploy
-dpl.3
+
 Deploying application
 cd /tmp/d20220612-6975-s1zerh/work
 commit fc19656296bd70de2ed24bdb2bf1c36bea7e3b67
