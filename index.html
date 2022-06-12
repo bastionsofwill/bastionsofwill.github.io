@@ -121,8 +121,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br></pre></td></tr></table></figure>
 <p>에러 로그를 다시 살펴보면, <code>dpl-pages</code>를 설치하다가 에러가 발생하였고,  <code>multipart-post</code>가 요구하는 ruby 버전이 2.6.0 이상인 것이 문제임을 알 수 있었다. </p>
 <p>첫번째로 든 의문은, ‘<code>dpl-pages</code>, <code>multipart-post</code>는 또 뭔데?’였다. ‘배포 작업을 수행하기 위해 필요한 무언가’ 정도로만 추정이 되는 상황이었으므로, Travis CI가 배포하는 방식에 대한 지식이 필요했다.</p>
+<p>이전에 생각없이 hexo tutorial을 복붙하면서, 나는 인지하지 못한 채 Travis CI의 GitHub Pages Deployment 기능을 사용하고 있었다. </p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">main</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
-<p>이전에 생각없이 hexo tutorial을 복붙하면서, 나는 인지하지 못한 채 Travis CI의 GitHub Pages Deployment 기능을 사용하고 있었다.<br>해당 기능에 대한 Travis CI 문서 확인 결과, Travis CI는 배포 관련 작업을 수행할 때 dpl을 사용하는 것을 알 수 있었다. 하지만 여기서 결국 <code>dpl-pages</code>, <code>multipart-post</code>에 대한 내용은 결국 찾지 못했는데, ruby에 대한 지식이 없는 상황에서 dpl의 문서에는 관련 내용이 없기 때문이다. 하지만 dpl은 rubygem으로 publish&#x2F;관리되고 있다는 내용이 있었으므로, rubygems.org에서 dpl, dpl-pages, multipart-post라는 gem은 찾을 수 있었다.</p>
+<p>위의 yml 파일이 관련 설정으로, <code>provider: pages</code>를 비롯한 설정을 통해 <code>hexo generate</code>의 결과물인 public 디렉토리 하위 파일들을 타겟 브랜치(지정하지 않았으므로 기본값인 <code>gh-pages</code> 브랜치)에 push하는 기능이다.</p>
+<p>해당 기능에 대한 Travis CI 문서 확인 결과, dpl이라는 루비 코드를 사용하는 것을 알 수 있었다. 하지만 여기서 결국 <code>dpl-pages</code>, <code>multipart-post</code>에 대한 내용은 결국 찾지 못했는데, ruby에 대한 지식이 없는 상황에서 dpl의 문서에는 관련 내용이 없기 때문이다. 하지만 dpl은 rubygem으로 publish&#x2F;관리되고 있다는 내용이 있었으므로, dpl, dpl-pages, multipart-post라는 gem에 대한 기본적인 정보는 찾을 수 있었다.</p>
 <h2 id="갈림길"><a href="#갈림길" class="headerlink" title="갈림길"></a>갈림길</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br></pre></td></tr></table></figure>
 <p>위의 메시지를 자세히 보면, 배경이 어떻든 결국 <code>multipart-post</code>라는 gem이 ruby <em>2.6.0</em> 이상을 요구하는 반면, 환경에 설치된 ruby는 <em>2.4.5.335</em> 버전인 것이 문제임을 알 수 있다.</p>
 <p>따라서 이를 해결하기 위해서는 아래 두 가지 해결책을 떠올릴 수 있다.</p>
@@ -133,15 +135,15 @@
 <p>두 방법 모두 Travis CI가 동작하는 환경에 대한 조작이 필요하므로, <code>.travis.yml</code> 파일을 건드려야 한다. 쉽게 끝날 수도 있겠지만 아닐 가능성이 더 커서 꺼려지는데, 어느 쪽이 더 쉽고 문제가 적을지를 생각했다.</p>
 <h4 id="1안-ruby-버전-업그레이드"><a href="#1안-ruby-버전-업그레이드" class="headerlink" title="1안: ruby 버전 업그레이드"></a>1안: ruby 버전 업그레이드</h4><p>2안 같은 버전 다운그레이드는 결국 문제를 나중에 터지도록 미루는 것이라는 생각이 들었다. 또 몇 시간 전까지도 잘 동작하다가 에러가 발생한 상황이어서, ruby 2.6.0은 비교적 최근에 릴리즈된 버전일 것이라 예상했고, 새로운 버전을 쓰면 좋을 것이라는 생각이 들었다.<br>하지만 확인 결과, ruby 2.6.0의 릴리즈 일자는 2018년 말이고 2.6.10도 이미 지원 종료(EOL)되었다. 이를 알게 되니 ‘아직도 몇년 전 버전의 루비를 사용하는 것을 보니 역시 고수들도 dependency는 함부로 건드리기 어렵구나’ 라는 생각에 갑자기 버전 업그레이드가 부담스러워졌다.<br>애초에 에러 메시지에서도 <code>multiport-post</code>의 버전을 낮출 것을 권장하였으니, 2안에 대해 알아보는 것이 좋을 것 같다.</p>
 <h4 id="2안-multipart-post-버전-다운그레이드"><a href="#2안-multipart-post-버전-다운그레이드" class="headerlink" title="2안: multipart-post 버전 다운그레이드"></a>2안: multipart-post 버전 다운그레이드</h4><p>몇 시간 전만 해도 되던 걸 안 되게 만든 주범으로 추정되는 <code>multipart-post</code>는 직접적으로 확인할 수는 없었지만 에러 메시지를 통해 추정하면, 몇 시간 새 2.2.0 이후 버전이 적용되면서 Travis CI의 가상환경에서 사용되던 ruby 버전과 충돌을 일으킨 것으로 추정된다.<br>확인을 위해 rubygems.org에서 <code>multipart-post</code>를 찾아본 결과, 2022년 6월 9일에 릴리즈된 2.2.2 버전은 ruby 2.6.0 이상을 요구하였다. 하지만, 그 다음날에 릴리즈된 2.2.3 버전은 ruby 2.3.0 이상으로 요구 조건이 완화되었다. 즉, <code>multipart-post</code> 2.2.3 버전을 사용하면 현재 버전인 2.4.335도 문제없이 사용이 가능한 것이다.</p>
-<h2 id="고마워요-ioquatix"><a href="#고마워요-ioquatix" class="headerlink" title="고마워요, ioquatix!"></a>고마워요, ioquatix!</h2><p>따라서, <code>multipart-post</code>를 관리하는 고수님들의 빠른 조치(<a target="_blank" rel="noopener" href="https://github.com/socketry/multipart-post/pull/95">https://github.com/socketry/multipart-post/pull/95</a>) 덕에, 나는 아무 것도 하지 않아도 저절로 문제가 해결되는 기쁨을 누렸다. 실제로 아무 조치 없이 빌드를 재실행한 결과, 빌드에 성공하였다.<br>내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 알아서 default로 사용하는 ruby 버전을 업그레이드 해주길 바라면서, 성공한 빌드 로그로 포스트를 마친다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">4.03s</span><br><span class="line">dpl.1</span><br><span class="line">Installing deploy dependencies</span><br><span class="line">Logged <span class="keyword">in</span> as @bastionsofwill (bastionsofwill)</span><br><span class="line">dpl.2</span><br><span class="line">Preparing deploy</span><br><span class="line">dpl.3</span><br><span class="line">Deploying application</span><br><span class="line"><span class="built_in">cd</span> /tmp/d20220612-6975-s1zerh/work</span><br><span class="line">commit fc19656296bd70de2ed24bdb2bf1c36bea7e3b67</span><br><span class="line">Author: Deployment Bot (from Travis CI) &lt;deploy@travis-ci.org&gt;</span><br><span class="line">Date:   Sun Jun 12 12:07:27 2022 +0000</span><br><span class="line">    Deploy bastionsofwill/bastionsofwill.github.io to github.com/bastionsofwill/bastionsofwill.github.io.git:gh-pages</span><br><span class="line"> 2021/07/14/web-domain-architecting/index.html   | 251 ------------------------</span><br><span class="line"> 2021/07/22/email-tracking/index.html            |  13 +-</span><br><span class="line"> 2021/08/01/tslop-04/index.html                  |   8 +-</span><br><span class="line"> 2021/08/01/tslop-05/index.html                  |   8 +-</span><br><span class="line"> 2021/08/06/what-is-ssl-certificate/index.html   |   8 +-</span><br><span class="line"> 2021/10/05/video-through-web-0/index.html       |   8 +-</span><br><span class="line"> 2021/11/17/hexo-travis-ghpage/index.html        |   8 +-</span><br><span class="line"> 2021/11/19/what-is-dependabot/index.html        |   8 +-</span><br><span class="line"> 2021/12/13/log4j2-vulnerability/index.html      |   8 +-</span><br><span class="line"> 2022/01/12/encoding-and-video-codecs/index.html |   8 +-</span><br><span class="line"> ...</span><br><span class="line"> 48 files changed, 129 insertions(+), 925 deletions(-)</span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line">Done. Your build exited with 0.</span><br></pre></td></tr></table></figure>
+<h2 id="고마워요-ioquatix"><a href="#고마워요-ioquatix" class="headerlink" title="고마워요, ioquatix!"></a>고마워요, ioquatix!</h2><p>따라서, <code>multipart-post</code>를 관리하는 고수님들의 빠른 조치(<a target="_blank" rel="noopener" href="https://github.com/socketry/multipart-post/pull/95">https://github.com/socketry/multipart-post/pull/95</a>) 덕에, 나는 아무 것도 하지 않아도 저절로 문제가 해결되는 기쁨을 누렸다. 실제로 아무 조치 없이 빌드를 재실행한 결과, 빌드에 성공하였다.<br>내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 알아서 default로 사용하는 ruby 버전을 업그레이드 해주길 바라면서, 또 이 포스트의 속편을 바로 작성해야 하는 일이 없기를 바라면서 성공한 빌드 로그로 포스트를 마친다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Installing deploy dependencies</span><br><span class="line">Logged <span class="keyword">in</span> as @bastionsofwill (bastionsofwill)</span><br><span class="line"></span><br><span class="line">Preparing deploy</span><br><span class="line"></span><br><span class="line">Deploying application</span><br><span class="line"><span class="built_in">cd</span> /tmp/d20220612-6975-s1zerh/work</span><br><span class="line">commit fc19656296bd70de2ed24bdb2bf1c36bea7e3b67</span><br><span class="line">Author: Deployment Bot (from Travis CI) &lt;deploy@travis-ci.org&gt;</span><br><span class="line">Date:   Sun Jun 12 12:07:27 2022 +0000</span><br><span class="line">    Deploy bastionsofwill/bastionsofwill.github.io to github.com/bastionsofwill/bastionsofwill.github.io.git:gh-pages</span><br><span class="line"> 2021/07/14/web-domain-architecting/index.html   | 251 ------------------------</span><br><span class="line"> 2021/07/22/email-tracking/index.html            |  13 +-</span><br><span class="line"> 2021/08/01/tslop-04/index.html                  |   8 +-</span><br><span class="line"> 2021/08/01/tslop-05/index.html                  |   8 +-</span><br><span class="line"> 2021/08/06/what-is-ssl-certificate/index.html   |   8 +-</span><br><span class="line"> 2021/10/05/video-through-web-0/index.html       |   8 +-</span><br><span class="line"> 2021/11/17/hexo-travis-ghpage/index.html        |   8 +-</span><br><span class="line"> 2021/11/19/what-is-dependabot/index.html        |   8 +-</span><br><span class="line"> 2021/12/13/log4j2-vulnerability/index.html      |   8 +-</span><br><span class="line"> 2022/01/12/encoding-and-video-codecs/index.html |   8 +-</span><br><span class="line"> ...</span><br><span class="line"> 48 files changed, 129 insertions(+), 925 deletions(-)</span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line">Done. Your build exited with 0.</span><br></pre></td></tr></table></figure>
 
 <h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/ko/docs/github-pages">https://hexo.io/ko/docs/github-pages</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/for-beginners">https://docs.travis-ci.com/user/for-beginners</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/deployment">https://docs.travis-ci.com/user/deployment</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/deployment/pages/">https://docs.travis-ci.com/user/deployment/pages/</a><br><a target="_blank" rel="noopener" href="https://github.com/travis-ci/dpl">https://github.com/travis-ci/dpl</a><br><a target="_blank" rel="noopener" href="https://rubygems.org/gems/dpl-pages">https://rubygems.org/gems/dpl-pages</a><br><a target="_blank" rel="noopener" href="https://rubygems.org/gems/multipart-post">https://rubygems.org/gems/multipart-post</a><br><a target="_blank" rel="noopener" href="https://www.ruby-lang.org/ko/downloads/">https://www.ruby-lang.org/ko/downloads/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl4baoacw001cfiq32vr4ezxm" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl4bb41zf001ccuv91ge4ft1g" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
       
       
       
@@ -263,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl4baoacv0018fiq381er6pbv" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl4bb41ze0018cuv9c7wx2d2i" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
@@ -371,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl4baoacw001afiq3bg0i0z57" data-title="Terraform Language 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl4bb41zf001acuv9c0sigfhe" data-title="Terraform Language 기초" class="article-share-link">공유</a>
       
       
       
@@ -500,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl4baoacp000xfiq33mlrepse" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl4bb41z8000xcuv91akw5vqg" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
       
       
       
@@ -582,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl4baoacn000vfiq30ukfgy49" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl4bb41z6000vcuv907wh8ff3" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
       
       
       
@@ -633,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl4baoacs0011fiq33s8rgnec" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl4bb41zb0011cuv98kcf7ria" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
       
       
       
@@ -680,7 +682,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl4baoacu0016fiq39un04alg" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl4bb41zd0016cuv9gqfb7rx2" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
       
       
       
@@ -726,7 +728,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl4baoad0001kfiq31z9xcxzx" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl4bb41zj001kcuv9ctl1c7zc" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
       
       
       
@@ -772,7 +774,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl4baoact0013fiq3bhes2pdw" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl4bb41zc0013cuv91cy7gplt" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
       
       
       
@@ -820,7 +822,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl4baoacz001jfiq37g9nfe29" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl4bb41zi001jcuv9hpzr53sm" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
       
       
       
