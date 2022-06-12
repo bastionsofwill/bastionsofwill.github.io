@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Travis CI 에러 조치 | bastionsofwill</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="#74 errored오랜만에 블로그에 포스트를 작성하고 블로그를 둘러보니, 이전에 작성한 불필요한 포스트가 보였다. 이를 로컬 디렉토리에서 삭제한 후, 블로그에 반영하기 위해 리포지토리 main 브랜치에 push하였다. 리포지토리는 Travis CI를 통해 빌드&#x2F;배포 자동화가 설정되어 있으므로, 여느 때와 같이 빌드&#x2F;배포 작업이 진행될거라">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Travis CI 에러 조치">
+<meta property="og:url" content="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/index.html">
+<meta property="og:site_name" content="bastionsofwill">
+<meta property="og:description" content="#74 errored오랜만에 블로그에 포스트를 작성하고 블로그를 둘러보니, 이전에 작성한 불필요한 포스트가 보였다. 이를 로컬 디렉토리에서 삭제한 후, 블로그에 반영하기 위해 리포지토리 main 브랜치에 push하였다. 리포지토리는 Travis CI를 통해 빌드&#x2F;배포 자동화가 설정되어 있으므로, 여느 때와 같이 빌드&#x2F;배포 작업이 진행될거라">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://bastionsofwill.github.io/images/travis-error.png">
+<meta property="og:image" content="https://bastionsofwill.github.io/images/travis-error.png">
+<meta property="article:published_time" content="2022-06-12T21:27:57.000Z">
+<meta property="article:modified_time" content="2022-06-12T12:29:30.704Z">
+<meta property="article:author" content="JY">
+<meta property="article:tag" content="Travis CI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bastionsofwill.github.io/images/travis-error.png">
+  
+    <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">bastionsofwill</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bastionsofwill.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-travis-ci-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/12/travis-ci-error/" class="article-date">
+  <time class="dt-published" datetime="2022-06-12T21:27:57.000Z" itemprop="datePublished">2022-06-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Travis CI 에러 조치
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="74-errored"><a href="#74-errored" class="headerlink" title="#74 errored"></a>#74 errored</h2><p>오랜만에 블로그에 포스트를 작성하고 블로그를 둘러보니, 이전에 작성한 불필요한 포스트가 보였다. 이를 로컬 디렉토리에서 삭제한 후, 블로그에 반영하기 위해 리포지토리 main 브랜치에 push하였다. 리포지토리는 Travis CI를 통해 빌드&#x2F;배포 자동화가 설정되어 있으므로, 여느 때와 같이 빌드&#x2F;배포 작업이 진행될거라 기대했지만, 빌드가 실패했다는 메일을 받게 되었다.<br><img src="/images/travis-error.png"><br>지난 11월에 블로그 프레임워크를 Hexo로 바꾸면서, Hexo 튜토리얼 문서를 보고 그대로 따라한 뒤(<a href="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/">https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/</a>) 처음 겪는 빌드 실패여서 당혹스러웠으나, 몇 시간 전에 성공한 것이 실패한 이유는 당연히 안 해본 짓(포스트 삭제)을 했기 때문일 것으로 추정하고 해결을 미뤘다.<br>하지만 빌드 실패 결과를 살펴본 결과, 문제는 다른 곳에 있음을 알 수 있었다.</p>
+<h2 id="Job-Log"><a href="#Job-Log" class="headerlink" title="Job Log"></a>Job Log</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">Worker information</span><br><span class="line">(생략)</span><br><span class="line">Build system information</span><br><span class="line">(생략)</span><br><span class="line">$ git <span class="built_in">clone</span> --depth=50 --branch=main https://github.com/bastionsofwill/bastionsofwill.github.io.git bastionsofwill/bastionsofwill.github.io</span><br><span class="line"></span><br><span class="line">Setting environment variables from repository settings</span><br><span class="line">$ <span class="built_in">export</span> GH_TOKEN=[secure]</span><br><span class="line"></span><br><span class="line">$ nvm install 16</span><br><span class="line"></span><br><span class="line">Setting up build cache</span><br><span class="line">$ <span class="built_in">export</span> CASHER_DIR=<span class="variable">$&#123;TRAVIS_HOME&#125;</span>/.casher</span><br><span class="line">$ Installing caching utilities</span><br><span class="line">attempting to download cache archive</span><br><span class="line">fetching main/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-16.tgz</span><br><span class="line">found cache</span><br><span class="line">$ node --version</span><br><span class="line">v16.15.1</span><br><span class="line">$ npm --version</span><br><span class="line">8.11.0</span><br><span class="line">$ nvm --version</span><br><span class="line">0.39.1</span><br><span class="line">$ yarn --version</span><br><span class="line">1.22.18</span><br><span class="line"></span><br><span class="line">$ yarn --frozen-lockfile</span><br><span class="line">hexo generate</span><br><span class="line">(생략)</span><br><span class="line">The <span class="built_in">command</span> <span class="string">&quot;hexo generate&quot;</span> exited with 0.</span><br><span class="line"></span><br><span class="line">store build cache</span><br><span class="line">changes detected (content changed, file is created, or file is deleted):\n/home/travis/.npm/_logs/2022-06-09T17_42_37_173Z-debug-0.log\n</span><br><span class="line">changes detected, packing new archive</span><br><span class="line">uploading main/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-16.tgz</span><br><span class="line">cache uploaded</span><br><span class="line"></span><br><span class="line">$ rvm $(travis_internal_ruby) --fuzzy <span class="keyword">do</span> ruby -S gem install dpl</span><br><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br><span class="line">Successfully installed public_suffix-3.0.3</span><br><span class="line">Successfully installed addressable-2.8.0</span><br><span class="line">/home/travis/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:54:<span class="keyword">in</span> `require<span class="string">&#x27;: cannot load such file -- dpl/provider/pages (LoadError)</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:54:in `require&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/provider.rb:93:<span class="keyword">in</span> `rescue <span class="keyword">in</span> block <span class="keyword">in</span> new<span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/provider.rb:68:in `block in new&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/cli.rb:41:<span class="keyword">in</span> `<span class="built_in">fold</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/provider.rb:67:in `new&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/cli.rb:31:<span class="keyword">in</span> `run<span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/cli.rb:7:in `run&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/bin/dpl:5:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/bin/dpl:23:in `load&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/bin/dpl:23:<span class="keyword">in</span> `&lt;main&gt;<span class="string">&#x27;</span></span><br><span class="line"><span class="string">failed to deploy</span></span><br></pre></td></tr></table></figure>
+<p>에러가 난 부분을 보면, deploy dependencies를 설치하다가 <code>dpl-pages</code>에서 에러가 발생했고, <code>multipart-post</code>가 Ruby 2.6.0을 요구하는데 현재 버전이 2.4.5.335인 것이 문제로 보인다.</p>
+<h2 id="errored"><a href="#errored" class="headerlink" title="errored?"></a>errored?</h2><p>먼저 Travis CI가 동작하는 과정에 대한 간략한 이해가 필요하다.<br>Travis CI가 수행할 작업을 정의하는 구조는 phase -&gt; job -&gt; stage -&gt; build로, 하나의 <em>job</em>은 아래와 같은 <em>phase</em>로 구성된다.</p>
+<ol>
+<li><code>before_install</code></li>
+<li><code>install</code>: dependency의 설치</li>
+<li><code>before_script</code></li>
+<li><code>script</code>: build script 실행</li>
+<li><code>before_cache</code>(OPTIONAL)</li>
+<li><code>after_success/failure</code></li>
+<li><code>before_deploy</code>(OPTIONAL)</li>
+<li><code>deploy</code>(OPTIONAL)</li>
+<li><code>after_deploy</code>(OPTIONAL)</li>
+<li><code>after_script</code></li>
+</ol>
+<p><em>stage</em>는 이러한 job들이 병렬로(in parellel) 실행되는 그룹을 말하며, <em>build</em>는 이러한 stage들이 순차적으로 실행되는 group을 말한다.</p>
+<p>하나 이상의 job이 실패할 경우 그 job이 속한 빌드는 비정상으로 표시되며, 비정상 빌드는 아래 세 가지로 구분된다.</p>
+<ul>
+<li><em>errored</em>: <code>before_install</code>, <code>install</code>, <code>before_script</code>, <code>before_deploy</code> phase가 정상적으로 종료되지 않을 경우(non-zero exit code) 발생</li>
+<li><em>failed</em>: <code>script</code> phase가 정상적으로 종료되지 않을 경우 발생</li>
+<li><em>canceled</em>: 사용자에 의한 취소<br><code>after_success/failure</code>, <code>after_deploy</code>, <code>after_script</code>의 exit code는 빌드 결과에 영향을 미치지 않지만, 타임아웃이 발생했을 경우 빌드 결과는 <em>failed</em>로 표시된다.</li>
+</ul>
+<p>즉, 위의 job log를 살펴본 결과, <code>hexo generate</code>라는 1줄짜리 스크립트가 실행되는 <code>script</code> phase까지는 무사히 실행되었으나, <code>before_deploy</code> phase에서 deploy dependency를 설치하다가 오류가 나서 build가 errored로 표시된 것임을 확인할 수 있었다.</p>
+<h2 id="dpl-pages와-multipart-post"><a href="#dpl-pages와-multipart-post" class="headerlink" title="dpl-pages와 multipart-post"></a>dpl-pages와 multipart-post</h2><p>에러가 난 지점에 대한 감은 잡을 수 있었다. 하지만 여전히 문제에 대한 지식은 많이 모자란 상황이다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br></pre></td></tr></table></figure>
+<p>에러 로그를 다시 살펴보면, <code>dpl-pages</code>를 설치하다가 에러가 발생하였고,  <code>multipart-post</code>가 요구하는 ruby 버전이 2.6.0 이상인 것이 문제임을 알 수 있었다. </p>
+<p>첫번째로 든 의문은, ‘<code>dpl-pages</code>, <code>multipart-post</code>는 또 뭔데?’였다. ‘배포 작업을 수행하기 위해 필요한 무언가’ 정도로만 추정이 되는 상황이었으므로, Travis CI가 배포하는 방식에 대한 지식이 필요했다.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">main</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
+<p>이전에 생각없이 hexo tutorial을 복붙하면서, 나는 인지하지 못한 채 Travis CI의 GitHub Pages Deployment 기능을 사용하고 있었다.<br><img src="/images/travis-error.png"><br>위 이미지와 같이, 해당 기능에 대한 Travis CI 문서에는 dpl v1에 대한 내용이 있었고, dpl을 사용하여 Travis CI는 배포 관련 작업을 수행하는 것임을 알 수 있었다. 하지만 여기서 결국 <code>dpl-pages</code>, <code>multipart-post</code>에 대한 내용은 결국 찾지 못했는데, ruby에 대한 지식이 없는 상황에서 dpl의 문서에는 관련 내용이 없기 때문이다. 하지만 dpl은 rubygem으로 관리되고 있다는 내용이 있었으므로, rubygems.org에서 dpl, dpl-pages, multipart-post라는 gem은 찾을 수 있었다.</p>
+<h2 id="갈림길"><a href="#갈림길" class="headerlink" title="갈림길"></a>갈림길</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br></pre></td></tr></table></figure>
+<p>위의 메시지를 자세히 보면, 배경이 어떻든 결국 <code>multipart-post</code>라는 gem이 ruby <em>2.6.0</em> 이상을 요구하는 반면, 환경에 설치된 ruby는 <em>2.4.5.335</em> 버전인 것이 문제임을 알 수 있다.</p>
+<p>따라서 이를 해결하기 위해서는 아래 두 가지 해결책을 떠올릴 수 있다.</p>
+<ol>
+<li>ruby 버전을 <em>2.6.0</em> 이상으로 올린다.</li>
+<li><code>multipart-post</code>의 버전을 <em>2.2.0</em>으로 내린다.(에러 메시지에서 권장한 방법)</li>
+</ol>
+<p>두 방법 모두 Travis CI가 동작하는 환경에 대한 조작이 필요하므로, <code>.travis.yml</code> 파일을 건드려야 한다. 쉽게 끝날 수도 있겠지만 아닐 가능성이 더 커서 꺼려지는데, 어느 쪽이 더 쉽고 문제가 적을지를 생각했다.</p>
+<h4 id="1안-ruby-버전-업그레이드"><a href="#1안-ruby-버전-업그레이드" class="headerlink" title="1안: ruby 버전 업그레이드"></a>1안: ruby 버전 업그레이드</h4><p>2안 같은 버전 다운그레이드는 결국 문제를 나중에 터지도록 미루는 것이라는 생각이 들었다. 또 몇 시간 전까지도 잘 동작하다가 에러가 발생한 상황이어서, ruby 2.6.0은 비교적 최근에 릴리즈된 버전일 것이라 예상했고, 새로운 버전을 쓰면 좋을 것이라는 생각이 들었다. 하지만 ruby 2.6.0의 릴리즈 일자는 2018년 말이고 2.6.10도 이미 지원 종료(EOL)되었다는 사실은 충격이었고, ‘아직도 몇년 전 버전의 루비를 사용하는 것을 보니 역시 고수들도 dependency는 함부로 건드리기 어렵구나’ 라는 생각에 갑자기 버전 업그레이드가 부담스러워졌다. 애초에 에러 메시지에서도 <code>multiport-post</code>의 버전을 낮출 것을 권장하였으니, 2안에 대해 알아보는 것이 좋을 것 같다.</p>
+<h4 id="2안-multipart-post-버전-다운그레이드"><a href="#2안-multipart-post-버전-다운그레이드" class="headerlink" title="2안: multipart-post 버전 다운그레이드"></a>2안: multipart-post 버전 다운그레이드</h4><p>몇 시간 전만 해도 되던 걸 안 되게 만든 주범으로 추정되는 <code>multipart-post</code>는 직접적으로 확인할 수는 없었으나, 에러 메시지를 통해 추정하면 몇 시간 새에 2.2.0 이후 버전이 적용되면서 Travis CI의 가상환경에서 사용되던 ruby 버전과 충돌을 일으킨 것으로 추정된다. 확인을 위해 rubygems.org에서 <code>multipart-post</code>를 찾아본 결과, 2022년 6월 9일에 릴리즈된 2.2.2 버전은 ruby 2.6.0 이상을 요구하였다. 하지만, 그 다음날에 릴리즈된 2.2.3 버전은 ruby 2.3.0 이상으로 요구 조건이 완화되어 있었다. 즉, <code>multipart-post</code> 2.2.3 버전을 사용하면 현재 버전인 2.4.335도 문제없이 사용이 가능한 것이다.</p>
+<h2 id="문제…-해결…"><a href="#문제…-해결…" class="headerlink" title="문제… 해결…?"></a>문제… 해결…?</h2><p>따라서, <code>multipart-post</code>를 관리하는 고수님(고마워요, ioquatix!)들의 빠른 조치(<a target="_blank" rel="noopener" href="https://github.com/socketry/multipart-post/pull/95">https://github.com/socketry/multipart-post/pull/95</a>) 덕에, 나는 아무 것도 하지 않아도 저절로 문제가 해결되는 기쁨을 누렸다. 실제로 리포지토리에 아무 변동이 없는 채로 Travis CI에서 빌드를 재실행한 결과, 아무런 문제 없이 빌드에 성공하였다. 내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 알아서 default로 사용하는 ruby 버전을 업그레이드 해주길 바라면서, 성공한 빌드 로그로 포스트를 마친다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">4.03s</span><br><span class="line">dpl.1</span><br><span class="line">Installing deploy dependencies</span><br><span class="line">Logged <span class="keyword">in</span> as @bastionsofwill (bastionsofwill)</span><br><span class="line">dpl.2</span><br><span class="line">Preparing deploy</span><br><span class="line">dpl.3</span><br><span class="line">Deploying application</span><br><span class="line"><span class="built_in">cd</span> /tmp/d20220612-6975-s1zerh/work</span><br><span class="line">commit fc19656296bd70de2ed24bdb2bf1c36bea7e3b67</span><br><span class="line">Author: Deployment Bot (from Travis CI) &lt;deploy@travis-ci.org&gt;</span><br><span class="line">Date:   Sun Jun 12 12:07:27 2022 +0000</span><br><span class="line">    Deploy bastionsofwill/bastionsofwill.github.io to github.com/bastionsofwill/bastionsofwill.github.io.git:gh-pages</span><br><span class="line"> 2021/07/14/web-domain-architecting/index.html   | 251 ------------------------</span><br><span class="line"> 2021/07/22/email-tracking/index.html            |  13 +-</span><br><span class="line"> 2021/08/01/tslop-04/index.html                  |   8 +-</span><br><span class="line"> 2021/08/01/tslop-05/index.html                  |   8 +-</span><br><span class="line"> 2021/08/06/what-is-ssl-certificate/index.html   |   8 +-</span><br><span class="line"> 2021/10/05/video-through-web-0/index.html       |   8 +-</span><br><span class="line"> 2021/11/17/hexo-travis-ghpage/index.html        |   8 +-</span><br><span class="line"> 2021/11/19/what-is-dependabot/index.html        |   8 +-</span><br><span class="line"> 2021/12/13/log4j2-vulnerability/index.html      |   8 +-</span><br><span class="line"> 2022/01/12/encoding-and-video-codecs/index.html |   8 +-</span><br><span class="line"> ...</span><br><span class="line"> 48 files changed, 129 insertions(+), 925 deletions(-)</span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line">Done. Your build exited with 0.</span><br></pre></td></tr></table></figure>
+
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/ko/docs/github-pages">https://hexo.io/ko/docs/github-pages</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/for-beginners">https://docs.travis-ci.com/user/for-beginners</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/deployment">https://docs.travis-ci.com/user/deployment</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/deployment/pages/">https://docs.travis-ci.com/user/deployment/pages/</a><br><a target="_blank" rel="noopener" href="https://github.com/travis-ci/dpl">https://github.com/travis-ci/dpl</a><br><a target="_blank" rel="noopener" href="https://rubygems.org/gems/dpl-pages">https://rubygems.org/gems/dpl-pages</a><br><a target="_blank" rel="noopener" href="https://rubygems.org/gems/multipart-post">https://rubygems.org/gems/multipart-post</a><br><a target="_blank" rel="noopener" href="https://www.ruby-lang.org/ko/downloads/">https://www.ruby-lang.org/ko/downloads/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl4baaflc001ceeqf9og22z2o" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/09/magical-shell-script/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">쉘 스크립트 기초</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Terraform/" rel="tag">Terraform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Weekend-Study/" rel="tag">Weekend Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 15px;">Travis CI</a> <a href="/tags/Weekend-Study/" style="font-size: 15px;">Weekend Study</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 15px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 15px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 15px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">6월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">4월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">12월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">11월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">10월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">8월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">7월 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/12/travis-ci-error/">Travis CI 에러 조치</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/09/magical-shell-script/">쉘 스크립트 기초</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/terraform-lang-basics/">Terraform Language 기초</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/11/cntda-02/">주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/10/cntda-01/">주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 JY<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -71,6 +71,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-travis-ci-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/12/travis-ci-error/" class="article-date">
+  <time class="dt-published" datetime="2022-06-12T21:27:57.000Z" itemprop="datePublished">2022-06-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/06/12/travis-ci-error/">Travis CI 에러 조치</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="74-errored"><a href="#74-errored" class="headerlink" title="#74 errored"></a>#74 errored</h2><p>오랜만에 블로그에 포스트를 작성하고 블로그를 둘러보니, 이전에 작성한 불필요한 포스트가 보였다. 이를 로컬 디렉토리에서 삭제한 후, 블로그에 반영하기 위해 리포지토리 main 브랜치에 push하였다. 리포지토리는 Travis CI를 통해 빌드&#x2F;배포 자동화가 설정되어 있으므로, 여느 때와 같이 빌드&#x2F;배포 작업이 진행될거라 기대했지만, 빌드가 실패했다는 메일을 받게 되었다.<br><img src="/images/travis-error.png"><br>지난 11월에 블로그 프레임워크를 Hexo로 바꾸면서, Hexo 튜토리얼 문서를 보고 그대로 따라한 뒤(<a href="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/">https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/</a>) 처음 겪는 빌드 실패여서 당혹스러웠으나, 몇 시간 전에 성공한 것이 실패한 이유는 당연히 안 해본 짓(포스트 삭제)을 했기 때문일 것으로 추정하고 해결을 미뤘다.<br>하지만 빌드 실패 결과를 살펴본 결과, 문제는 다른 곳에 있음을 알 수 있었다.</p>
+<h2 id="Job-Log"><a href="#Job-Log" class="headerlink" title="Job Log"></a>Job Log</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">Worker information</span><br><span class="line">(생략)</span><br><span class="line">Build system information</span><br><span class="line">(생략)</span><br><span class="line">$ git <span class="built_in">clone</span> --depth=50 --branch=main https://github.com/bastionsofwill/bastionsofwill.github.io.git bastionsofwill/bastionsofwill.github.io</span><br><span class="line"></span><br><span class="line">Setting environment variables from repository settings</span><br><span class="line">$ <span class="built_in">export</span> GH_TOKEN=[secure]</span><br><span class="line"></span><br><span class="line">$ nvm install 16</span><br><span class="line"></span><br><span class="line">Setting up build cache</span><br><span class="line">$ <span class="built_in">export</span> CASHER_DIR=<span class="variable">$&#123;TRAVIS_HOME&#125;</span>/.casher</span><br><span class="line">$ Installing caching utilities</span><br><span class="line">attempting to download cache archive</span><br><span class="line">fetching main/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-16.tgz</span><br><span class="line">found cache</span><br><span class="line">$ node --version</span><br><span class="line">v16.15.1</span><br><span class="line">$ npm --version</span><br><span class="line">8.11.0</span><br><span class="line">$ nvm --version</span><br><span class="line">0.39.1</span><br><span class="line">$ yarn --version</span><br><span class="line">1.22.18</span><br><span class="line"></span><br><span class="line">$ yarn --frozen-lockfile</span><br><span class="line">hexo generate</span><br><span class="line">(생략)</span><br><span class="line">The <span class="built_in">command</span> <span class="string">&quot;hexo generate&quot;</span> exited with 0.</span><br><span class="line"></span><br><span class="line">store build cache</span><br><span class="line">changes detected (content changed, file is created, or file is deleted):\n/home/travis/.npm/_logs/2022-06-09T17_42_37_173Z-debug-0.log\n</span><br><span class="line">changes detected, packing new archive</span><br><span class="line">uploading main/cache--linux-xenial-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855--node-16.tgz</span><br><span class="line">cache uploaded</span><br><span class="line"></span><br><span class="line">$ rvm $(travis_internal_ruby) --fuzzy <span class="keyword">do</span> ruby -S gem install dpl</span><br><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br><span class="line">Successfully installed public_suffix-3.0.3</span><br><span class="line">Successfully installed addressable-2.8.0</span><br><span class="line">/home/travis/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:54:<span class="keyword">in</span> `require<span class="string">&#x27;: cannot load such file -- dpl/provider/pages (LoadError)</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/rubies/ruby-2.4.5/lib/ruby/site_ruby/2.4.0/rubygems/core_ext/kernel_require.rb:54:in `require&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/provider.rb:93:<span class="keyword">in</span> `rescue <span class="keyword">in</span> block <span class="keyword">in</span> new<span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/provider.rb:68:in `block in new&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/cli.rb:41:<span class="keyword">in</span> `<span class="built_in">fold</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/provider.rb:67:in `new&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/cli.rb:31:<span class="keyword">in</span> `run<span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/lib/dpl/cli.rb:7:in `run&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/gems/dpl-1.10.16/bin/dpl:5:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">&#x27;</span></span><br><span class="line"><span class="string">	from /home/travis/.rvm/gems/ruby-2.4.5/bin/dpl:23:in `load&#x27;</span></span><br><span class="line">	from /home/travis/.rvm/gems/ruby-2.4.5/bin/dpl:23:<span class="keyword">in</span> `&lt;main&gt;<span class="string">&#x27;</span></span><br><span class="line"><span class="string">failed to deploy</span></span><br></pre></td></tr></table></figure>
+<p>에러가 난 부분을 보면, deploy dependencies를 설치하다가 <code>dpl-pages</code>에서 에러가 발생했고, <code>multipart-post</code>가 Ruby 2.6.0을 요구하는데 현재 버전이 2.4.5.335인 것이 문제로 보인다.</p>
+<h2 id="errored"><a href="#errored" class="headerlink" title="errored?"></a>errored?</h2><p>먼저 Travis CI가 동작하는 과정에 대한 간략한 이해가 필요하다.<br>Travis CI가 수행할 작업을 정의하는 구조는 phase -&gt; job -&gt; stage -&gt; build로, 하나의 <em>job</em>은 아래와 같은 <em>phase</em>로 구성된다.</p>
+<ol>
+<li><code>before_install</code></li>
+<li><code>install</code>: dependency의 설치</li>
+<li><code>before_script</code></li>
+<li><code>script</code>: build script 실행</li>
+<li><code>before_cache</code>(OPTIONAL)</li>
+<li><code>after_success/failure</code></li>
+<li><code>before_deploy</code>(OPTIONAL)</li>
+<li><code>deploy</code>(OPTIONAL)</li>
+<li><code>after_deploy</code>(OPTIONAL)</li>
+<li><code>after_script</code></li>
+</ol>
+<p><em>stage</em>는 이러한 job들이 병렬로(in parellel) 실행되는 그룹을 말하며, <em>build</em>는 이러한 stage들이 순차적으로 실행되는 group을 말한다.</p>
+<p>하나 이상의 job이 실패할 경우 그 job이 속한 빌드는 비정상으로 표시되며, 비정상 빌드는 아래 세 가지로 구분된다.</p>
+<ul>
+<li><em>errored</em>: <code>before_install</code>, <code>install</code>, <code>before_script</code>, <code>before_deploy</code> phase가 정상적으로 종료되지 않을 경우(non-zero exit code) 발생</li>
+<li><em>failed</em>: <code>script</code> phase가 정상적으로 종료되지 않을 경우 발생</li>
+<li><em>canceled</em>: 사용자에 의한 취소<br><code>after_success/failure</code>, <code>after_deploy</code>, <code>after_script</code>의 exit code는 빌드 결과에 영향을 미치지 않지만, 타임아웃이 발생했을 경우 빌드 결과는 <em>failed</em>로 표시된다.</li>
+</ul>
+<p>즉, 위의 job log를 살펴본 결과, <code>hexo generate</code>라는 1줄짜리 스크립트가 실행되는 <code>script</code> phase까지는 무사히 실행되었으나, <code>before_deploy</code> phase에서 deploy dependency를 설치하다가 오류가 나서 build가 errored로 표시된 것임을 확인할 수 있었다.</p>
+<h2 id="dpl-pages와-multipart-post"><a href="#dpl-pages와-multipart-post" class="headerlink" title="dpl-pages와 multipart-post"></a>dpl-pages와 multipart-post</h2><p>에러가 난 지점에 대한 감은 잡을 수 있었다. 하지만 여전히 문제에 대한 지식은 많이 모자란 상황이다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br></pre></td></tr></table></figure>
+<p>에러 로그를 다시 살펴보면, <code>dpl-pages</code>를 설치하다가 에러가 발생하였고,  <code>multipart-post</code>가 요구하는 ruby 버전이 2.6.0 이상인 것이 문제임을 알 수 있었다. </p>
+<p>첫번째로 든 의문은, ‘<code>dpl-pages</code>, <code>multipart-post</code>는 또 뭔데?’였다. ‘배포 작업을 수행하기 위해 필요한 무언가’ 정도로만 추정이 되는 상황이었으므로, Travis CI가 배포하는 방식에 대한 지식이 필요했다.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">main</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
+<p>이전에 생각없이 hexo tutorial을 복붙하면서, 나는 인지하지 못한 채 Travis CI의 GitHub Pages Deployment 기능을 사용하고 있었다.<br><img src="/images/travis-error.png"><br>위 이미지와 같이, 해당 기능에 대한 Travis CI 문서에는 dpl v1에 대한 내용이 있었고, dpl을 사용하여 Travis CI는 배포 관련 작업을 수행하는 것임을 알 수 있었다. 하지만 여기서 결국 <code>dpl-pages</code>, <code>multipart-post</code>에 대한 내용은 결국 찾지 못했는데, ruby에 대한 지식이 없는 상황에서 dpl의 문서에는 관련 내용이 없기 때문이다. 하지만 dpl은 rubygem으로 관리되고 있다는 내용이 있었으므로, rubygems.org에서 dpl, dpl-pages, multipart-post라는 gem은 찾을 수 있었다.</p>
+<h2 id="갈림길"><a href="#갈림길" class="headerlink" title="갈림길"></a>갈림길</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Installing deploy dependencies</span><br><span class="line">ERROR:  Error installing dpl-pages:</span><br><span class="line">	The last version of multipart-post (&gt;= 1.2, &lt; 3) to support your Ruby &amp; RubyGems was 2.2.0. Try installing it with `gem install multipart-post -v 2.2.0` and <span class="keyword">then</span> running the current <span class="built_in">command</span> again</span><br><span class="line">	multipart-post requires Ruby version &gt;= 2.6.0. The current ruby version is 2.4.5.335.</span><br></pre></td></tr></table></figure>
+<p>위의 메시지를 자세히 보면, 배경이 어떻든 결국 <code>multipart-post</code>라는 gem이 ruby <em>2.6.0</em> 이상을 요구하는 반면, 환경에 설치된 ruby는 <em>2.4.5.335</em> 버전인 것이 문제임을 알 수 있다.</p>
+<p>따라서 이를 해결하기 위해서는 아래 두 가지 해결책을 떠올릴 수 있다.</p>
+<ol>
+<li>ruby 버전을 <em>2.6.0</em> 이상으로 올린다.</li>
+<li><code>multipart-post</code>의 버전을 <em>2.2.0</em>으로 내린다.(에러 메시지에서 권장한 방법)</li>
+</ol>
+<p>두 방법 모두 Travis CI가 동작하는 환경에 대한 조작이 필요하므로, <code>.travis.yml</code> 파일을 건드려야 한다. 쉽게 끝날 수도 있겠지만 아닐 가능성이 더 커서 꺼려지는데, 어느 쪽이 더 쉽고 문제가 적을지를 생각했다.</p>
+<h4 id="1안-ruby-버전-업그레이드"><a href="#1안-ruby-버전-업그레이드" class="headerlink" title="1안: ruby 버전 업그레이드"></a>1안: ruby 버전 업그레이드</h4><p>2안 같은 버전 다운그레이드는 결국 문제를 나중에 터지도록 미루는 것이라는 생각이 들었다. 또 몇 시간 전까지도 잘 동작하다가 에러가 발생한 상황이어서, ruby 2.6.0은 비교적 최근에 릴리즈된 버전일 것이라 예상했고, 새로운 버전을 쓰면 좋을 것이라는 생각이 들었다. 하지만 ruby 2.6.0의 릴리즈 일자는 2018년 말이고 2.6.10도 이미 지원 종료(EOL)되었다는 사실은 충격이었고, ‘아직도 몇년 전 버전의 루비를 사용하는 것을 보니 역시 고수들도 dependency는 함부로 건드리기 어렵구나’ 라는 생각에 갑자기 버전 업그레이드가 부담스러워졌다. 애초에 에러 메시지에서도 <code>multiport-post</code>의 버전을 낮출 것을 권장하였으니, 2안에 대해 알아보는 것이 좋을 것 같다.</p>
+<h4 id="2안-multipart-post-버전-다운그레이드"><a href="#2안-multipart-post-버전-다운그레이드" class="headerlink" title="2안: multipart-post 버전 다운그레이드"></a>2안: multipart-post 버전 다운그레이드</h4><p>몇 시간 전만 해도 되던 걸 안 되게 만든 주범으로 추정되는 <code>multipart-post</code>는 직접적으로 확인할 수는 없었으나, 에러 메시지를 통해 추정하면 몇 시간 새에 2.2.0 이후 버전이 적용되면서 Travis CI의 가상환경에서 사용되던 ruby 버전과 충돌을 일으킨 것으로 추정된다. 확인을 위해 rubygems.org에서 <code>multipart-post</code>를 찾아본 결과, 2022년 6월 9일에 릴리즈된 2.2.2 버전은 ruby 2.6.0 이상을 요구하였다. 하지만, 그 다음날에 릴리즈된 2.2.3 버전은 ruby 2.3.0 이상으로 요구 조건이 완화되어 있었다. 즉, <code>multipart-post</code> 2.2.3 버전을 사용하면 현재 버전인 2.4.335도 문제없이 사용이 가능한 것이다.</p>
+<h2 id="문제…-해결…"><a href="#문제…-해결…" class="headerlink" title="문제… 해결…?"></a>문제… 해결…?</h2><p>따라서, <code>multipart-post</code>를 관리하는 고수님(고마워요, ioquatix!)들의 빠른 조치(<a target="_blank" rel="noopener" href="https://github.com/socketry/multipart-post/pull/95">https://github.com/socketry/multipart-post/pull/95</a>) 덕에, 나는 아무 것도 하지 않아도 저절로 문제가 해결되는 기쁨을 누렸다. 실제로 리포지토리에 아무 변동이 없는 채로 Travis CI에서 빌드를 재실행한 결과, 아무런 문제 없이 빌드에 성공하였다. 내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 알아서 default로 사용하는 ruby 버전을 업그레이드 해주길 바라면서, 성공한 빌드 로그로 포스트를 마친다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">4.03s</span><br><span class="line">dpl.1</span><br><span class="line">Installing deploy dependencies</span><br><span class="line">Logged <span class="keyword">in</span> as @bastionsofwill (bastionsofwill)</span><br><span class="line">dpl.2</span><br><span class="line">Preparing deploy</span><br><span class="line">dpl.3</span><br><span class="line">Deploying application</span><br><span class="line"><span class="built_in">cd</span> /tmp/d20220612-6975-s1zerh/work</span><br><span class="line">commit fc19656296bd70de2ed24bdb2bf1c36bea7e3b67</span><br><span class="line">Author: Deployment Bot (from Travis CI) &lt;deploy@travis-ci.org&gt;</span><br><span class="line">Date:   Sun Jun 12 12:07:27 2022 +0000</span><br><span class="line">    Deploy bastionsofwill/bastionsofwill.github.io to github.com/bastionsofwill/bastionsofwill.github.io.git:gh-pages</span><br><span class="line"> 2021/07/14/web-domain-architecting/index.html   | 251 ------------------------</span><br><span class="line"> 2021/07/22/email-tracking/index.html            |  13 +-</span><br><span class="line"> 2021/08/01/tslop-04/index.html                  |   8 +-</span><br><span class="line"> 2021/08/01/tslop-05/index.html                  |   8 +-</span><br><span class="line"> 2021/08/06/what-is-ssl-certificate/index.html   |   8 +-</span><br><span class="line"> 2021/10/05/video-through-web-0/index.html       |   8 +-</span><br><span class="line"> 2021/11/17/hexo-travis-ghpage/index.html        |   8 +-</span><br><span class="line"> 2021/11/19/what-is-dependabot/index.html        |   8 +-</span><br><span class="line"> 2021/12/13/log4j2-vulnerability/index.html      |   8 +-</span><br><span class="line"> 2022/01/12/encoding-and-video-codecs/index.html |   8 +-</span><br><span class="line"> ...</span><br><span class="line"> 48 files changed, 129 insertions(+), 925 deletions(-)</span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line">Done. Your build exited with 0.</span><br></pre></td></tr></table></figure>
+
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/ko/docs/github-pages">https://hexo.io/ko/docs/github-pages</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/for-beginners">https://docs.travis-ci.com/user/for-beginners</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/deployment">https://docs.travis-ci.com/user/deployment</a><br><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/deployment/pages/">https://docs.travis-ci.com/user/deployment/pages/</a><br><a target="_blank" rel="noopener" href="https://github.com/travis-ci/dpl">https://github.com/travis-ci/dpl</a><br><a target="_blank" rel="noopener" href="https://rubygems.org/gems/dpl-pages">https://rubygems.org/gems/dpl-pages</a><br><a target="_blank" rel="noopener" href="https://rubygems.org/gems/multipart-post">https://rubygems.org/gems/multipart-post</a><br><a target="_blank" rel="noopener" href="https://www.ruby-lang.org/ko/downloads/">https://www.ruby-lang.org/ko/downloads/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl4baaflc001ceeqf9og22z2o" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-magical-shell-script" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/06/09/magical-shell-script/" class="article-date">
@@ -179,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl4b9hl5n0018ej0pdcr67oy2" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl4baafla0018eeqfcd0149zm" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
@@ -287,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl4b9hl5o001aej0p86f20ads" data-title="Terraform Language 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl4baaflb001aeeqf00obevlb" data-title="Terraform Language 기초" class="article-share-link">공유</a>
       
       
       
@@ -416,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl4b9hl5g000xej0p4cg10mkm" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl4baafl5000xeeqfa4ekh8qo" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
       
       
       
@@ -498,7 +582,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl4b9hl5f000vej0pg0g888th" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl4baafl4000veeqffjet3z33" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
       
       
       
@@ -549,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl4b9hl5j0011ej0p3hdp7bd9" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl4baafl80011eeqf1hdg4rfn" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
       
       
       
@@ -596,7 +680,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl4b9hl5m0016ej0p4dr50wxi" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl4baafl90016eeqfez7r0z26" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
       
       
       
@@ -642,7 +726,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl4b9hl5r001jej0p8dby64bd" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl4baaflf001keeqfa837f0jh" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
       
       
       
@@ -688,7 +772,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl4b9hl5k0013ej0pb4o33fl9" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl4baafl80013eeqfctip18q3" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
       
       
       
@@ -736,201 +820,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl4b9hl5q001hej0pf9yeh664" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl4baafle001jeeqf2ka80bwk" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-what-is-ssl-certificate" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/08/06/what-is-ssl-certificate/" class="article-date">
-  <time class="dt-published" datetime="2021-08-06T16:28:37.000Z" itemprop="datePublished">2021-08-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/08/06/what-is-ssl-certificate/">SSL/TLS와 인증서의 이해</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="SSL-x2F-TLS란"><a href="#SSL-x2F-TLS란" class="headerlink" title="SSL&#x2F;TLS란?"></a>SSL&#x2F;TLS란?</h2><ul>
-<li>SSL(Secure Socket Layer)은 암호 기반의 인터넷 보안 프로토콜</li>
-<li>여러 번의 보완이 있었으며, 넷스케이프와 무관한 IETF가 이를 관리하면서 TLS(Transport Layer Security)로 이름이 변경</li>
-<li>HTTP가 이를 사용하여 HTTPS(HTTP over TLS)를 제공하며, SNMP, FTP 등 다른 프로토콜에서도 SSL&#x2F;TLS를 사용</li>
-<li>현재 SSL은 업데이트가 중단되어 많은 보안 취약점이 있고, 대다수의 웹 브라우저는 SSL을 지원하지 않는다.</li>
-<li>따라서 대부분의 경우 엄밀하게 말하자면 TLS라 표기하는 것이 맞지만, SSL이 TLS를 지칭하는 용어로 자주 혼용된다.</li>
-</ul>
-<h2 id="SSL-x2F-TLS의-기능"><a href="#SSL-x2F-TLS의-기능" class="headerlink" title="SSL&#x2F;TLS의 기능"></a>SSL&#x2F;TLS의 기능</h2><ul>
-<li>Encryption: 웹 상에서 전송되는 데이터를 암호화하여, 전송 중인 데이터를 탈취하여도 의미없게 만든다.</li>
-<li>Authentication: Handshake라는 두 기기 간 인증 절차를 거침으로서 서로가 서로임을 보장해준다.</li>
-<li>Integrity: 디지털 서명을 통해 데이터 무결성, 즉 데이터가 변조되지 않았음을 검증한다.</li>
-</ul>
-<h2 id="SSL-certificate-TLS-certificate-란"><a href="#SSL-certificate-TLS-certificate-란" class="headerlink" title="SSL certificate(TLS certificate)란?"></a>SSL certificate(TLS certificate)란?</h2><ul>
-<li>웹사이트의 서버 또는 앱 서버에 저장되어 웹사이트를 인증해주는 일종의 신분증이다.</li>
-<li>인증서에는 아래와 같은 정보가 포함되어 있다.<ul>
-<li>도메인 네임</li>
-<li>발급받은 주체(개인, 단체, 기기)</li>
-<li>발급 주체(CA)</li>
-<li>CA의 디지털 서명</li>
-<li>적용받는 서브도메인들</li>
-<li>발급 날짜</li>
-<li>만료 날짜</li>
-<li>퍼블릭 키</li>
-</ul>
-</li>
-<li>인증서에는 웹사이트의 퍼블릭 키가 포함되어 사용자 디바이스는 이를 통해 웹사이트와 안전한 연결을 할 수 있도록 한다.</li>
-<li>웹사이트는 별도 관리하는 프라이빗 키로 사용자가 전달한 퍼블릭 키로 암호화된 데이터를 복호화한다.</li>
-<li>CA(Certificate Authorities)는 SSL 인증서를 발급해주는 기관이다.</li>
-</ul>
-<h2 id="SSL-certificate-validation-level"><a href="#SSL-certificate-validation-level" class="headerlink" title="SSL certificate validation level"></a>SSL certificate validation level</h2><ul>
-<li>Domain Validation<ul>
-<li>가장 낮은 수준의 검증</li>
-<li>비용 저렴</li>
-<li>해당 도메인의 control 여부만 증명: 이는 보통 DNS 레코드나 이메일을 통해 검증</li>
-</ul>
-</li>
-<li>Organization Validation<ul>
-<li>CA가 직접 인증서를 발급받는 주체와 접촉하여 검증</li>
-<li>인증서에는 해당 단체의 이름과 주소 등을 포함</li>
-</ul>
-</li>
-<li>Extended Validation<ul>
-<li>SSL 인증서 발급 전, 해당 환경과 단체에 관한 폭넓은 검증</li>
-<li>단체가 정말 존재하며 법적 문제 없이 등록되어있느지 등을 조사</li>
-<li>시간과 비용 필요</li>
-</ul>
-</li>
-</ul>
-<h2 id="안전한-상태란"><a href="#안전한-상태란" class="headerlink" title="안전한 상태란?"></a>안전한 상태란?</h2><ul>
-<li>클라이언트가 신뢰할 수 있는 상태의 인증서</li>
-<li>안전한 설정<ul>
-<li>안전한 프로토콜 제공(Protocol support)</li>
-<li>안전한 암호(Secure Cipher Suites) 설정</li>
-</ul>
-</li>
-</ul>
-<h2 id="클라이언트가-신뢰할-수-있는-인증서"><a href="#클라이언트가-신뢰할-수-있는-인증서" class="headerlink" title="클라이언트가 신뢰할 수 있는 인증서"></a>클라이언트가 신뢰할 수 있는 인증서</h2><ol>
-<li><p>서비스 도메인에 적합한 인증서 유형의 확인</p>
-<ul>
-<li>FQDN(Fully Qualified Domain Name: Subdomain부터 TLD까지 포함하는 완전한 도메인 이름)에 대한 개별 인증서</li>
-<li>SAN(Subject Alternative Name) 인증서: 여러 FQDN에 대한 신뢰를 한번에 제공</li>
-<li>Wildcard 인증서<ul>
-<li>‘*’을 접두사로 사용하여 서브도메인 전체에 대한 신뢰 제공</li>
-<li>첫 번째 레벨 서브 도메인에 대해서만 커버 가능: 두 번째 이하 레벨은 신뢰하지 않음</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>신뢰할 수 있는 root CA의 선택</p>
-<ul>
-<li>Certificate Transparency<ul>
-<li>Google의 Certificate Transparency(<a target="_blank" rel="noopener" href="https://certificate.transparency.dev/">https://certificate.transparency.dev</a>) 참여 여부</li>
-<li>향후 SCT(Signed Certificate Timestamp) 대응 계획</li>
-<li>특정 도메인에 대한 인증서 발급 현황에 대해 누구나 조회 가능(<a target="_blank" rel="noopener" href="https://crt.sh/">https://crt.sh</a>)</li>
-</ul>
-</li>
-<li>CA&#x2F;Browser Forum(<a target="_blank" rel="noopener" href="https://cabforum.org)의/">https://cabforum.org)의</a> Base Requirement에 따른 운영 여부</li>
-</ul>
-</li>
-<li><p>인증서 프라이빗 키를 안전하게 보관</p>
-<ul>
-<li>인증서를 발급받을 경우 보통 아래와 같은 파일들이 생성<table>
-<thead>
-<tr>
-<th>Index</th>
-<th>Purpose</th>
-<th>Filename</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>CA로부터 서명 받은 인증서(X.509 형식)</td>
-<td>cert.pem</td>
-</tr>
-<tr>
-<td>2</td>
-<td>인증서의 개인키(Certificate’s private key)</td>
-<td>privkey.pem</td>
-</tr>
-<tr>
-<td>3</td>
-<td>중간 CA의 인증서</td>
-<td>chain.pem</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Fullchain(1+3 combined)</td>
-<td>fullchain.pem</td>
-</tr>
-</tbody></table>
-</li>
-<li>2번 파일인 인증서의 개인키는 안전한 곳에서 최초 생성 후 접근 불가하도록 설정</li>
-<li>나머지 파일들은 클라이언트가 접속할 때 전달</li>
-</ul>
-</li>
-<li><p>웹서버에서 적절한 중간 CA 인증서 설정: 클라이언트에서 Chain of Trust 확인</p>
-<ul>
-<li>위 테이블의 3, 4번 파일</li>
-<li>클라이언트가 인증서를 신뢰할 수 있는 근거를 전달하는 절차</li>
-<li>클라이언트는 접속할 서버에서 보낸 인증서 내용 확인 후 신뢰할 수 있는 CA의 서명을 확인</li>
-<li>클라이언트가 전달받은 leaf 인증서를 서명한 중간 CA 정보와, 중간 CA를 서명한 root CA가 이미 신뢰하는 root CA의 목록에 있는지 차례대로 확인(Chain of Trust)하여 검증</li>
-<li>따라서, 중간 CA 정보를 클라이언트에 전달하지 못하면 root CA에 대한 신뢰관계를 검증하지 못할 수도(대부분 클라이언트들은 신뢰하는 중간 CA 정보도 설정하기 때문에 문제가 없는 경우가 많음) 있기 때문에 중간 CA 정보를 설정하는 것이 좋음</li>
-<li>root CA와 중간 CA를 굳이 분리하는 것은 신뢰구조 전체가 무너지는 것을 방지하기 위함이며, root CA는 중간 CA를 서명하기 위해서만 제한적으로 사용되고 실제 발급되는 leaf 인증서의 발급(서명)에는 중간 CA를 사용하는 구조가 보편적.<br> <img src="/images/Chain_Of_Trust.png"></li>
-<li>CSR(Cross Signed Root): 클라이언트의 신뢰하는 root CA 목록에 해당 root CA가 포함되지 않을 수 있는데(클라이언트 환경이 오래되었거나, root CA가 비교적 최근에 작성되었을 경우), 이 경우 대부분의 클라이언트가 신뢰하는 root CA에게 별도로 서명을 받아두기도 하며 이를 CSR이라 한다.</li>
-<li>SNI(Server Name Indication): 여러 도메인을 하나의 웹 서버로 서비스할 때, 접속하고자 하는 호스트네임을 요청하여 적절한 인증서를 받아 오기 위해 SNI를 지원하는 클라이언트 환경이 요구될 수 있다.</li>
-</ul>
-</li>
-</ol>
-<h2 id="안전한-설정"><a href="#안전한-설정" class="headerlink" title="안전한 설정"></a>안전한 설정</h2><ol>
-<li>사용하는 OpenSSL 라이브러리의 지속적인 업데이트<ul>
-<li>라이브러리 커플링: 웹서버 설치 시 OpenSSL 라이브러리를 정적으로 빌드하면 업데이트할 시 웹서버를 새로 빌드&#x2F;배포해야 하므로, 시스템 라이브러리를 사용하여 웹서버와 분리할 것을 권장</li>
-</ul>
-</li>
-<li>안전하지 않은 프로토콜의 배제<ul>
-<li>TLS는 지속적으로 보안 수준을 높여가고 있으므로 최신 버전 프로토콜만 사용하도록 하는 것이 바람직하나, 호환성을 고려하여 상황에 따라 결정</li>
-</ul>
-</li>
-<li>안전한 cipher suite 설정<ul>
-<li>Cipher Suite: 안전한 연결 생성을 위한 4개의 암호화 알고리즘<ol>
-<li>키 교환(Key exchange&#x2F;agreement)</li>
-<li>접속 시 상대 확인(Authentication)</li>
-<li>기밀성을 위한 블록 암호화(Block&#x2F;stream cipher)</li>
-<li>메시지 무결성을 위한 암호화(Message authentication)</li>
-</ol>
-</li>
-<li>cipher suite를 구성하는 알고리즘을 결정하는 데 있어 대규모 트래픽 처리 시 성능을 고려해야 할 때도 있으므로 테스트를 해보는 것이 좋음</li>
-</ul>
-</li>
-</ol>
-<p>출처:<br><a target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/ssl/what-is-ssl/">https://www.cloudflare.com/learning/ssl/what-is-ssl/</a><br><a target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/ssl/what-is-an-ssl-certificate/">https://www.cloudflare.com/learning/ssl/what-is-an-ssl-certificate/</a><br><a target="_blank" rel="noopener" href="https://engineering.linecorp.com/ko/blog/best-practices-to-secure-your-ssl-tls/">https://engineering.linecorp.com/ko/blog/best-practices-to-secure-your-ssl-tls/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/08/06/what-is-ssl-certificate/" data-id="cl4b9hl5s001kej0p64xvd7tk" data-title="SSL/TLS와 인증서의 이해" class="article-share-link">공유</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network/" rel="tag">network</a></li></ul>
 
     </footer>
   </div>
@@ -968,7 +862,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그 클라우드</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 10px;">Travis CI</a> <a href="/tags/Weekend-Study/" style="font-size: 15px;">Weekend Study</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 15px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 15px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 15px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 15px;">Travis CI</a> <a href="/tags/Weekend-Study/" style="font-size: 15px;">Weekend Study</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 15px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 15px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 15px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
     </div>
   </div>
 
@@ -990,6 +884,10 @@
       <ul>
         
           <li>
+            <a href="/2022/06/12/travis-ci-error/">Travis CI 에러 조치</a>
+          </li>
+        
+          <li>
             <a href="/2022/06/09/magical-shell-script/">쉘 스크립트 기초</a>
           </li>
         
@@ -1003,10 +901,6 @@
         
           <li>
             <a href="/2022/04/10/cntda-01/">주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/12/encoding-and-video-codecs/">인코딩과 비디오 코덱</a>
           </li>
         
       </ul>
