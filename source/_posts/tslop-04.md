@@ -2,7 +2,6 @@
 title: The Secret Life of Programs - 04. Computer Anatomy
 tags:
   - book
-  - fundamental
   - the-secret-life-of-programs
 date: 2021-08-01 13:17:04
 ---

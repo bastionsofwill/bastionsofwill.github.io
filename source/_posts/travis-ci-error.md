@@ -2,6 +2,8 @@
 title: Travis CI 에러 조치
 tags:
   - Travis CI
+  - devops
+  - weekend
 date: 2022-06-12 21:27:57
 ---
 

@@ -2,7 +2,7 @@
 title: 주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷
 tags:
   - book
-  - Weekend Study
+  - weekend
 date: 2022-04-10 00:07:16
 ---
 

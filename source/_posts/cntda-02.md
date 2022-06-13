@@ -2,7 +2,7 @@
 title: 주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP
 tags:
   - book
-  - Weekend Study
+  - weekend
 date: 2022-04-11 01:16:50
 ---
 
