@@ -6,7 +6,8 @@ date: 2022-06-12 21:27:57
 ---
 
 ## \#74 errored
-오랜만에 블로그에 포스트를 작성하고 블로그를 둘러보니, 이전에 작성한 불필요한 포스트가 보였다. 이를 로컬 디렉토리에서 삭제한 후, 블로그에 반영하기 위해 리포지토리 main 브랜치에 push하였다. 리포지토리는 Travis CI를 통해 빌드/배포 자동화가 설정되어 있으므로, 여느 때와 같이 빌드/배포 작업이 진행될거라 기대했지만, 빌드가 실패했다는 메일을 받게 되었다.
+오랜만에 블로그에 포스트를 작성하고 블로그를 둘러보니, 이전에 작성한 불필요한 포스트가 보였다. 이를 로컬 디렉토리에서 삭제한 후, 블로그에 반영하기 위해 리포지토리 main 브랜치에 push하였다. 
+리포지토리는 Travis CI를 통해 빌드/배포 자동화가 설정되어 있으므로, 여느 때와 같이 빌드/배포 작업이 진행될거라 기대했지만, 빌드가 실패했다는 메일을 받게 되었다.
 ![](/images/travis-error.jpg) 
 지난 11월에 블로그 프레임워크를 Hexo로 바꾸면서, Hexo 튜토리얼 문서를 보고 그대로 따라한 뒤(https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage) 처음 겪는 빌드 실패여서 당혹스러웠으나, 몇 시간 전에 성공한 것이 실패한 이유는 당연히 안 해본 짓(포스트 삭제)을 했기 때문일 것으로 추정하고 해결을 미뤘다. 
 하지만 빌드 실패 결과를 살펴본 결과, 문제는 다른 곳에 있음을 알 수 있었다.
@@ -86,9 +87,9 @@ Travis CI가 수행할 작업을 정의하는 구조는 phase -> job -> stage ->
 9. `after_deploy`(OPTIONAL)
 10. `after_script`
 
-*stage*는 이러한 job들이 병렬로(in parellel) 실행되는 그룹을 말하며, *build*는 이러한 stage들이 순차적으로 실행되는 group을 말한다.
+*stage*는 이러한 job들이 병렬로(in parellel) 실행되는 그룹을 말하며, *build*는 이러한 stage들이 순차적으로 실행되는 그룹을 말한다.
 
-하나 이상의 job이 실패할 경우 그 job이 속한 빌드는 비정상으로 표시되며, 비정상 빌드는 아래 세 가지로 구분된다.
+하나 이상의 job이 실패할 경우 그 job이 속한 빌드는 비정상(break)이 되며, 비정상 빌드는 아래 세 가지 키워드 중 하나로 표시된다.
 - *errored*: `before_install`, `install`, `before_script`, `before_deploy` phase가 정상적으로 종료되지 않을 경우(non-zero exit code) 발생
 - *failed*: `script` phase가 정상적으로 종료되지 않을 경우 발생
 - *canceled*: 사용자에 의한 취소
@@ -149,7 +150,7 @@ ERROR:  Error installing dpl-pages:
 
 ## 고마워요, ioquatix!
 따라서, `multipart-post`를 관리하는 고수님들의 빠른 조치(https://github.com/socketry/multipart-post/pull/95) 덕에, 나는 아무 것도 하지 않아도 저절로 문제가 해결되는 기쁨을 누렸다. 실제로 아무 조치 없이 빌드를 재실행한 결과, 빌드에 성공하였다. 
-내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 알아서 default로 사용하는 ruby 버전을 업그레이드 해주길 바라면서, 또 이 포스트의 속편을 바로 작성해야 하는 일이 없기를 바라면서 성공한 빌드 로그로 포스트를 마친다.
+내가 Travis CI가 사용하는 ruby의 버전을 지정하는 방법을 배워야 하는 사태가 발생하기 전에 Travis CI팀이 default ruby 버전을 계속 업그레이드 해주길 바라면서, 또 이 포스트의 속편을 바로 작성해야 하는 일이 없기를 바라면서 성공한 빌드 로그로 포스트를 마친다.
 
 ```bash
 Installing deploy dependencies
