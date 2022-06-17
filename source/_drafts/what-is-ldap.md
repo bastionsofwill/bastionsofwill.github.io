@@ -10,7 +10,7 @@ tags:
 팀에서 사용하는 여러 서비스들의 계정을 통합 관리하기 위해, freeIPA라는 솔루션을 도입하였다. 기능은 강력한데 디자인적인 요소에 전혀 신경을 쓰지 않은 모습이 특히 마음에 든다. 
 ![](/images/freeipa_gui.png)
 
-freeIPA는 여러 가지 기능을 제공하지만, 현재 내가 이해한 기능으로는 Host-based Access Control(HBAC)과 LDAP 기능의 제공이 있다. 이를 통해 우리 팀 구성원들은 여러 대의 서버의 계정을 통합하여 관리할 수 있고, GitLab/Jenkins 같은 외부 서비스도 같은 인증 정보로 사용할 수 있다.
+freeIPA는 여러 가지 기능을 제공하지만, 현재 내가 이해한 기능으로는 Host-based Access Control(HBAC)과 LDAP 기능의 제공이 있다. 이를 통해 우리 팀 구성원들은 여러 대의 서버의 계정을 통합하여 관리(HBAC)하고, GitLab/Jenkins와 같은 서비스도 동일한 인증 정보로 사용(LDAP)할 수 있다.
 
 - Lightweight Directory Access Protocol
 - 네트워크 상 디렉토리 서비스 표준 X.500의 일부인 DAP의 경량화 버전
