@@ -71,6 +71,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-how-does-a-package-manager-work" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/22/how-does-a-package-manager-work/" class="article-date">
+  <time class="dt-published" datetime="2022-06-22T16:18:43.000Z" itemprop="datePublished">2022-06-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/06/22/how-does-a-package-manager-work/">리눅스 패키지 매니저</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h2><p>패키지는 바이너리 실행 파일들과 그 메타데이터(configuration 파일, dependency 정보)의 모음이며, 일반적으로 DEB(데비안 계열), RPM(레드햇 계열) 등 다양한 아카이브 파일 형식으로 배포된다. 패키지 매니저는 아카이브 파일을 열고 지정된 위치에 바이너리 실행 파일을 위치시키고, 그 파일이 어떤 패키지에 속하는지 파악해 두었다가 패키지를 삭제할 때 이를 삭제한다.</p>
+<p>또, 패키지 매니저는 아래와 같은 기능을 수행하여 패키지 관리를 용이하게 해준다.</p>
+<ol>
+<li>패키지 의존성 관리: 패키지 간 의존 관계를 분석하여 어떤 패키지를 설치&#x2F;제거할 경우 해당 패키지가 의존하는 다른 패키지들 역시 설치&#x2F;제거하여 패키지 간 의존 관계를 사용자가 직접 관리하지 않아도 효과적으로 패키지를 사용할 수 있게 한다.</li>
+<li>패키지 버전 관리: 설치된 패키지들 중 리포지토리에 사용 가능한 업데이트가 있는 패키지가 있는지 확인하고 필요 시 업데이트하는 역할도 수행한다.</li>
+</ol>
+<h2 id="Repository"><a href="#Repository" class="headerlink" title="Repository"></a>Repository</h2><p>리눅스 환경에서, 패키지 매니저가 설치 대상 패키지를 가져오는 가장 보편적인 방법은 리포지토리(여기서의 리포지토리란 소프트웨어 리포지토리로, git이나 SVN같은 VCS에서 사용하는 리포지토리와는 다른 개념이다.)에서 원하는 패키지를 가져오는 방식이다. 각 리눅스 배포판마다 실행이 가능한 패키지를 제공하는 리포지토리를 운영하므로, 이를 활용하면 사용자는 편리하게 환경에 맞는 패키지를 설치&#x2F;관리할 수 있다.<br><img src="/images/linux-package-manager-explanation.png"><br>만약 리포지토리에서 제공하지 않는 소프트웨어를 설치하여야 할 경우, 사용자는 패키지 매니저라는 툴이 존재하지 않던 시절처럼 직접 자신의 환경에서 실행이 가능하도록 소스 파일을 빌드하고 환경을 구성하여야 한다. 여기서 말하는 환경 구성은 소프트웨어 의존 요소의 관리, 바이너리 파일의 위치 지정 등을 포함하며, 이에 추가로 구성 스크립트나 makefile등을 사용하도록 설계된 소프트웨어도 있을 것이다. 이는 굉장히 번거로운 일이며, 설치한 패키지가 많을수록 그 관리의 복잡성은 증가하고 문제 발생의 여지도 크다. </p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://itsfoss.com/package-manager/">https://itsfoss.com/package-manager/</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Software_repository">https://en.wikipedia.org/wiki/Software_repository</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Package_manager">https://en.wikipedia.org/wiki/Package_manager</a><br><a target="_blank" rel="noopener" href="https://www.howtogeek.com/117579/htg-explains-how-software-installation-package-managers-work-on-linux/">https://www.howtogeek.com/117579/htg-explains-how-software-installation-package-managers-work-on-linux/</a><br><a target="_blank" rel="noopener" href="https://help.ubuntu.com/community/Repositories/Ubuntu">https://help.ubuntu.com/community/Repositories/Ubuntu</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl4p9nd000011cosu08gfd3rx" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-travis-ci-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/06/12/travis-ci-error/" class="article-date">
@@ -143,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl4i86imh0018d3sh33j6g60a" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl4p9nd06001acosuh4rm25zb" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
       
       
       
@@ -265,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl4i86imc0013d3shgj834217" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl4p9nd020015cosu7jav12tv" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
@@ -373,7 +421,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl4i86imd0015d3sh8lb6c5t9" data-title="Terraform Language 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl4p9nd050018cosue7hs37z2" data-title="Terraform Language 기초" class="article-share-link">공유</a>
       
       
       
@@ -502,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl4i86im3000sd3sh3lyt3q95" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl4p9nczr000scosu4sr28eum" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
       
       
       
@@ -584,7 +632,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl4i86im2000qd3shge305q4o" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl4p9nczq000qcosu7ie28moi" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
       
       
       
@@ -635,7 +683,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl4i86im5000wd3shfcl2eznb" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl4p9nczv000wcosu74w57t0a" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
       
       
       
@@ -682,7 +730,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl4i86im90011d3sh84o64uz4" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl4p9nd010013cosud6rchn1e" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
       
       
       
@@ -728,7 +776,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl4i86iml001fd3sh0gv1eqax" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl4p9nd0b001hcosuakqz0rq3" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
       
       
       
@@ -774,59 +822,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl4i86im7000zd3shg2jid22t" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/11/17/hexo-travis-ghpage/" data-id="cl4p9nczy000zcosu4lno6uuw" data-title="Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영" class="article-share-link">공유</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-video-through-web-0" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/05/video-through-web-0/" class="article-date">
-  <time class="dt-published" datetime="2021-10-05T19:48:36.000Z" itemprop="datePublished">2021-10-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/05/video-through-web-0/">Adobe Flash와 ActiveX</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="웹-상에서의-사용자-경험에-대한-갈증"><a href="#웹-상에서의-사용자-경험에-대한-갈증" class="headerlink" title="웹 상에서의 사용자 경험에 대한 갈증"></a>웹 상에서의 사용자 경험에 대한 갈증</h2><p>웹을 통해 사용자에게 하이퍼텍스트 이상의 경험, 다시 말해 영상과 소리, 또는 게임 등의 상호작용이 가능한 컨텐츠를 전달하려면 어떻게 해야 할까? 클라이언트의 웹 브라우저는 HTTP 통신으로 정보를 주고받지만, 기존에 주고받던 데이터의 형태인 텍스트와 정적인 이미지에 비해 훨씬 많은 자원을 요구하는 이러한 컨텐츠를 웹을 통해 전달하고 경험하기 위해서는 특별한 고려가 필요하다. 이를 해결하기 위해 등장한 수많은 해답 중 하나인 RIA와 Browser Plugin 기술에 대해 알아보자.</p>
-<h2 id="Rich-Internet-Application-RIA-RWA-x3D-Rich-Web-Appliction"><a href="#Rich-Internet-Application-RIA-RWA-x3D-Rich-Web-Appliction" class="headerlink" title="Rich Internet Application(RIA, RWA&#x3D;Rich Web Appliction)"></a>Rich Internet Application(RIA, RWA&#x3D;Rich Web Appliction)</h2><p>웹 상에서 사용자 경험을 향상시키기 위한 브라우저 확장 프로그램으로, 데스크탑 애플리케이션의 특징을 갖는 웹 애플리케이션이다. Adobe Flash의 전신인 Macromedia Flash MX로 만든 프로덕트를 설명하기 위한 개념으로 처음 소개되었으며, Java applet, 어도비 플래시, MS 실버라이트 등의 플러그인 기술로 개발한 웹 애플리케이션을 칭하는 개념으로 확장되었다.<br>주로 브라우저의 멀티미디어&#x2F;그래픽 성능을 보강하는 역할을 했지만, 브라우저, 운영체제 등 클라이언트의 환경에 따라 RIA 요소를 전부 따로 고려하여야 했기 때문에 크로스 브라우징을 지원할 때 심각한 장애 요소로 작용하여 현대의 웹에서는 퇴출되었다.</p>
-<h2 id="NPAPI-Netscape-Plugin-API-와-ActiveX"><a href="#NPAPI-Netscape-Plugin-API-와-ActiveX" class="headerlink" title="NPAPI(Netscape Plugin API)와 ActiveX"></a>NPAPI(Netscape Plugin API)와 ActiveX</h2><p>NPAPI는 넷스케이프에서 개발한, 브라우저가 외부 애플리케이션(&#x3D; RIA)을 브라우저에서 플러그인 형식으로 끌어다 쓰기 위한 API이다. 다시 말하면, 브라우저에서 동작하기 어려운 기능을 구현하기 위해 클라이언트 환경에 애플리케이션을 설치한 뒤, 이를 웹 페이지에서 접근하기 위해 사용하는 API이다.<br>이것이 대세가 되면서 플래시 등의 플러그인 기술들은 이를 기반으로 개발되고, MS는 이에 대응하기 위해 IE3에 NPAPI 지원 기능을 추가하면서도 한편으로는 윈도우 + IE 환경에서만 사용이 가능한 자체 플러그인 규격인 ActiveX를 만들었다.<br>이후 IE가 시장에서 지배적인 위치를 차지하면서 IE는 NPAPI 지원을 중단하였고, ActiveX는 웹 환경에서의 보다 다양한 경험 및 기능을 위한 표준이 되어버리나, 지나친 권한을 허용함으로서 사용자의 보안을 저해하고, 여러 플랫폼에서 호환이 되지 않는 등 여러 부작용을 가져온다.<br>이러한 심각한 문제점과 모바일 기반 환경의 폭발적인 성장, 파이어폭스&#x2F;크롬 등 경쟁자의 등장 등이 맞물리면서 윈도우 및 IE의 독점적인 지위는 하락세를 걸었고, 크로스 브라우징 및 웹 표준에 대한 논의가 등장하면서 ActiveX(비슷한 문제를 가지고 있던 NPAPI까지도)는 마침내 퇴출된다.</p>
-<h2 id="어도비-플래시-플래시-플레이어-액션스크립트"><a href="#어도비-플래시-플래시-플레이어-액션스크립트" class="headerlink" title="어도비 플래시, 플래시 플레이어, 액션스크립트"></a>어도비 플래시, 플래시 플레이어, 액션스크립트</h2><ul>
-<li>어도비 플래시: RIA를 포함하는 다양한 프로덕트(animations, rich web applications, desktop applications, mobile apps, mobile games, and embedded web browser video players)를 개발하는 플랫폼(Java applets, MS Silverlight와 같은 레벨)</li>
-<li>어도비 플래시 플레이어: 어도비 플래시에서 생산된 컨텐츠 파일(SWF 파일)을 실행하는 가상 머신</li>
-<li>액션스크립트: 어도비 플래시에서의 사용(애플리케이션 개발)을 목적으로 만들어진 스크립트 언어</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/10/05/video-through-web-0/" data-id="cl4i86imk001ed3sh139majhk" data-title="Adobe Flash와 ActiveX" class="article-share-link">공유</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
 
     </footer>
   </div>
@@ -854,7 +854,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Terraform/" rel="tag">Terraform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/devops/" rel="tag">devops</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekend/" rel="tag">weekend</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Terraform/" rel="tag">Terraform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/devops/" rel="tag">devops</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekend/" rel="tag">weekend</a></li></ul>
     </div>
   </div>
 
@@ -864,7 +864,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그 클라우드</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 13.33px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/devops/" style="font-size: 10px;">devops</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 13.33px;">infrastructure</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 13.33px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/weekend/" style="font-size: 16.67px;">weekend</a>
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 13.33px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/devops/" style="font-size: 10px;">devops</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 13.33px;">infrastructure</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 13.33px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/weekend/" style="font-size: 16.67px;">weekend</a>
     </div>
   </div>
 
@@ -886,6 +886,10 @@
       <ul>
         
           <li>
+            <a href="/2022/06/22/how-does-a-package-manager-work/">리눅스 패키지 매니저</a>
+          </li>
+        
+          <li>
             <a href="/2022/06/12/travis-ci-error/">Travis CI 에러 조치</a>
           </li>
         
@@ -899,10 +903,6 @@
         
           <li>
             <a href="/2022/04/11/cntda-02/">주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/10/cntda-01/">주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷</a>
           </li>
         
       </ul>
