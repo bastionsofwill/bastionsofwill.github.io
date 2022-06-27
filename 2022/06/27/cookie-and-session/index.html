@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>cookie-and-session | bastionsofwill</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Stateless에게 State를HTTP는 무상태(stateless) 프로토콜이다. 하지만 클라이언트와의 상호작용을 위해서는 서버가 클라이언트(사용자)의 상태(state)를 알 수 있어야 한다. 이를 위해 등장한 기술이 몇 종류 존재하는데, 쿠키, 세션, 웹 스토리지가 그것이다.  쿠키(Cookie)쿠키는 서버가 클라이언트를 식별하고 클라이언트의 상태를 저">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookie-and-session">
+<meta property="og:url" content="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/index.html">
+<meta property="og:site_name" content="bastionsofwill">
+<meta property="og:description" content="Stateless에게 State를HTTP는 무상태(stateless) 프로토콜이다. 하지만 클라이언트와의 상호작용을 위해서는 서버가 클라이언트(사용자)의 상태(state)를 알 수 있어야 한다. 이를 위해 등장한 기술이 몇 종류 존재하는데, 쿠키, 세션, 웹 스토리지가 그것이다.  쿠키(Cookie)쿠키는 서버가 클라이언트를 식별하고 클라이언트의 상태를 저">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2022-06-27T15:33:29.000Z">
+<meta property="article:modified_time" content="2022-06-27T06:34:59.260Z">
+<meta property="article:author" content="JY">
+<meta property="article:tag" content="network">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">bastionsofwill</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="검색"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="검색"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bastionsofwill.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-cookie-and-session" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/27/cookie-and-session/" class="article-date">
+  <time class="dt-published" datetime="2022-06-27T15:33:29.000Z" itemprop="datePublished">2022-06-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      cookie-and-session
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Stateless에게-State를"><a href="#Stateless에게-State를" class="headerlink" title="Stateless에게 State를"></a>Stateless에게 State를</h2><p>HTTP는 무상태(stateless) 프로토콜이다. 하지만 클라이언트와의 상호작용을 위해서는 서버가 클라이언트(사용자)의 상태(state)를 알 수 있어야 한다. 이를 위해 등장한 기술이 몇 종류 존재하는데, 쿠키, 세션, 웹 스토리지가 그것이다. </p>
+<h2 id="쿠키-Cookie"><a href="#쿠키-Cookie" class="headerlink" title="쿠키(Cookie)"></a>쿠키(Cookie)</h2><p>쿠키는 서버가 클라이언트를 식별하고 클라이언트의 상태를 저장하기 위해 사용하는, <em>클라이언트에 대한 정보를 저장한 파일</em>이다.<br>브라우저는 서버의 응답으로부터 쿠키를 전달받아 클라이언트 환경에 key-value 형태로 저장하였다가, 추후 HTTP 요청 시 해당 도메인으로부터 등록된 <strong>모든</strong> 쿠키를 요청과 함께 전달한다.</p>
+<p>클라이언트 입장에서, 쿠키에 자신의 정보가 저장되는 것은 탈취당할 요소를 추가하는 것이므로 보안적인 위협이 된다.<br>반면, 쿠키를 관리&#x2F;전달하는 주체는 클라이언트이므로 클라이언트 쪽에서는 이를 얼마든지 위&#x2F;변조하여 서버에게 전달할 수 있고, 따라서 서버 입장에서도 클라이언트가 전달하는 쿠키가 보안적 위험 요소로 작용할 수 있다.</p>
+<p>위와 같은 단점이 존재함에도 불구하고, 쿠키는 여전히 널리 사용된다.<br>서버가 클라이언트를 식별하고 클라이언트의 상태에 따라 동작하기 위해서는 클라이언트의 정보가 반드시 어딘가에는 저장되어 있어야 하므로, 이를 위한 가장 간편한 해결책인 쿠키는 보안에 민감한 정보가 아닐 경우에 한해 가장 먼저 고려할 수 있는 수단이다. </p>
+<h2 id="세션-Session"><a href="#세션-Session" class="headerlink" title="세션(Session)"></a>세션(Session)</h2><p>위에서 쿠키 방식의 단점 중 하나는, 클라이언트 쪽에서 위&#x2F;변조 또는 탈취한 쿠키를 사용할 경우, 서버 쪽에서 이를 탐지하고 해당 요청을 거부할 수 없다는 것이었다.<br>따라서, 그런 중요한 정보를 클라이언트 쪽에서 전달하는 대로 믿지 않고 서버에서 직접 사용자의 정보를 관리하는 해결책을 떠올릴 수 있고, 이를 일반적으로 세션 방식이라고 부른다.<br>다만 앞서 설명한 것처럼 HTTP는 stateless 프로토콜이므로 서버에서 일방적으로 클라이언트를 식별할 수 있는 방법은 없다. 따라서, 서버에 필요한 정보를 저장하여도 해당 정보와 그 주인(특정 클라이언트)를 매칭시키기 위해서는  클라이언트를 식별하기 위한 식별자 정보가 필요하고, 이를 위해 서버는 클라이언트 식별자로 사용할 수 있는 쿠키를 발급한다. </p>
+<p>즉 <em>쿠키 방식</em>과 <em>세션 방식</em>이라고 흔히들 말하는 것에 반해, 엄밀히 따지자면 쿠키와 세션은 대립되는 선택지가 아니다. 세션 방식에서도 쿠키를 사용하기 때문이다.<br>하지만 세션을 사용한 사용자의 인증은 중요한 정보가 서버 측에 저장되어 불특정 클라이언트로부터의 위&#x2F;변조가 어렵고, 클라이언트의 정보가 탈취당한다 하여도 세션이 만료된다면, 즉 클라이언트의 브라우저가 종료되거나 서버 쪽에서 설정한 세션 시간이 경과되면 해당 값은 사용할 수 없는 값이 되어버리므로 비교적 안전하다.</p>
+<p>물론 브라우저가 종료되면 사용자의 정보는 모두 사라지는 점은 때로는 단점으로 작용하여, 쿠키를 사용하여야 할 때도<br>있다.<br>또 대규모 시스템의 경우, 가용성을 확보하기 위해 여러 대의 서버를 사용하여 부하를 분산하게 되는데, 이러한 경우 한 클라이언트가 보내는 연속적인 요청을 한 서버가 맡아서 처리하지 않으면 사용자가 시스템을 정상적으로 사용할 수 없으므로, 세션 정보만을 처리하는 별도의 서버를 분리하여 운영하기도 한다.</p>
+<h2 id="웹-스토리지-Web-Storage"><a href="#웹-스토리지-Web-Storage" class="headerlink" title="웹 스토리지(Web Storage)"></a>웹 스토리지(Web Storage)</h2><p>웹 스토리지는 비교적 최근에 등장한 기술로 HTML5 표준에서 정의되었으며, 쿠키와 유사하면서도 장&#x2F;단점이 존재하지만 쿠키의 단점을 보완해줄 수 있는 기술이다.<br>웹 스토리지는 만료 시간이 없는 로컬 스토리지와 탭 단위 휘발성을 갖는 세션 스토리지로 구분되어 데이터의 용도에 따라 저장 장소를 선택하여 데이터의 생애 주기를 보다 효과적으로 관리할 수 있어 보다 안전하다.<br>또, 존재하는 모든 정보가 매번 무조건 전송되는 쿠키와 달리, 웹 스토리지에 있는 데이터 중 어떤 데이터를 전송할 지 선택할 수 있으며, string값만 저장할 수 있었던 쿠키와 달리 Javascript 객체를 저장할 수 있게 되었다는 점도 보다 다양한 방식으로 HTTP를 사용할 수 있는 여지를 준다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://kamang-it.tistory.com/entry/Web%EC%A1%B0%EA%B8%88-%EB%8D%94-%EC%9E%90%EC%84%B8%ED%9E%88%EB%8F%84%EB%8C%80%EC%B2%B4-%EC%99%9C-%EC%9D%B4%EB%A6%84%EC%9D%B4-%EC%BF%A0%ED%82%A4%EC%9D%B8%EA%B1%B8%EA%B9%8C-%EC%83%81%ED%83%9C%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EB%8A%94-http-cookie">https://kamang-it.tistory.com/entry/Web%EC%A1%B0%EA%B8%88-%EB%8D%94-%EC%9E%90%EC%84%B8%ED%9E%88%EB%8F%84%EB%8C%80%EC%B2%B4-%EC%99%9C-%EC%9D%B4%EB%A6%84%EC%9D%B4-%EC%BF%A0%ED%82%A4%EC%9D%B8%EA%B1%B8%EA%B9%8C-%EC%83%81%ED%83%9C%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%98%EB%8A%94-http-cookie</a><br><a target="_blank" rel="noopener" href="https://kamang-it.tistory.com/entry/Web%EC%A1%B0%EA%B8%88-%EB%8D%94-%EC%9E%90%EC%84%B8%ED%9E%88%EC%84%9C%EB%B2%84%EC%99%80-%ED%81%B4%EB%9D%BC%EC%9D%98-%EC%97%B0%EA%B2%B0%EA%B3%A0%EB%A6%AC-%EC%83%81%ED%83%9C%EB%A5%BC-%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%98%EB%8A%94-http-session-cookie%EC%99%80%EC%9D%98-%EB%B9%84%EA%B5%90">https://kamang-it.tistory.com/entry/Web%EC%A1%B0%EA%B8%88-%EB%8D%94-%EC%9E%90%EC%84%B8%ED%9E%88%EC%84%9C%EB%B2%84%EC%99%80-%ED%81%B4%EB%9D%BC%EC%9D%98-%EC%97%B0%EA%B2%B0%EA%B3%A0%EB%A6%AC-%EC%83%81%ED%83%9C%EB%A5%BC-%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%98%EB%8A%94-http-session-cookie%EC%99%80%EC%9D%98-%EB%B9%84%EA%B5%90</a><br><a target="_blank" rel="noopener" href="https://kamang-it.tistory.com/entry/Web%EC%A1%B0%EA%B8%88-%EB%8D%94-%EC%9E%90%EC%84%B8%ED%9E%88cookie%EB%8A%94-%EB%84%88%EB%AC%B4-%EA%B5%AC%EC%8B%9D%EC%95%84%EB%83%90-%EC%9D%B4%EC%A0%9C%EB%B6%80%ED%84%B4-Web-Storage">https://kamang-it.tistory.com/entry/Web%EC%A1%B0%EA%B8%88-%EB%8D%94-%EC%9E%90%EC%84%B8%ED%9E%88cookie%EB%8A%94-%EB%84%88%EB%AC%B4-%EA%B5%AC%EC%8B%9D%EC%95%84%EB%83%90-%EC%9D%B4%EC%A0%9C%EB%B6%80%ED%84%B4-Web-Storage</a><br><a target="_blank" rel="noopener" href="https://kcizzang.tistory.com/entry/SessionStorage-%EC%99%80-LocalStorage-%EC%B0%A8%EC%9D%B4%EC%A0%90">https://kcizzang.tistory.com/entry/SessionStorage-%EC%99%80-LocalStorage-%EC%B0%A8%EC%9D%B4%EC%A0%90</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl4wd8abn000mc1n7buis00fw" data-title="cookie-and-session" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network/" rel="tag">network</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/22/how-does-a-package-manager-work/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">리눅스 패키지 매니저</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Terraform/" rel="tag">Terraform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/devops/" rel="tag">devops</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekend/" rel="tag">weekend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">태그 클라우드</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 13.33px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/devops/" style="font-size: 10px;">devops</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 13.33px;">infrastructure</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 13.33px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/weekend/" style="font-size: 16.67px;">weekend</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">아카이브</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">6월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">4월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">12월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">11월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">10월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">8월 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">7월 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">최근 포스트</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/27/cookie-and-session/">cookie-and-session</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/22/how-does-a-package-manager-work/">리눅스 패키지 매니저</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/12/travis-ci-error/">Travis CI 에러 조치</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/09/magical-shell-script/">쉘 스크립트 기초</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/terraform-lang-basics/">Terraform Language 기초</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 JY<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
