@@ -4,23 +4,24 @@
   <meta charset="utf-8">
   
   
-  <title>Dependabot은 무엇일까? | bastionsofwill</title>
+  <title>Local Port Forwarding | bastionsofwill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="내 main 브랜치에 무슨 짓이야Github 리포지토리에 Dependabot이라는 봇이 main 브랜치를 내가 생성한 적이 없는 브랜치와 머지하는 PR을 작성하였다.PR을 확인해보니 package-lock.json, package.json, yarn.lock 3개의 파일이 변경된 것을 확인할 수 있었는데, PR의 제목처럼 hexo-renderer-marke">
+  <meta name="description" content="SSH Port Forwarding과 그 종류 SSH Tunneling이라고도 부름 특정 포트를 다른 연결에 forwarding하는 행위  프록시와 유사한 역할을 수행 Local, Remote, Dynamic 포트 포워딩이 있음  Local Port ForwardingLocal port forwarding은 말 그대로 localhost(SSH 클라이언트)의">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dependabot은 무엇일까?">
-<meta property="og:url" content="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/index.html">
+<meta property="og:title" content="Local Port Forwarding">
+<meta property="og:url" content="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/index.html">
 <meta property="og:site_name" content="bastionsofwill">
-<meta property="og:description" content="내 main 브랜치에 무슨 짓이야Github 리포지토리에 Dependabot이라는 봇이 main 브랜치를 내가 생성한 적이 없는 브랜치와 머지하는 PR을 작성하였다.PR을 확인해보니 package-lock.json, package.json, yarn.lock 3개의 파일이 변경된 것을 확인할 수 있었는데, PR의 제목처럼 hexo-renderer-marke">
+<meta property="og:description" content="SSH Port Forwarding과 그 종류 SSH Tunneling이라고도 부름 특정 포트를 다른 연결에 forwarding하는 행위  프록시와 유사한 역할을 수행 Local, Remote, Dynamic 포트 포워딩이 있음  Local Port ForwardingLocal port forwarding은 말 그대로 localhost(SSH 클라이언트)의">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://bastionsofwill.github.io/images/dpdb_pr.png">
-<meta property="og:image" content="https://bastionsofwill.github.io/images/dpdb_pr.png">
-<meta property="article:published_time" content="2021-11-19T18:03:25.000Z">
+<meta property="og:image" content="https://bastionsofwill.github.io/images/lfp_local.png">
+<meta property="og:image" content="https://bastionsofwill.github.io/images/lfp_faraway.png">
+<meta property="article:published_time" content="2022-06-28T21:23:49.000Z">
 <meta property="article:modified_time" content="2022-06-28T12:26:12.556Z">
 <meta property="article:author" content="JY">
-<meta property="article:tag" content="github">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bastionsofwill.github.io/images/dpdb_pr.png">
+<meta name="twitter:image" content="https://bastionsofwill.github.io/images/lfp_local.png">
   
     <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
   
@@ -77,10 +78,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-what-is-dependabot" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-ssh-local-port-forwarding" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/11/19/what-is-dependabot/" class="article-date">
-  <time class="dt-published" datetime="2021-11-19T18:03:25.000Z" itemprop="datePublished">2021-11-19</time>
+    <a href="/2022/06/28/ssh-local-port-forwarding/" class="article-date">
+  <time class="dt-published" datetime="2022-06-28T21:23:49.000Z" itemprop="datePublished">2022-06-28</time>
 </a>
     
   </div>
@@ -91,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Dependabot은 무엇일까?
+      Local Port Forwarding
     </h1>
   
 
@@ -99,21 +100,42 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="내-main-브랜치에-무슨-짓이야"><a href="#내-main-브랜치에-무슨-짓이야" class="headerlink" title="내 main 브랜치에 무슨 짓이야"></a>내 main 브랜치에 무슨 짓이야</h3><p>Github 리포지토리에 Dependabot이라는 봇이 main 브랜치를 내가 생성한 적이 없는 브랜치와 머지하는 PR을 작성하였다.<br><img src="/images/dpdb_pr.png"><br>PR을 확인해보니 package-lock.json, package.json, yarn.lock 3개의 파일이 변경된 것을 확인할 수 있었는데, PR의 제목처럼 hexo-renderer-marked라는 패키지의 버전을 업데이트하면서 생긴 변경임을 확인할 수 있었다.</p>
-<h3 id="Dependabot이란"><a href="#Dependabot이란" class="headerlink" title="Dependabot이란?"></a>Dependabot이란?</h3><p>Dependabot은 Bump<a target="_blank" rel="noopener" href="https://github.com/gocardless/bump">1</a>라는 프로젝트로부터 출발한, 프로젝트의 의존성을 최신으로 유지하는 툴이다. 핵심 기능을 담당하는 Dependabot Core는 Ruby Gem들의 집합으로 Ruby, Python, JavaScript 등 넓은 범위의 언어를 지원하며, 리포지토리에 존재하는 코드의 의존성을 확인하여 업데이트 후 빌드하여 PR을 생성하는 기능을 수행한다.<br><img src="/images/dpdb_pr.png"><a target="_blank" rel="noopener" href="https://github.com/dependabot/dependabot-core">2</a><br><code>.github/dependabot.yml</code> 파일을 통해 업데이트 스케줄, 최대 open된 PR의 개수 등을 추가로 설정할 수 있다.</p>
-<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.nearform.com/blog/automatic-dependency-bump/">https://www.nearform.com/blog/automatic-dependency-bump/</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/dependabot/dependabot-core">https://github.com/dependabot/dependabot-core</a></li>
+        <h2 id="SSH-Port-Forwarding과-그-종류"><a href="#SSH-Port-Forwarding과-그-종류" class="headerlink" title="SSH Port Forwarding과 그 종류"></a>SSH Port Forwarding과 그 종류</h2><ul>
+<li>SSH Tunneling이라고도 부름</li>
+<li>특정 포트를 다른 <em>연결에 forwarding</em>하는 행위 </li>
+<li>프록시와 유사한 역할을 수행</li>
+<li>Local, Remote, Dynamic 포트 포워딩이 있음</li>
 </ul>
+<h2 id="Local-Port-Forwarding"><a href="#Local-Port-Forwarding" class="headerlink" title="Local Port Forwarding"></a>Local Port Forwarding</h2><p>Local port forwarding은 말 그대로 localhost(SSH 클라이언트)의 특정 포트를 다른 연결로 forward한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L &lt;<span class="built_in">local</span> port&gt;:&lt;target server&gt;:&lt;target port&gt; &lt;username&gt;@&lt;remote server&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>&lt;local port&gt;: SSH 터널링의 시작점으로 사용될 SSH 클라이언트가 동작하는 호스트의 포트</li>
+<li>&lt;target server&gt;: 최종 목적지 서버</li>
+<li>&lt;target port&gt;: &lt;target server&gt;의 포트</li>
+<li>&lt;remote server&gt;: SSH 터널링을 통해 도달하는, Gateway(Bastion) 역할을 하는 서버(SSH 서버)</li>
+</ul>
+<p>즉, 클라이언트 환경에서 위와 같은 프로세스가 실행되면, <code>localhost:&lt;local port&gt;</code>로 전달되는 요청은 <code>username@&lt;remote server&gt;</code>에서 <code>&lt;target server&gt;:&lt;target port&gt;</code>에 보내지는 요청으로 처리된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 10030:localhost:8180 root@1.2.3.4</span><br></pre></td></tr></table></figure>
+<p><img src="/images/lfp_local.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
+<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 10030번 포트(아래 이미지의 <code>your host:10030</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#x31;&#46;&#50;&#46;&#51;&#46;&#x34;">&#114;&#111;&#111;&#116;&#x40;&#x31;&#46;&#50;&#46;&#51;&#46;&#x34;</a> –&gt; 127.0.0.1:8180 연결로 forward된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 10030:&lt;farawayhost&gt;:8180 root@1.2.3.4</span><br></pre></td></tr></table></figure>
+<p><img src="/images/lfp_faraway.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
+<p>반면 위와 같이 target server를 다른 farawayhost로 지정하여 포트 포워딩을 실행할 경우, 클라이언트의 10030번 포트로 보내진 요청은 ssh 터널을 통해 1.2.3.4 –&gt; farawayhost:8180으로 forward된다.</p>
+<p>즉, Local Port Forwarding은 아래와 같은 기능을 수행한다.</p>
+<blockquote>
+<p><some_host> –&gt; <client_host>:<client_port><br>를 아래 연결로 forward한다.<br><remote_host> –&gt; <target_host>:<target_port></p>
+</blockquote>
+<h2 id="Local-Port-Forwarding의-이점"><a href="#Local-Port-Forwarding의-이점" class="headerlink" title="Local Port Forwarding의 이점"></a>Local Port Forwarding의 이점</h2><p>Local port forwarding을 통해, 불특정 다수(<some_host>)의 <target_host>:<target_port>로의 접근 제어를 <client_host>:<client_port>로의 접근 제어를 통해 관리할 수 있다.<br>즉 <target_host>:<target_port>는 <remote_host>(Bation Host의 역할을 수행)로부터의 접근만 허용하면 된다는 점에서 <target_host>를 보다 안전하게 관리할 수 있고, 보안&#x2F;시스템적 제약 사항을 우회하는 데에도 자주 쓰인다.<br>컨테이너 기반 환경에서는 특히 이러한 Local Port Forwarding을 요긴하게 사용할 수 있다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://linux.systemv.pe.kr/ssh-%ED%8F%AC%ED%8A%B8-%ED%8F%AC%EC%9B%8C%EB%94%A9/">https://linux.systemv.pe.kr/ssh-%ED%8F%AC%ED%8A%B8-%ED%8F%AC%EC%9B%8C%EB%94%A9/</a><br><a target="_blank" rel="noopener" href="https://blog.naver.com/PostView.naver?blogId=alice_k106&amp;logNo=221364560794">https://blog.naver.com/PostView.naver?blogId=alice_k106&amp;logNo=221364560794</a><br><a target="_blank" rel="noopener" href="https://www.hanbit.co.kr/network/category/category_view.html?cms_code=CMS5064906327">https://www.hanbit.co.kr/network/category/category_view.html?cms_code=CMS5064906327</a><br><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a><br><a target="_blank" rel="noopener" href="https://www.ssh.com/acadeclient/ssh/tunneling/example">https://www.ssh.com/acadeclient/ssh/tunneling/example</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/11/19/what-is-dependabot/" data-id="cl4y57t4z001adbq05k4q1fz2" data-title="Dependabot은 무엇일까?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl4y57t4v000ydbq01k0o5u4v" data-title="Local Port Forwarding" class="article-share-link">공유</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
 
     </footer>
   </div>
@@ -121,19 +143,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/12/13/log4j2-vulnerability/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">최신</strong>
-      <div class="article-nav-title">
-        
-          Log4j2 취약점(CVE-2021-44228)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/11/17/hexo-travis-ghpage/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/06/27/cookie-and-session/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">이전</strong>
-      <div class="article-nav-title">Hexo 튜토리얼: Travis CI를 사용한 Github Pages 블로그 운영</div>
+      <div class="article-nav-title">cookie-and-session</div>
     </a>
   
 </nav>
