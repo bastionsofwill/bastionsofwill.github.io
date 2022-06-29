@@ -49,8 +49,8 @@ ssh -L 123:<farawayhost>:456 root@1.2.3.4
 \<remote_host\> --> \<target_host\>:\<target_port\>
 
 ## Local Port Forwarding의 이점
-Local port forwarding을 통해, 불특정 다수(<some_host>)의 <target_host>:<target_port>로의 접근 제어를 <client_host>:<client_port>로의 접근 제어를 통해 관리할 수 있다. 
-즉 <target_host>:<target_port>는 <remote_host>(Bation Host의 역할을 수행)로부터의 접근만 허용하면 된다는 점에서 <target_host>를 보다 안전하게 관리할 수 있고, 보안/시스템적 제약 사항을 우회하는 데에도 자주 쓰인다.
+Local port forwarding을 통해, 불특정 다수(\<some_host\>)의 \<target_host\>:\<target_port\>로의 접근 제어를 \<client_host\>:\<client_port\>로의 접근 제어를 통해 관리할 수 있다. 
+즉 \<target_host\>:\<target_port\>는 \<remote_host\>(Bation Host의 역할을 수행)로부터의 접근만 허용하면 된다는 점에서 \<target_host\>를 보다 안전하게 관리할 수 있고, 보안/시스템적 제약 사항을 우회하는 데에도 자주 쓰인다.
 컨테이너 기반 환경에서는 특히 이러한 Local Port Forwarding을 요긴하게 사용할 수 있다.
 
 ### 출처
