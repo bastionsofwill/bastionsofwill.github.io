@@ -1,7 +1,6 @@
 ---
 title: SSL/TLS와 인증서의 이해
 tags:
-  - infrastructure
   - network
 date: 2021-08-06 16:28:37
 ---

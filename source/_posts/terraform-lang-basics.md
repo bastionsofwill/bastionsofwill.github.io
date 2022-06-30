@@ -6,7 +6,6 @@ tags:
 date: 2022-04-20 13:43:00
 ---
 
-
 Terraform은 오픈소스 IaaC툴이며, 이를 위해 자체 Configuration 언어인 Terraform Language를 사용한다. 
 
 ## Terraform Language Elements
