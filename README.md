@@ -1,1 +1,1 @@
-<https://https://bastionsofwill.github.io/>
+<https://bastionsofwill.net/>
