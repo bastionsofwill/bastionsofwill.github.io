@@ -1,5 +1,5 @@
 ---
-title: cookie-and-session
+title: Cookie와 Session 
 tags:
   - network
 date: 2022-06-27 15:33:29

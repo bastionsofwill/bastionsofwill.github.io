@@ -9,7 +9,6 @@ tags:
 ## h2
 ### h3
 
-
 ### Emphasis
 **bold**
 __also bold__
@@ -89,7 +88,7 @@ console.log(a.cfa);
 <http://google.com/>
 
 ### Reference link
-[Google][1]
-[Naver][2]
+Google[1]
+Naver[2]
 [1]: http://google.com/ “구글”
 [2]: http://naver.com/ “네이버”
