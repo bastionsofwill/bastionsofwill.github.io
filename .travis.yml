@@ -8,6 +8,7 @@ branches:
     - main # build master branch only
 script:
   - hexo generate # generate static files
+  - echo www.bastionsofwill.net > ./public/CNAME
 deploy:
   provider: pages
   skip-cleanup: true
