@@ -110,7 +110,7 @@
 <p>즉, 클라이언트 환경에서 위와 같은 프로세스가 실행되면, <code>localhost:&lt;local port&gt;</code>로 전달되는 요청은 <code>username@&lt;remote server&gt;</code>에서 <code>&lt;target server&gt;:&lt;target port&gt;</code>에 보내지는 요청으로 처리된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:localhost:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_local.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
-<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#x40;&#49;&#46;&#50;&#x2e;&#51;&#x2e;&#52;">&#x72;&#111;&#x6f;&#x74;&#x40;&#49;&#46;&#50;&#x2e;&#51;&#x2e;&#52;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
+<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#x2e;&#x32;&#x2e;&#x33;&#46;&#52;">&#x72;&#111;&#x6f;&#x74;&#64;&#49;&#x2e;&#x32;&#x2e;&#x33;&#46;&#52;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:&lt;farawayhost&gt;:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_faraway.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
 <p>반면 위와 같이 target server를 다른 farawayhost로 지정하여 포트 포워딩을 실행할 경우, 클라이언트의 123번 포트로 보내진 요청은 ssh 터널을 통해 1.2.3.4 –&gt; farawayhost:456으로 forward된다.</p>
@@ -124,7 +124,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl57wqxvd000ye1qm95a86mgm" data-title="Local Port Forwarding" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl5gcdzxm000veuv8aqf6beps" data-title="Local Port Forwarding" class="article-share-link">공유</a>
       
       
       
@@ -173,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl57wqxv1000ke1qmb6gq7wp7" data-title="Cookie와 Session" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl5gcdzxa000ieuv84o02buh3" data-title="Cookie와 Session" class="article-share-link">공유</a>
       
       
       
@@ -221,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl57wqxv9000te1qm0rtwcs7t" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl5gcdzxg000qeuv833hsgjii" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
       
       
       
@@ -307,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl57wqxve0012e1qm1ywfd8c1" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl5gcdzxo0010euv8bebz6smh" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
       
       
       
@@ -429,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl57wqxvc000we1qm46uq7dq2" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl5gcdzxl000teuv809yw4px1" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
@@ -537,7 +537,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl57wqxve0011e1qma8vy9rnb" data-title="Terraform Language 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl5gcdzxn000xeuv812wv6s6j" data-title="Terraform Language 기초" class="article-share-link">공유</a>
       
       
       
@@ -666,7 +666,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl57wqxv0000ie1qm0lku7chm" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl5gcdzx8000geuv87fad303a" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
       
       
       
@@ -748,7 +748,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl57wqxuy000ge1qmbbbkfjly" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl5gcdzx7000feuv83w5ffjot" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
       
       
       
@@ -799,7 +799,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl57wqxv4000pe1qmhyv5aw13" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/01/12/encoding-and-video-codecs/" data-id="cl5gcdzxc000meuv86j2idt29" data-title="인코딩과 비디오 코덱" class="article-share-link">공유</a>
       
       
       
@@ -846,7 +846,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl57wqxva000ue1qmcjecap6j" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2021/12/13/log4j2-vulnerability/" data-id="cl5gcdzxk000seuv81t8pa1nl" data-title="Log4j2 취약점(CVE-2021-44228)" class="article-share-link">공유</a>
       
       
       
