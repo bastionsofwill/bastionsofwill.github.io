@@ -4,14 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>태그: unix | bastionsofwill</title>
+  <title>scp와 rsync | bastionsofwill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="bastionsofwill">
-<meta property="og:url" content="https://bastionsofwill.github.io/tags/unix/index.html">
+  <meta name="description" content="scpscp는 Secure Copy의 약어로, 원격 호스트에 파일을 전송하는 수단이다. SSH를 사용하기 때문에 통신 탈취 등으로부터 안전하다. rsyncrsync는 Remote Sync의 약어로, 마찬가지로 원격 호스트에 파일을 전송하는 수단이다.하지만 두 파일 간 차이(difference)만을 전달하는 알고리즘을 사용하기 때문에, 대부분의 경우에 보다">
+<meta property="og:type" content="article">
+<meta property="og:title" content="scp와 rsync">
+<meta property="og:url" content="https://bastionsofwill.github.io/2022/07/14/scp-and-rsync/index.html">
 <meta property="og:site_name" content="bastionsofwill">
+<meta property="og:description" content="scpscp는 Secure Copy의 약어로, 원격 호스트에 파일을 전송하는 수단이다. SSH를 사용하기 때문에 통신 탈취 등으로부터 안전하다. rsyncrsync는 Remote Sync의 약어로, 마찬가지로 원격 호스트에 파일을 전송하는 수단이다.하지만 두 파일 간 차이(difference)만을 전달하는 알고리즘을 사용하기 때문에, 대부분의 경우에 보다">
 <meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2022-07-14T17:11:03.000Z">
+<meta property="article:modified_time" content="2022-07-14T08:12:21.824Z">
 <meta property="article:author" content="JY">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="bastionsofwill" type="application/atom+xml">
@@ -69,39 +74,58 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/06/09/magical-shell-script/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-06-09T17:53:10.000Z" itemprop="datePublished">6월 9</time>
+        <section id="main"><article id="post-scp-and-rsync" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/14/scp-and-rsync/" class="article-date">
+  <time class="dt-published" datetime="2022-07-14T17:11:03.000Z" itemprop="datePublished">2022-07-14</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/06/09/magical-shell-script/">쉘 스크립트 기초</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      scp와 rsync
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><p>scp는 Secure Copy의 약어로, 원격 호스트에 파일을 전송하는 수단이다. SSH를 사용하기 때문에 통신 탈취 등으로부터 안전하다.</p>
+<h2 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h2><p>rsync는 Remote Sync의 약어로, 마찬가지로 원격 호스트에 파일을 전송하는 수단이다.<br>하지만 두 파일 간 차이(difference)만을 전달하는 알고리즘을 사용하기 때문에, 대부분의 경우에 보다 효율적인 파일 전송이 가능하다.<br>또, SCP에 비해 훨씬 다양한 옵션을 제공하기 때문에 이를 활용하여 보다 다양한 작업을 수행할 수 있다.</p>
+<p>하지만 rsync가 scp에 비해 반드시 우월하다고는 볼 수 없는데, rsync 자체는 암호화되지 않은 평문으로 데이터를 전송하기 때문에, 보안성을 위해서 SSH를 사용한 암호화를 사용(<code>--rsh=ssh</code> 옵션을 추가)하여야 한다. 반면 scp는 항상 SSH 기반 통신을 수행하기 때문에 단순하거나 가벼운 작업을 실행할 경우에는 scp를 사용하여 파일을 전송하는 것이 편리하다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/20244585/how-does-scp-differ-fromrsync-">https://stackoverflow.com/questions/20244585/how-does-scp-differ-fromrsync-</a><br><a target="_blank" rel="noopener" href="https://madplay.github.io/post/scprsync-">https://madplay.github.io/post/scprsync-</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/07/14/scp-and-rsync/" data-id="cl5kr706u000vdoqv5785bsmw" data-title="scp와 rsync" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/13/tecs-04/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">이전</strong>
+      <div class="article-nav-title">밑바닥부터 만드는 컴퓨팅 시스템 04</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>

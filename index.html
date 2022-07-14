@@ -71,6 +71,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-scp-and-rsync" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/14/scp-and-rsync/" class="article-date">
+  <time class="dt-published" datetime="2022-07-14T17:11:03.000Z" itemprop="datePublished">2022-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/07/14/scp-and-rsync/">scp와 rsync</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><p>scp는 Secure Copy의 약어로, 원격 호스트에 파일을 전송하는 수단이다. SSH를 사용하기 때문에 통신 탈취 등으로부터 안전하다.</p>
+<h2 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h2><p>rsync는 Remote Sync의 약어로, 마찬가지로 원격 호스트에 파일을 전송하는 수단이다.<br>하지만 두 파일 간 차이(difference)만을 전달하는 알고리즘을 사용하기 때문에, 대부분의 경우에 보다 효율적인 파일 전송이 가능하다.<br>또, SCP에 비해 훨씬 다양한 옵션을 제공하기 때문에 이를 활용하여 보다 다양한 작업을 수행할 수 있다.</p>
+<p>하지만 rsync가 scp에 비해 반드시 우월하다고는 볼 수 없는데, rsync 자체는 암호화되지 않은 평문으로 데이터를 전송하기 때문에, 보안성을 위해서 SSH를 사용한 암호화를 사용(<code>--rsh=ssh</code> 옵션을 추가)하여야 한다. 반면 scp는 항상 SSH 기반 통신을 수행하기 때문에 단순하거나 가벼운 작업을 실행할 경우에는 scp를 사용하여 파일을 전송하는 것이 편리하다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/20244585/how-does-scp-differ-fromrsync-">https://stackoverflow.com/questions/20244585/how-does-scp-differ-fromrsync-</a><br><a target="_blank" rel="noopener" href="https://madplay.github.io/post/scprsync-">https://madplay.github.io/post/scprsync-</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/07/14/scp-and-rsync/" data-id="cl5kr706u000vdoqv5785bsmw" data-title="scp와 rsync" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-tecs-04" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/07/13/tecs-04/" class="article-date">
@@ -107,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/13/tecs-04/" data-id="cl5je8sat0010ekusexot0rq1" data-title="밑바닥부터 만드는 컴퓨팅 시스템 04" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/13/tecs-04/" data-id="cl5kr706w0011doqvgqkh442c" data-title="밑바닥부터 만드는 컴퓨팅 시스템 04" class="article-share-link">공유</a>
       
       
       
@@ -186,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/11/tecs-010203/" data-id="cl5je8sar000xekus6wif7yah" data-title="밑바닥부터 만드는 컴퓨팅 시스템 01-03" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/11/tecs-010203/" data-id="cl5kr706v0010doqv1yar7c2k" data-title="밑바닥부터 만드는 컴퓨팅 시스템 01-03" class="article-share-link">공유</a>
       
       
       
@@ -239,7 +283,7 @@
 <p>즉, 클라이언트 환경에서 위와 같은 프로세스가 실행되면, <code>localhost:&lt;local port&gt;</code>로 전달되는 요청은 <code>username@&lt;remote server&gt;</code>에서 <code>&lt;target server&gt;:&lt;target port&gt;</code>에 보내지는 요청으로 처리된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:localhost:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_local.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
-<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#x72;&#111;&#111;&#x74;&#64;&#49;&#x2e;&#50;&#x2e;&#x33;&#x2e;&#x34;">&#x72;&#111;&#111;&#x74;&#64;&#49;&#x2e;&#50;&#x2e;&#x33;&#x2e;&#x34;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
+<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#114;&#x6f;&#111;&#x74;&#x40;&#49;&#46;&#50;&#x2e;&#51;&#x2e;&#52;">&#114;&#x6f;&#111;&#x74;&#x40;&#49;&#46;&#50;&#x2e;&#51;&#x2e;&#52;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:&lt;farawayhost&gt;:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_faraway.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
 <p>반면 위와 같이 target server를 다른 farawayhost로 지정하여 포트 포워딩을 실행할 경우, 클라이언트의 123번 포트로 보내진 요청은 ssh 터널을 통해 1.2.3.4 –&gt; farawayhost:456으로 forward된다.</p>
@@ -253,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl5je8sar000vekus02ib19az" data-title="Local Port Forwarding" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl5kr706v000xdoqv3dm13d53" data-title="Local Port Forwarding" class="article-share-link">공유</a>
       
       
       
@@ -302,7 +346,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl5je8sai000iekus881d389y" data-title="Cookie와 Session" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl5kr706l000idoqv0qg1h3mj" data-title="Cookie와 Session" class="article-share-link">공유</a>
       
       
       
@@ -350,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl5je8san000qekus1q9i451y" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl5kr706q000qdoqv8tid6vbn" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
       
       
       
@@ -436,7 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl5je8sau0013ekuseiwdhpry" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl5kr706y0015doqvb88vh3hv" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
       
       
       
@@ -558,7 +602,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl5je8saq000tekus1tl21m7w" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl5kr706t000tdoqv38ua9jel" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
@@ -666,7 +710,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl5je8sat0011ekushf2kamf8" data-title="Terraform Language 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl5kr706x0013doqvga6g2x4r" data-title="Terraform Language 기초" class="article-share-link">공유</a>
       
       
       
@@ -795,89 +839,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl5je8sag000gekus3wz0enyb" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weekend/" rel="tag">weekend</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-cntda-01" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/04/10/cntda-01/" class="article-date">
-  <time class="dt-published" datetime="2022-04-10T00:07:16.000Z" itemprop="datePublished">2022-04-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/04/10/cntda-01/">주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="구성요소로-본-인터넷"><a href="#구성요소로-본-인터넷" class="headerlink" title="구성요소로 본 인터넷"></a>구성요소로 본 인터넷</h2><ul>
-<li>인터넷은 여러 개의 컴퓨팅 장치(종단 시스템)를 연결하는 컴퓨터 네트워크</li>
-<li>종단 시스템은 통신 링크(물리 매체)와 패킷 스위치의 네트워크로 연결</li>
-<li>packet &#x3D; segment(데이터의 조각) + header</li>
-<li>가장 널리 사용되는 패킷 스위치는 라우터와 링크-레이어 스위치로, 최종 목적지 방향으로 패킷을 전달하는 역할을 수행하며, 링크-레이어 스위치는 주로 액세스 네트워크에서, 라우터는 네트워크 코어에서 사용</li>
-</ul>
-<h2 id="서비스-측면에서-본-인터넷"><a href="#서비스-측면에서-본-인터넷" class="headerlink" title="서비스 측면에서 본 인터넷"></a>서비스 측면에서 본 인터넷</h2><ul>
-<li>인터넷에 접속된 종단 시스템(출발지)은 인터넷 인프라 구조에게 다른 종단 시스템(목적지)에서 수행되는 프로그램에 데이터를 어떻게 전달하도록 요구하는지 명시하는 API(Application Programing Interface)를 제공</li>
-<li>API는 송신 프로그램이 따라야 하는 규칙의 집합이며, 인터넷은 이 규칙에 따라 데이터를 목적지로 전달</li>
-</ul>
-<h2 id="액세스-네트워크-네트워크-코어"><a href="#액세스-네트워크-네트워크-코어" class="headerlink" title="액세스 네트워크, 네트워크 코어"></a>액세스 네트워크, 네트워크 코어</h2><ul>
-<li>액세스 네트워크: 종단 시스템 간 경로 중 출발지와 첫 번째 라우터를 연결하는 네트워크</li>
-<li>네트워크 코어: 패킷 스위치와 링크의 메시(mesh)</li>
-<li>링크, 스위치의 네트워크를 통한 데이터의 전송에는 회선 교환과 패킷 교환 방식이 존재</li>
-</ul>
-<h2 id="인터넷-프로토콜-스택"><a href="#인터넷-프로토콜-스택" class="headerlink" title="인터넷 프로토콜 스택"></a>인터넷 프로토콜 스택</h2><ul>
-<li>네트워크 프로토콜은 레이어 구조를 가지며, 각 프로토콜은 한 레이어에 속하며, 상위 레이어는 하위 레이어의 서비스를 이용할 수 있다.</li>
-<li>인터넷 프로토콜 스택은 Application, Transport, Network, Link, Physical 5개 레이어로 구성된다.<h3 id="Application-Layer"><a href="#Application-Layer" class="headerlink" title="Application Layer"></a>Application Layer</h3></li>
-<li>인터넷에서 사용하는 애플리케이션 계층 프로토콜은 대표적으로 HTTP, SMTP, FTP등이 있다.</li>
-<li>애플리케이션 레이어에서의 정보 패킷을 메시지(message)라 부른다.<h3 id="Transport-Layer"><a href="#Transport-Layer" class="headerlink" title="Transport Layer"></a>Transport Layer</h3></li>
-<li>애플리케이션 레이어로부터 전달받은 메시지를 전송하는 서비스를 제공한다.</li>
-<li>인터넷에서는 TCP, UDP 2가지의 트랜스포트 프로토콜이 사용된다.</li>
-<li>트랜스포트 레이어에서의 정보 패킷을 세그먼트(segment)라 부른다.<h3 id="Network-Layer"><a href="#Network-Layer" class="headerlink" title="Network Layer"></a>Network Layer</h3></li>
-<li>출발지 호스트의 트랜스포트 레이어로부터 전달받은 세그먼트를 목적지 호스트의 트랜스포트 레이어로 전송하는 서비스를 제공한다.</li>
-<li>네트워크 레이어에서의 정보 패킷을 데이터그램(datagram)이라 부른다.</li>
-<li>IP는 데이터그램의 필드 및 네트워크 요소(종단 시스템 및 라우터)가 각 필드에 어떻게 동작하는지 정의하는, 유일한 프로토콜이다.</li>
-<li>라우팅 프로토콜 역시 네트워크 레이어에 속하며, 인터넷은 다양한 라우팅 프로토콜을 가지고 있다.<h3 id="Link-Layer"><a href="#Link-Layer" class="headerlink" title="Link Layer"></a>Link Layer</h3></li>
-<li>한 노드(호스트 또는 패킷 스위치)에서 다른 노드로 패킷을 전달하는 서비스를 제공한다.</li>
-<li>이더넷, 와이파이, DOCSIS(Data Over Cable Service Interface Specification) 등이 있다.</li>
-<li>링크 레이어에서의 정보 패킷을 프레임(frame)이라 부른다.<h3 id="Physical-Layer"><a href="#Physical-Layer" class="headerlink" title="Physical Layer"></a>Physical Layer</h3></li>
-<li>한 노드에서 다른 노드로 프레임 내부의 각 비트를 전달하는 기능을 담당한다.</li>
-</ul>
-<h2 id="캡슐화-Encapsulation"><a href="#캡슐화-Encapsulation" class="headerlink" title="캡슐화(Encapsulation)"></a>캡슐화(Encapsulation)</h2><p><img src="/images/network_layers.png"></p>
-<ul>
-<li>패킷은 각 레이어를 거치면서, 상위 계층에서 받은 정보에 헤더를 추가하면서 데이터를 캡슐화한다.</li>
-</ul>
-<h2 id="네트워크-공격"><a href="#네트워크-공격" class="headerlink" title="네트워크 공격"></a>네트워크 공격</h2><ul>
-<li>호스트에서 악성코드 실행</li>
-<li>네트워크 인프라 공격(DoS)</li>
-<li>패킷 탐지(Sniffing)</li>
-<li>패킷 위장(Spoofing)</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/10/cntda-01/" data-id="cl5je8sae000fekus635zbzrm" data-title="주말 네트워크 공부 01 - 컴퓨터 네트워크와 인터넷" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl5kr706k000gdoqvazdy12tk" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
       
       
       
@@ -919,7 +881,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그 클라우드</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TECS/" style="font-size: 13.33px;">TECS</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 13.33px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/devops/" style="font-size: 13.33px;">devops</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 13.33px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/network/" style="font-size: 16.67px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 13.33px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/weekend/" style="font-size: 16.67px;">weekend</a>
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TECS/" style="font-size: 13.33px;">TECS</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 13.33px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/devops/" style="font-size: 13.33px;">devops</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 13.33px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/network/" style="font-size: 16.67px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 13.33px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/weekend/" style="font-size: 16.67px;">weekend</a>
     </div>
   </div>
 
@@ -941,6 +903,10 @@
       <ul>
         
           <li>
+            <a href="/2022/07/14/scp-and-rsync/">scp와 rsync</a>
+          </li>
+        
+          <li>
             <a href="/2022/07/13/tecs-04/">밑바닥부터 만드는 컴퓨팅 시스템 04</a>
           </li>
         
@@ -954,10 +920,6 @@
         
           <li>
             <a href="/2022/06/27/cookie-and-session/">Cookie와 Session</a>
-          </li>
-        
-          <li>
-            <a href="/2022/06/22/how-does-a-package-manager-work/">리눅스 패키지 매니저</a>
           </li>
         
       </ul>
