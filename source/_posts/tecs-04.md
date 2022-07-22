@@ -35,5 +35,7 @@ binary 파일을 시뮬레이터로 실행하면서 키보드의 입력에 따�
 (변명하자면 어차피 종료조건도 없는 무한 루프이기 때문에 더 붙잡고 확인할 것도 없었다.) 
 
 ### 출처
+- 밑바닥부터 만드는 컴퓨팅 시스템(노암 니산, 시몬 쇼켄 / 인사이트 / 2019)
+- https://www.nand2tetris.org/
 https://stackoverflow.com/questions/8065026/assembly-language-standard
 https://standards.ieee.org/ieee/694/950/
