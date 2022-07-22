@@ -15,7 +15,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://bastionsofwill.github.io/images/tecs05-computer.png">
 <meta property="article:published_time" content="2022-07-22T17:58:10.000Z">
-<meta property="article:modified_time" content="2022-07-22T09:05:31.396Z">
+<meta property="article:modified_time" content="2022-07-22T09:13:38.960Z">
 <meta property="article:author" content="JY">
 <meta property="article:tag" content="fundamental">
 <meta property="article:tag" content="TECS">
@@ -104,8 +104,7 @@
 <p>여태까지의 흐름대로라면 두 장을 하나로 합치거나 04장과 05장의 순서가 바뀌는게 맞지 않나 싶지만, 05장에서 구현하는 회로들이 어떤 방식으로 작동하는지, 또 어떤 역할을 수행하는지를 04장에서 배우지 않았다면 안 그래도 어려운 이번 장에서 더 큰 벽을 느끼기 때문에 순서를 이렇게 구성한 것으로 보인다.</p>
 <h2 id="Project"><a href="#Project" class="headerlink" title="Project"></a>Project</h2><p>Memeory, CPU, Computer 3개의 칩을 구현하는 프로젝트가 주어진다.</p>
 <h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>이 칩은 데이터를 읽고 쓰는 저장 장치의 역할을 수행하면서 출력 장치를 주소공간에 mapping하여 추상화하는 역할을 수행한다.<br>이렇게 두 개의 역할을 수행함에도 칩의 입&#x2F;출력 명세는 굉장히 단순한데, 15비트짜리 주소 정보를 입력받은 뒤, 해당 주소에 위치하는 16비트짜리 명령어를 반환하도록 구성하면 된다.<br>이처럼 단순한 명세를 사용하지만 주소 공간을 분리하여 역할을 다르게 설계함으로서 임의의 데이터 저장 기능과 출력장치 제어 기능을 구현하는 것이 굉장히 인상적이었다.  </p>
-<p>입력 주소 정보가 15비트이므로, 해당 칩은 최대 2^15 &#x3D; 0x8000 ~&#x3D; 32K(bit)의 정보를 저장할 수 있어야 한다.</p>
-<p>하지만 설계에서는 레지스터를 아래와 같이 이용한다.</p>
+<p>입력 주소 정보가 15비트이므로, 해당 칩은 최대 2^15 &#x3D; 0x8000 ~&#x3D; 32K(bit)의 정보를 저장할 수 있어야 한다.<br>하지만 저자는 레지스터를 아래와 같이 사용하도록 구성하였고, 0x6001번 ~ 0x7FFF번 레지스터는 사용하지 않는다.</p>
 <table>
 <thead>
 <tr>
@@ -146,7 +145,7 @@
 <p>Computer는 ROM32K라는 Built-in 칩에 존재하는 명령어를 PC가 정해주는 순서대로 수행한다.<br>ROM32K 칩은 <code>load</code> 명령을 사용하여 .hack 파일의 값을 불러오는 기능을 내장한, 읽기 전용의 메모리이다.<br>만약 reset이 발생하면 ROM을 제외한 모든 레지스터(CPU 레지스터와 RAM, PC)들의 값이 0으로 초기화되면서 Computer의 상태가 초기화된다.</p>
 <h3 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h3><p>CPU 칩을 테스트하는 중, 제공된 테스트 중 CPU.tst는 통과하였으나 CPU-external.tst는 실패하였다.<br>뭐가 문제인지 확인해보았으나, 아무리 봐도 테스트 케이스가 잘못된 것으로 보여서 코드가 아니라 케이스를 수정해버리고 넘어갔다.(언제나 그렇듯이, 이렇게 문제를 해결하면 망한다.)</p>
 <p>이후 Computer 칩을 완성하고 Add, Max, Rect라는 3개의 테스트 프로그램을 사용한 테스트를 진행하였다.<br>Add와 Max는 통과하였으나, Rect를 통과하지 못해서 무엇이 문제인지 오랫동안 고민하였다.<br>Add와 Max에서는 프로그램 이름 그대로의 산술 연산을, Rect에서는 스크린 출력을 테스트하므로, Computer 칩이 출력 장치를 제어하는 로직이 잘못된 것으로 의심하였다.<br>하지만 Computer는 Memory 칩을 기반으로 동작할 뿐 직접 출력 장치를 제어하는 논리는 가지고 있지 않고, Memory 칩은 이전에 데이터 저장 뿐만 아니라 입&#x2F;출력 제어 역시 정상적으로 테스트를 통과했다.</p>
-<p>결국 디버깅을 위해 .cmp 파일과 .out 파일을 비교한 결과, D 레지스터가 업데이트되지 말아야 하는 상황에서 D 레지스터의 값이 덮어씌워지는 것을 확인할 수 있었다.<br>즉, 윗 문단의 CPU칩의 구현에서 D 레지스터의 값을 업데이트하는 논리에 오류가 있었는데 그 동안의 테스트에서 한 번도 문제점을 일으키지 않았던 것이다.<br>관련 오류를 수정하니 내 맘대로 뜯어고쳤던 CPU-external 테스트에 실패하였고, CPU-external.cmp를 초기값으로 수정하니 정상적으로 테스트에 성공하였고, CPU에서 발생한 문제가 해결되니 이를 기반으로 하는 Computer 칩에서도 모든 테스트를 성공적으로 마칠 수 있었다.</p>
+<p>디버깅을 위해 .cmp 파일과 .out 파일을 비교한 결과, D 레지스터가 업데이트되지 말아야 하는 상황에서 D 레지스터의 값이 덮어씌워지는 것을 확인할 수 있었다.<br>즉, 윗 문단의 CPU칩의 구현에서 D 레지스터의 값을 업데이트하는 논리에 오류가 있었는데 그 동안의 테스트에서 한 번도 문제점을 일으키지 않았던 것이다.<br>관련 오류를 수정하니 내 맘대로 뜯어고쳤던 CPU-external 테스트에 실패하였고, CPU-external.cmp를 초기값으로 수정하니 정상적으로 테스트를 정상적으로 통과하였다. 역시 검증된 테스트 케이스를 마음대로 고치는 건 좋은 결말로 이어질 수가 없는 법이다.<br>CPU에서 발생한 문제가 해결되니 이를 기반으로 하는 Computer 칩에서도 문제가 해결되어 모든 테스트를 성공적으로 마칠 수 있었다.</p>
 <h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><ul>
 <li>밑바닥부터 만드는 컴퓨팅 시스템(노암 니산, 시몬 쇼켄 &#x2F; 인사이트 &#x2F; 2019)</li>
 <li><a target="_blank" rel="noopener" href="https://www.nand2tetris.org/">https://www.nand2tetris.org/</a></li>
@@ -155,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/22/tecs-05/" data-id="cl5w8m6js0013d0p05trg21xg" data-title="밑바닥부터 만드는 컴퓨팅 시스템 05" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/22/tecs-05/" data-id="cl5w8wmli0013b0w775vo2a03" data-title="밑바닥부터 만드는 컴퓨팅 시스템 05" class="article-share-link">공유</a>
       
       
       
