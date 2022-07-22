@@ -71,6 +71,97 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-tecs-05" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/22/tecs-05/" class="article-date">
+  <time class="dt-published" datetime="2022-07-22T17:58:10.000Z" itemprop="datePublished">2022-07-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/07/22/tecs-05/">tecs-05</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Computer-Architecture"><a href="#Computer-Architecture" class="headerlink" title="Computer Architecture"></a>Computer Architecture</h2><p>그간 구현했던 모든 회로를 합쳐서 컴퓨터를 완성하는 과정이다.<br>04장에서 기계어와 어셈블리에 대해 배우고 이를 작성하고 테스트하는 과제를 하면서 01, 02, 03장에서 배운 내용에서 바로 이어지지 않는다는 느낌이 들었는데, 이번 장을 진행하면서 그 빈 부분을 채울 수 있었다.</p>
+<p>여태까지의 흐름대로라면 두 장을 하나로 합치거나 04장과 05장의 순서가 바뀌는게 맞지 않나 싶지만, 05장에서 구현하는 회로들이 어떤 방식으로 작동하는지, 또 어떤 역할을 수행하는지를 04장에서 배우지 않았다면 안 그래도 어려운 이번 장에서 더 큰 벽을 느끼기 때문에 순서를 이렇게 구성한 것으로 보인다.</p>
+<h2 id="Project"><a href="#Project" class="headerlink" title="Project"></a>Project</h2><p>Memeory, CPU, Computer 3개의 칩을 구현하는 프로젝트가 주어진다.</p>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>이 칩은 데이터를 읽고 쓰는 저장 장치의 역할을 수행하면서 출력 장치를 주소공간에 mapping하여 추상화하는 역할을 수행한다.<br>이렇게 두 개의 역할을 수행함에도 칩의 입&#x2F;출력 명세는 굉장히 단순한데, 15비트짜리 주소 정보를 입력받은 뒤, 해당 주소에 위치하는 16비트짜리 명령어를 반환하도록 구성하면 된다.<br>이처럼 단순한 명세를 사용하지만 주소 공간을 분리하여 역할을 다르게 설계함으로서 임의의 데이터 저장 기능과 출력장치 제어 기능을 구현하는 것이 굉장히 인상적이었다.  </p>
+<p>입력 주소 정보가 15비트이므로, 해당 칩은 최대 2^15 &#x3D; 0x8000 ~&#x3D; 32K(bit)의 정보를 저장할 수 있어야 한다.</p>
+<p>하지만 설계에서는 레지스터를 아래와 같이 이용한다.</p>
+<table>
+<thead>
+<tr>
+<th>Address Area</th>
+<th align="center">Area Size(dec)</th>
+<th align="right">Area Size(hex)</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x0000 ~ 0x3FFF</td>
+<td align="center">2^14</td>
+<td align="right">0x4000</td>
+<td align="right">Data Memory</td>
+</tr>
+<tr>
+<td>0x4000 ~ 0x5FFF</td>
+<td align="center">2^13</td>
+<td align="right">0x2000</td>
+<td align="right">Screen memory mapping space</td>
+</tr>
+<tr>
+<td>0x6000</td>
+<td align="center">1</td>
+<td align="right">0x0001</td>
+<td align="right">Keyboard memory mapping space</td>
+</tr>
+<tr>
+<td>0x6001 ~ 0x7FFF</td>
+<td align="center">2^13 - 1</td>
+<td align="right">0x1FFF</td>
+<td align="right">N&#x2F;A</td>
+</tr>
+</tbody></table>
+<p>따라서 실제로 필요한 데이터 저장 공간은 레지스터 0x4000 + 0x2000 + 0x0001개로 구성할 수 있다.<br>이전 챕터에서 구현한 RAM16K(레지스터 0x4000개)와 내장된 Screen(레지스터 0x2000개, 이전에 구성한 RAM8K(16bit)와 같은 역할을 하지만, 테스트 시 스크린 출력값을 확인할 수 있는 환경이 구성되어 있으므로 대신 사용한다), Keyboard(레지스터 0x0001개, Register와 같은 역할) 3개의 칩을 조합하여 구성한다.</p>
+<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><p>CPU는 명령어를 입력받아 이를 수행하는, 컴퓨터에서 가장 핵심이 되는 부품이다. </p>
+<p>02장에서 왜 이런 연산이 필요한지 그 이유는 모르는 채로 과제대로 구현했던 논리들이 04장에서 배운 기본적인 16비트 명령어들에 대응한다는 점을 알게 되었을 때는 감동스럽기까지 했다.</p>
+<p>02장에서 구현한 ALU와 03장의 PC(Program Counter), 그리고 04장에서 배운 D와 A, 두 개의 레지스터를 조합하여 구성할 수 있었다.</p>
+<h3 id="Computer"><a href="#Computer" class="headerlink" title="Computer"></a>Computer</h3><p>구현한 Memory와 CPU를 사용하여 reset 신호만 받아서 .hack 확장자의 어셈블리 프로그램을 실행할 수 있는 플랫폼이다.<br>말이 칩이지 입력이라고는 달랑 1비트짜리 reset 하나에 출력은 아예 없는 것이 드디어 컴퓨터에 가까운 무언가가 등장했다고 느껴졌지만, 이를 구현하는 과정이 굉장히 막막할 뻔했다.<br><img src="/../images/tecs05-computer.png"><br>다행히 책에서 구조를 다 설계해줘서 그동안 구현한 칩을 책에 나온대로 이어붙이기만 하면 실제로 명령어를 실행할 수 있는 컴퓨터의 구조를 만들어볼 수 있었다.</p>
+<p>Computer는 ROM32K라는 Built-in 칩에 존재하는 명령어를 PC가 정해주는 순서대로 수행한다.<br>ROM32K 칩은 <code>load</code> 명령을 사용하여 .hack 파일의 값을 불러오는 기능을 내장한, 읽기 전용의 메모리이다.<br>만약 reset이 발생하면 ROM을 제외한 모든 레지스터(CPU 레지스터와 RAM, PC)들의 값이 0으로 초기화되면서 Computer의 상태가 초기화된다.</p>
+<h3 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h3><p>CPU 칩을 테스트하는 중, 제공된 테스트 중 CPU.tst는 통과하였으나 CPU-external.tst는 실패하였다.<br>뭐가 문제인지 확인해보았으나, 아무리 봐도 테스트 케이스가 잘못된 것으로 보여서 코드가 아니라 케이스를 수정해버리고 넘어갔다.(언제나 그렇듯이, 이렇게 문제를 해결하면 망한다.)<br>이후 Computer 칩을 완성하고 Add, Max, Rect라는 3개의 테스트 프로그램을 사용한 테스트를 진행하였다.<br>Add와 Max는 통과하였으나, Rect를 통과하지 못해서 무엇이 문제인지 오랫동안 고민하였다.<br>Add와 Max에서는 프로그램 이름 그대로의 산술 연산을, Rect에서는 스크린 출력을 테스트하므로, Computer 칩이 출력 장치를 제어하는 로직이 잘못된 것으로 의심하였다.<br>하지만 Computer는 Memory 칩을 기반으로 동작할 뿐 직접 출력 장치를 제어하는 논리는 가지고 있지 않고, Memory 칩은 이전에 데이터 저장 뿐만 아니라 입&#x2F;출력 제어 역시 정상적으로 테스트를 통과했다.<br>결국 디버깅을 위해 .cmp 파일과 .out 파일을 비교한 결과, D 레지스터가 업데이트되지 말아야 하는 상황에서 D 레지스터의 값이 덮어씌워지는 것을 확인할 수 있었다.<br>즉, 윗 문단의 CPU칩의 구현에서 D 레지스터의 값을 업데이트하는 논리에 오류가 있었는데 그 동안의 테스트에서 한 번도 문제점을 일으키지 않았던 것이다.<br>관련 오류를 수정하니 내 맘대로 뜯어고쳤던 CPU-external 테스트에 실패하였고, CPU-external.cmp를 초기값으로 수정하니 정상적으로 테스트에 성공하였고, CPU에서 발생한 문제가 해결되니 이를 기반으로 하는 Computer 칩에서도 모든 테스트를 성공적으로 마칠 수 있었다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><ul>
+<li>밑바닥부터 만드는 컴퓨팅 시스템(노암 니산, 시몬 쇼켄 &#x2F; 인사이트 &#x2F; 2019)</li>
+<li><a target="_blank" rel="noopener" href="https://www.nand2tetris.org/">https://www.nand2tetris.org/</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2022/07/22/tecs-05/" data-id="cl5w8eunz0023cvrr8fj9bbfa" data-title="tecs-05" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TECS/" rel="tag">TECS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/books/" rel="tag">books</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-scp-and-rsync" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/07/14/scp-and-rsync/" class="article-date">
@@ -101,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/14/scp-and-rsync/" data-id="cl5kr706u000vdoqv5785bsmw" data-title="scp와 rsync" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/14/scp-and-rsync/" data-id="cl5w8eunu001wcvrresp82hoi" data-title="scp와 rsync" class="article-share-link">공유</a>
       
       
       
@@ -146,12 +237,15 @@
 <p>작성한 프로그램을 위와 같이 assembler를 통해 .hack 확장자를 가진 binary 파일로 변환하였다.</p>
 <p><img src="/../images/tecs04-CPUsimulator.png"></p>
 <p>binary 파일을 시뮬레이터로 실행하면서 키보드의 입력에 따라 모니터의 픽셀이 검은 색으로 채워져 나가는 과정을 확인할 수 있다.<br>문제는 과제에서 제시한 대로 모니터 전체를 검은 색으로 채우기 위해서는 레지스터 8192개의 값을 -1로 설정해야 했는데, 가장 빠른 속도로 프로그램을 설정하여도 몇십 분은 걸릴 듯하여 포기하였다.<br>(변명하자면 어차피 종료조건도 없는 무한 루프이기 때문에 더 붙잡고 확인할 것도 없었다.) </p>
-<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/8065026/assembly-language-standard">https://stackoverflow.com/questions/8065026/assembly-language-standard</a><br><a target="_blank" rel="noopener" href="https://standards.ieee.org/ieee/694/950/">https://standards.ieee.org/ieee/694/950/</a></p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><ul>
+<li>밑바닥부터 만드는 컴퓨팅 시스템(노암 니산, 시몬 쇼켄 &#x2F; 인사이트 &#x2F; 2019)</li>
+<li><a target="_blank" rel="noopener" href="https://www.nand2tetris.org/">https://www.nand2tetris.org/</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/8065026/assembly-language-standard">https://stackoverflow.com/questions/8065026/assembly-language-standard</a><br><a target="_blank" rel="noopener" href="https://standards.ieee.org/ieee/694/950/">https://standards.ieee.org/ieee/694/950/</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/13/tecs-04/" data-id="cl5kr706w0011doqvgqkh442c" data-title="밑바닥부터 만드는 컴퓨팅 시스템 04" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/13/tecs-04/" data-id="cl5w8eunx0021cvrrettqfhia" data-title="밑바닥부터 만드는 컴퓨팅 시스템 04" class="article-share-link">공유</a>
       
       
       
@@ -230,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/11/tecs-010203/" data-id="cl5kr706v0010doqv1yar7c2k" data-title="밑바닥부터 만드는 컴퓨팅 시스템 01-03" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/11/tecs-010203/" data-id="cl5w8eunw0020cvrr7nosgz7m" data-title="밑바닥부터 만드는 컴퓨팅 시스템 01-03" class="article-share-link">공유</a>
       
       
       
@@ -283,7 +377,7 @@
 <p>즉, 클라이언트 환경에서 위와 같은 프로세스가 실행되면, <code>localhost:&lt;local port&gt;</code>로 전달되는 요청은 <code>username@&lt;remote server&gt;</code>에서 <code>&lt;target server&gt;:&lt;target port&gt;</code>에 보내지는 요청으로 처리된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:localhost:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_local.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
-<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#114;&#x6f;&#111;&#x74;&#x40;&#49;&#46;&#50;&#x2e;&#51;&#x2e;&#52;">&#114;&#x6f;&#111;&#x74;&#x40;&#49;&#46;&#50;&#x2e;&#51;&#x2e;&#52;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
+<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#114;&#x6f;&#111;&#x74;&#x40;&#49;&#x2e;&#x32;&#46;&#51;&#x2e;&#x34;">&#114;&#x6f;&#111;&#x74;&#x40;&#49;&#x2e;&#x32;&#46;&#51;&#x2e;&#x34;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:&lt;farawayhost&gt;:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_faraway.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
 <p>반면 위와 같이 target server를 다른 farawayhost로 지정하여 포트 포워딩을 실행할 경우, 클라이언트의 123번 포트로 보내진 요청은 ssh 터널을 통해 1.2.3.4 –&gt; farawayhost:456으로 forward된다.</p>
@@ -297,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl5kr706v000xdoqv3dm13d53" data-title="Local Port Forwarding" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl5w8eunv001ycvrr2l7aecvr" data-title="Local Port Forwarding" class="article-share-link">공유</a>
       
       
       
@@ -346,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl5kr706l000idoqv0qg1h3mj" data-title="Cookie와 Session" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl5w8eun6000icvrrbdyoazso" data-title="Cookie와 Session" class="article-share-link">공유</a>
       
       
       
@@ -394,7 +488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl5kr706q000qdoqv8tid6vbn" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl5w8eund000qcvrr3w9b8vvn" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
       
       
       
@@ -480,7 +574,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl5kr706y0015doqvb88vh3hv" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl5w8euo10026cvrr9sf8cgf5" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
       
       
       
@@ -602,7 +696,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl5kr706t000tdoqv38ua9jel" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl5w8eunt001vcvrr1e0z7nlr" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
@@ -710,7 +804,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl5kr706x0013doqvga6g2x4r" data-title="Terraform Language 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/04/20/terraform-lang-basics/" data-id="cl5w8euo00024cvrr9zav2qmf" data-title="Terraform Language 기초" class="article-share-link">공유</a>
       
       
       
@@ -724,140 +818,11 @@
 
 
   
-    <article id="post-cntda-02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/04/11/cntda-02/" class="article-date">
-  <time class="dt-published" datetime="2022-04-11T01:16:50.000Z" itemprop="datePublished">2022-04-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/04/11/cntda-02/">주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="네트워크-애플리케이션-구조"><a href="#네트워크-애플리케이션-구조" class="headerlink" title="네트워크 애플리케이션 구조"></a>네트워크 애플리케이션 구조</h2><h3 id="클라이언트-x2F-서버-구조"><a href="#클라이언트-x2F-서버-구조" class="headerlink" title="클라이언트&#x2F;서버 구조"></a>클라이언트&#x2F;서버 구조</h3><ul>
-<li>웹 애플리케이션과 같이, 항상 켜져있는 서버 호스트가 다른 많은 클라이언트 호스트의 요청을 처리하는 구조</li>
-<li>클라이언트는 직접 통신하지 않음</li>
-<li>서버가 고정 IP주소라는 잘 알려진 주소를 가짐</li>
-<li>하나의 서버 호스트가 클라이언트의 모든 요청을 처리하기 어려울 경우, 데이터 센터 등으로 가상 서버를 생성<h3 id="P2P-구조"><a href="#P2P-구조" class="headerlink" title="P2P 구조"></a>P2P 구조</h3></li>
-<li>항상 켜져있는 기반 서버에 최소 의존 또는 전혀 의존하지 않음</li>
-<li>간헐적으로 연결된 호스트 쌍이 서로 직접 통신</li>
-<li>클라이언트-서버 구조와 P2P 요소를 결합한 하이브리드 구조도 존재</li>
-<li>자가 확장성을 가지며, 비용 효율적</li>
-</ul>
-<h2 id="프로세스-간-통신"><a href="#프로세스-간-통신" class="headerlink" title="프로세스 간 통신"></a>프로세스 간 통신</h2><ul>
-<li>서로 다른 2개의 종단 시스템에서 각각의 프로세스는 메시지 교환을 통해 통신<h3 id="프로세스-네트워크-인터페이스"><a href="#프로세스-네트워크-인터페이스" class="headerlink" title="프로세스 - 네트워크 인터페이스"></a>프로세스 - 네트워크 인터페이스</h3></li>
-<li>프로세스는 소켓(socket, 호스트의 애플리케이션 레이어와 트랜스포트 레이어 간 인터페이스)을 통해 네트워크로 메시지를 주고받음</li>
-<li>애플리케이션 개발자는 트랜스포트 계층에는 트랜스포트 프로토콜의 선택과 약간의 매개변수만 통제가 가능</li>
-</ul>
-<h2 id="TCP와-UDP"><a href="#TCP와-UDP" class="headerlink" title="TCP와 UDP"></a>TCP와 UDP</h2><h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><ul>
-<li>연결 지향형 서비스: 클라이언트와 서버는 전송 제어 정보를 교환하는 핸드셰이크 단계를 거친 후에 연결이 생성되어 양방향 메시지 전달이 가능해지고, 메시지 전송이 끝나면 연결을 끊는다.</li>
-<li>신뢰적 데이터 전송 서비스</li>
-<li>SSL: 암호화를 제공하지 않는 TCP에 보안성을 갖추기 위해 애플리케이션 레이어에 구현된 암호화 프로토콜</li>
-<li>혼잡 제어 방식: 인터넷의 전체 성능 향상을 위해 각 연결의 대역폭 조정 및 제한<h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3></li>
-<li>최소 서비스 모델: 비연결형, 비신뢰적 데이터 전송 서비스</li>
-<li>혼잡 제어 방식 미포함</li>
-</ul>
-<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><ul>
-<li>HTTP는 클라이언트 프로그램(웹 브라우저)과 서버 프로그램(웹 서버)으로 구현된다.</li>
-<li>웹 페이지를 구성하는 각 객체의 URL은 1)해당 객체가 존재하는 서버의 호스트 네임과 2)객체의 경로 이름을 가진다.</li>
-<li>HTTP는 TCP를 기반으로 하며, 브라우저와 서버의 프로세스는 소켓 인터페이스를 통해 TCP 통신을 진행한다.</li>
-<li>HTTP는 상태가 없다(stateless).</li>
-</ul>
-<h2 id="HTTP-메시지-포맷"><a href="#HTTP-메시지-포맷" class="headerlink" title="HTTP 메시지 포맷"></a>HTTP 메시지 포맷</h2><h3 id="HTTP-req-메시지"><a href="#HTTP-req-메시지" class="headerlink" title="HTTP req 메시지"></a>HTTP req 메시지</h3><ul>
-<li>request 라인: HTTP req 메시지의 첫 번째 줄이다.<ul>
-<li>메서드 필드(GET, POST, HEAD, PUT, DELETE, etc.)<ul>
-<li>GET: URL에 해당하는 객체를 요청한다.</li>
-<li>POST: 사용자가 입력한 form 정보를 전달을 포함한 객체를 요청한다.</li>
-<li>HEAD: GET과 유사하나, 객체는 보내지 않고 HTTP 메시지 res만 요청한다.</li>
-<li>PUT: 웹 서버에 업로드할 객체가 필요한 애플리케이션이 사용한다.</li>
-<li>DELETE: 웹 서버에 있는 객체의 삭제를 요청한다.</li>
-</ul>
-</li>
-<li>URL 필드</li>
-<li>HTTP 버전 필드</li>
-</ul>
-</li>
-<li>header 라인: HTTP req 메시지의 나머지 줄이다.<ul>
-<li>Host: 객체가 존재하는 호스트 네임이며, 웹 프록시 캐시가 요구하는 정보이다.</li>
-<li>Connection: 지속 연결을 사용할지 여부</li>
-<li>User-agent: 브라우저 타입</li>
-<li>Accept-language: 선호 언어</li>
-</ul>
-</li>
-<li>entity body: GET에서는 empty 상태이며, POST에서는 사용자가 입력한 form 정보를 포함한다.<h3 id="HTTP-res-메시지"><a href="#HTTP-res-메시지" class="headerlink" title="HTTP res 메시지"></a>HTTP res 메시지</h3></li>
-<li>초기 상태 라인<ul>
-<li>HTTP 버전 필드</li>
-<li>상태 코드 및 메시지<ul>
-<li>200 OK</li>
-<li>301 Moved Permanently</li>
-<li>400 Bad Request</li>
-<li>404 Not Found</li>
-<li>505 HTTP Version Not Supported</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>header 라인:<ul>
-<li>Connection: 클라이언트에게 메시지를 보낸 후 연결을 지속할지 여부</li>
-<li>Date: 서버가 HTTP res를 생성하고 보낸 시간</li>
-<li>Server: 웹 서버 타입(req의 User-agent와 유사)</li>
-<li>Last-Modified: 객체 생성 또는 최근 수정 시간이며, 캐싱 기능에 중요하게 사용된다.</li>
-<li>Content-Length: 객체 크기</li>
-<li>Conent-Type: 객체 타입</li>
-</ul>
-</li>
-<li>entity body</li>
-</ul>
-<h2 id="쿠키"><a href="#쿠키" class="headerlink" title="쿠키"></a>쿠키</h2><ul>
-<li>HTTP는 stateless하므로, 서버가 사용자를 추적하기 위해 쿠키(cookie)를 사용한다.</li>
-<li>쿠키는 아래와 같은 4개 요소로 작동한다.<ul>
-<li>HTTP res 메시지 쿠키 헤더 라인: 서버는 사용자 식별을 위한 ID를 생성하고 Set-cookie: 헤더에 이를 포함한다.</li>
-<li>브라우저 쿠키 파일: 브라우저는 이를 자신이 관리하는 쿠키 파일에 저장한다.</li>
-<li>HTTP req 메시지 쿠키 헤더 라인: 브라우저는 쿠키 파일에 현재 사이트에서 발급받은 쿠키가 있을 경우 이를 Cookie: 헤더로 포함하여 req 메시지를 전달한다.</li>
-<li>서버(사이트) 백엔드 데이터베이스: 쿠키로 식별한 각 사용자의 활동 정보가 저장된다.</li>
-</ul>
-</li>
-</ul>
-<h2 id="웹-캐싱"><a href="#웹-캐싱" class="headerlink" title="웹 캐싱"></a>웹 캐싱</h2><ul>
-<li>웹 캐시는 프록시 서버라고도 불리며, origin을 대신하여 HTTP req를 처리해줄 수 있는 네트워크 개체이다.</li>
-<li>이를 위해 자체 저장 디스크를 갖추고 최근 호출된 객체의 사본을 저장한다.</li>
-<li>브라우저 설정을 통해 모든 HTTP 요청을 웹 캐시를 거치도록 구성할 수 있다.</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/04/11/cntda-02/" data-id="cl5kr706k000gdoqvazdy12tk" data-title="주말 네트워크 공부 02 - 네트워크 애플리케이션의 원리와 HTTP" class="article-share-link">공유</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weekend/" rel="tag">weekend</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">다음 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">다음 &raquo;</a>
   </nav>
 
 </section>
@@ -871,7 +836,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TECS/" rel="tag">TECS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Terraform/" rel="tag">Terraform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/devops/" rel="tag">devops</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekend/" rel="tag">weekend</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TECS/" rel="tag">TECS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Terraform/" rel="tag">Terraform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Travis-CI/" rel="tag">Travis CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/books/" rel="tag">books</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/devops/" rel="tag">devops</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fundamental/" rel="tag">fundamental</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/infrastructure/" rel="tag">infrastructure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/streaming/" rel="tag">streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/the-secret-life-of-programs/" rel="tag">the-secret-life-of-programs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weekend/" rel="tag">weekend</a></li></ul>
     </div>
   </div>
 
@@ -881,7 +846,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">태그 클라우드</h3>
     <div class="widget tagcloud">
-      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TECS/" style="font-size: 13.33px;">TECS</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 13.33px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/devops/" style="font-size: 13.33px;">devops</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 13.33px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/network/" style="font-size: 16.67px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 13.33px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/weekend/" style="font-size: 16.67px;">weekend</a>
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/TECS/" style="font-size: 16.67px;">TECS</a> <a href="/tags/Terraform/" style="font-size: 10px;">Terraform</a> <a href="/tags/Travis-CI/" style="font-size: 13.33px;">Travis CI</a> <a href="/tags/book/" style="font-size: 20px;">book</a> <a href="/tags/books/" style="font-size: 10px;">books</a> <a href="/tags/devops/" style="font-size: 13.33px;">devops</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/fundamental/" style="font-size: 16.67px;">fundamental</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/history/" style="font-size: 10px;">history</a> <a href="/tags/infrastructure/" style="font-size: 10px;">infrastructure</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/network/" style="font-size: 16.67px;">network</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/streaming/" style="font-size: 10px;">streaming</a> <a href="/tags/the-secret-life-of-programs/" style="font-size: 13.33px;">the-secret-life-of-programs</a> <a href="/tags/unix/" style="font-size: 10px;">unix</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/weekend/" style="font-size: 16.67px;">weekend</a>
     </div>
   </div>
 
@@ -903,6 +868,10 @@
       <ul>
         
           <li>
+            <a href="/2022/07/22/tecs-05/">tecs-05</a>
+          </li>
+        
+          <li>
             <a href="/2022/07/14/scp-and-rsync/">scp와 rsync</a>
           </li>
         
@@ -916,10 +885,6 @@
         
           <li>
             <a href="/2022/06/28/ssh-local-port-forwarding/">Local Port Forwarding</a>
-          </li>
-        
-          <li>
-            <a href="/2022/06/27/cookie-and-session/">Cookie와 Session</a>
           </li>
         
       </ul>

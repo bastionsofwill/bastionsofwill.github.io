@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   
   
-  <title>아카이브: 2021/8 | bastionsofwill</title>
+  <title>bastionsofwill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
 <meta property="og:title" content="bastionsofwill">
-<meta property="og:url" content="https://bastionsofwill.github.io/archives/2021/08/index.html">
+<meta property="og:url" content="https://bastionsofwill.github.io/page/3/index.html">
 <meta property="og:site_name" content="bastionsofwill">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:author" content="JY">
@@ -71,76 +71,64 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/06/what-is-ssl-certificate/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-06T16:28:37.000Z" itemprop="datePublished">8월 6</time>
+    <article id="post-email-tracking" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/22/email-tracking/" class="article-date">
+  <time class="dt-published" datetime="2021-07-22T19:03:20.000Z" itemprop="datePublished">2021-07-22</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/06/what-is-ssl-certificate/">SSL/TLS와 인증서의 이해</a>
+      <a class="p-name article-title" href="/2021/07/22/email-tracking/">이메일 개봉/링크 클릭 추적하기</a>
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/01/tslop-05/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-01T13:18:02.000Z" itemprop="datePublished">8월 1</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/01/tslop-05/">The Secret Life of Programs - 05. Computer Architecture</a>
-    </h1>
-  
+        <h2 id="Open-Tracking"><a href="#Open-Tracking" class="headerlink" title="Open Tracking"></a>Open Tracking</h2><p>Open tracking은 이메일 수신자가 해당 이메일을 개봉하였는지를 알려준다. 이를 위해 메일침프는 이메일 HTML 하단에 Open tracker(또는 Web beacon)이라는, 캠페인별로 유니크한 작은 투명 그래픽을 임베드한다. 이후 수신자가 해당 메일을 열게 되면, 그 투명 그래픽을 메일침프 서버에서 다운받게 되면서 메일 개봉 처리가 된다. Out-of-office같은 자동화 답장은 그래픽을 다운받지 않기 때문에 미개봉으로 처리된다.<br>Web beacon을 사용한 추적은 Open tracking을 위한 표준이며, 구독자의 참여 정도를 알 수 있게 해주지만 몇 가지 제약 사항이 따른다. 숨겨진 그래픽 이미지를 기반으로 작동하기 때문에 수신자가 이메일을 열람하는 환경에 따라서 작동하지 않을 수 있는데, 예를 들어 이메일 클라이언트가 해당 이미지를 표기하지 않는 경우에는 작동하지 않는다.</p>
+<h2 id="Click-Tracking"><a href="#Click-Tracking" class="headerlink" title="Click Tracking"></a>Click Tracking</h2><p>수신자가 메일에 포함된 URL을 클릭하게 되면, 해당 URL은 Mailchimp의 서버를 경유하여 로그에 기록된 후 목표 주소에 리다이렉트된다. </p>
+<h2 id="What-is-Link-Branding"><a href="#What-is-Link-Branding" class="headerlink" title="What is Link Branding?"></a>What is Link Branding?</h2><p>이메일 링크 브랜딩은 open tracking에 쓰이는 비콘 click tracking이 달린 링크가 SendGrid가 아니라 서비스 사용자의 도메인을 향하게 해준다. 스팸 필터와 수신 서버는 이메일에 포함된 링크를 검사하여 이메일의 신뢰도를 평가하는데, 이 때 해당 링크가 연결된 루트 도메인의 평판(reputation)을 사용하게 된다. 링크 라벨링을 통해 클릭 트래킹 링크가 사용자가 컨트롤할 수 없는 도메인을 경유하지 않도록 함으로써 이메일 전달성의 향상을 기대할 수 있다.</p>
+<h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p>SendGrid Documentation</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.sendgrid.com/ui/account-and-settings/how-to-set-up-link-branding#cdn">https://docs.sendgrid.com/ui/account-and-settings/how-to-set-up-link-branding#cdn</a></li>
+</ul>
+<p>Mailchimp Documentation</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mailchimp.com/help/about-open-tracking/">https://mailchimp.com/help/about-open-tracking/</a></li>
+<li><a target="_blank" rel="noopener" href="https://mailchimp.com/help/enable-and-view-click-tracking/">https://mailchimp.com/help/enable-and-view-click-tracking/</a></li>
+</ul>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/01/tslop-04/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-01T13:17:04.000Z" itemprop="datePublished">8월 1</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/01/tslop-04/">The Secret Life of Programs - 04. Computer Anatomy</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bastionsofwill.github.io/2021/07/22/email-tracking/" data-id="cl5w8eun7000kcvrrfvgw6uok" data-title="이메일 개봉/링크 클릭 추적하기" class="article-share-link">공유</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/email/" rel="tag">email</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
 </article>
-  
-  
-    </div></section>
+
+
+
   
 
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 이전</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         
