@@ -34,7 +34,7 @@ resource "aws_vpc" "main" {
   - `source`: child module의 configuration file path 또는 다운로드 주소
   - `version`: child module 버전
   - input variables
-  - meta-arguments: child 모듈을 호출하는 방식을 지정해줄 수 있ㄷ.
+  - meta-arguments: child 모듈을 호출하는 방식을 지정해줄 수 있다.
 
 ## Resources
 - Terraform Language에서 가장 중요한 요소
