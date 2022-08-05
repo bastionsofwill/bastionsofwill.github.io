@@ -107,16 +107,16 @@
 <h2 id="Web-ACL-Rule-Rule-Group"><a href="#Web-ACL-Rule-Rule-Group" class="headerlink" title="Web ACL, Rule, Rule Group"></a>Web ACL, Rule, Rule Group</h2><p>WAF는 일종의 규칙 목록인 Web ACL을 관리할 resource에 연결하는 방식으로 동작한다.<br>Web ACL은 여러 개의 Rule을 가질 수 있으며, 사용자는 다양한 Statement를 조합하여 Rule이 원하는 대로 동작하도록 구성할 수 있다.<br>또, 여러 개의 Rule을 Rule Group이라는 resource로 묶어서 관리할 수 있는데, Web ACL 역시 Rule들의 집합이라 볼 수 있으므로 Rule Group과 Web ACL의 관계는 처음 이해할 때 개인적으로 굉장히 헷갈리는 부분이었다. </p>
 <p>AWS resource에 연결된 Web ACL은 WAF 관점에서 해당 resource를 추상화한 인터페이스로 볼 수 있다.<br>즉, 어떤 Web ACL에 어떤 규칙을 추가하는 것은 곧 그 Web ACL이 연결된 AWS resource에 그 규칙을 적용하는 것과 같다.</p>
 <p>반면, Rule Group은 함께 사용되면 편리한 Rule들을 한 번에 적용하기 위한 관리 단위로, Rule Group을 AWS resource에 적용하기 위해서는 Web ACL에 이를 ‘Rule Group을 참조하는 Rule’ 형태로 추가하여 사용한다. </p>
-<p>다만 Web ACL과 AWS resource의 대응 관계는 1:N으로, 하나의 resource에는 하나의 Web ACL만 연결할 수 있지만, 하나의 Web ACL을 여러 resource에 연결하여 재사용하는 것은 가능하다.<br>(단, CloudFront Distribution에 연결된 Web ACL은 다른 종류에 resource들에게 연결할 수 없다.)</p>
-<h2 id="Web-ACL-Capacity-Unit-WCU"><a href="#Web-ACL-Capacity-Unit-WCU" class="headerlink" title="Web ACL Capacity Unit(WCU)"></a>Web ACL Capacity Unit(WCU)</h2><p>모든 Rule은 전부 그 복잡도에 따라 사용하는 컴퓨팅 파워의 양을 나타내는 척도를 갖는데, 이를 WCU라 한다.<br>각 Web ACL은 1500의 WCU 상한선(별도 요청을 통한 상향 조정은 가능)을 가지므로, 이를 고려하여 resource 관리 체계를 구성하여야 한다.</p>
+<p>다만 Web ACL과 AWS resource의 대응 관계는 1:N으로, 하나의 resource에는 하나의 Web ACL만 연결할 수 있지만, 하나의 Web ACL을 여러 resource에 연결하여 재사용하는 것은 가능하다.<br>(단, CloudFront Distribution에 연결된 Web ACL은 다른 종류의 resource들에 연결할 수 없다.)</p>
+<h2 id="Web-ACL-Capacity-Unit-WCU"><a href="#Web-ACL-Capacity-Unit-WCU" class="headerlink" title="Web ACL Capacity Unit(WCU)"></a>Web ACL Capacity Unit(WCU)</h2><p>모든 Rule은 전부 그 복잡도에 따라 사용하는 컴퓨팅 파워의 양을 나타내는 척도를 갖는데, 이를 WCU라 한다.<br>각 Web ACL은 1500의 WCU 상한선(Support 요청을 통한 상향 조정은 가능)을 가지므로, 이를 고려하여 resource 관리 체계를 구성하여야 한다.</p>
 <p>Rule Group을 최초 생성 시 변경 불가능한 WCU 상한선(Capacity)을 지정하여야 하는데, Rule Group이 갖는 Rule들의 WCU 총합(Used Capacity)은 (당연하게도) Capacity를 초과할 수 없다.</p>
-<p>Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity <strong>아님</strong>)가 Web ACL의 WCL 상한선에 합산되므로, Rule Group의 Capacity를 필요 이상으로 크게 생성하면 Rule Group을 다시 생성하여야 할 수도 있으므로 주의하여야 한다.</p>
+<p>Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity <strong>아님</strong>)가 Web ACL의 WCL 사용량에 합산되어 WCU를 잡아먹는다.<br>따라서 Rule Group의 Capacity를 필요 이상으로 크게 생성하면 WCU 상한선을 넘겨서 Rule Group을 다시 생성하여야 할 수도 있으므로, 적정 수준의 Capacity를 설정하는 것이 바람직하다.</p>
 <h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p>컴퓨터 네트워킹: 하향식 접근 - 제6판 (Kurose, Ross &#x2F; Pearson &#x2F; 2012)<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Firewall_(computing)">https://en.wikipedia.org/wiki/Firewall_(computing)</a><br><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/08/04/aws-waf/" data-id="cl6euzz4t000gdykk3xg65pr5" data-title="AWS WAF란?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/08/04/aws-waf/" data-id="cl6ft4n04000gcxua327j4z1z" data-title="AWS WAF란?" class="article-share-link">공유</a>
       
       
       
@@ -206,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/22/tecs-05/" data-id="cl6euzz580019dykk4jghcf6y" data-title="밑바닥부터 만드는 컴퓨팅 시스템 05" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/22/tecs-05/" data-id="cl6ft4n0j0019cxuaeqlc7y0o" data-title="밑바닥부터 만드는 컴퓨팅 시스템 05" class="article-share-link">공유</a>
       
       
       
@@ -250,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/14/scp-and-rsync/" data-id="cl6euzz560012dykkagr94yzn" data-title="scp와 rsync" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/14/scp-and-rsync/" data-id="cl6ft4n0g0012cxuad5j41xgo" data-title="scp와 rsync" class="article-share-link">공유</a>
       
       
       
@@ -303,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/13/tecs-04/" data-id="cl6euzz580017dykkem9caee2" data-title="밑바닥부터 만드는 컴퓨팅 시스템 04" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/13/tecs-04/" data-id="cl6ft4n0i0017cxua32tn98hc" data-title="밑바닥부터 만드는 컴퓨팅 시스템 04" class="article-share-link">공유</a>
       
       
       
@@ -382,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/07/11/tecs-010203/" data-id="cl6euzz570015dykk9x0y6sw7" data-title="밑바닥부터 만드는 컴퓨팅 시스템 01-03" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/07/11/tecs-010203/" data-id="cl6ft4n0h0015cxua8r2hbf59" data-title="밑바닥부터 만드는 컴퓨팅 시스템 01-03" class="article-share-link">공유</a>
       
       
       
@@ -435,7 +435,7 @@
 <p>즉, 클라이언트 환경에서 위와 같은 프로세스가 실행되면, <code>localhost:&lt;local port&gt;</code>로 전달되는 요청은 <code>username@&lt;remote server&gt;</code>에서 <code>&lt;target server&gt;:&lt;target port&gt;</code>에 보내지는 요청으로 처리된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:localhost:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_local.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
-<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#49;&#46;&#x32;&#x2e;&#x33;&#x2e;&#52;">&#x72;&#x6f;&#111;&#116;&#64;&#49;&#46;&#x32;&#x2e;&#x33;&#x2e;&#52;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
+<p>위 예시는 target server를 localhost, 즉 자기 자신(gateway server, SSH server, 1.2.3.4)으로 지정한 경우이다. 이 때는 접근이 허용된 어느 호스트(자기 자신을 포함하여)에서든 프로세스를 실행한 클라이언트의 123번 포트(아래 이미지의 <code>your host:123</code>)로 요청을 보내면, 해당 요청은 ssh 터널을 통해 <a href="mailto:&#x72;&#111;&#111;&#116;&#x40;&#x31;&#x2e;&#50;&#46;&#51;&#46;&#x34;">&#x72;&#111;&#111;&#116;&#x40;&#x31;&#x2e;&#50;&#46;&#51;&#46;&#x34;</a> –&gt; 127.0.0.1:456 연결로 forward된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L 123:&lt;farawayhost&gt;:456 root@1.2.3.4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/lfp_faraway.png"><br>이미지 출처: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></p>
 <p>반면 위와 같이 target server를 다른 farawayhost로 지정하여 포트 포워딩을 실행할 경우, 클라이언트의 123번 포트로 보내진 요청은 ssh 터널을 통해 1.2.3.4 –&gt; farawayhost:456으로 forward된다.</p>
@@ -449,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl6euzz560013dykk3vkp07fp" data-title="Local Port Forwarding" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/28/ssh-local-port-forwarding/" data-id="cl6ft4n0h0013cxuabq17d7ht" data-title="Local Port Forwarding" class="article-share-link">공유</a>
       
       
       
@@ -498,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl6euzz4x000mdykka3ul887h" data-title="Cookie와 Session" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/27/cookie-and-session/" data-id="cl6ft4n08000mcxuaf524e8ef" data-title="Cookie와 Session" class="article-share-link">공유</a>
       
       
       
@@ -546,7 +546,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl6euzz53000vdykkgckf7e7n" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/22/how-does-a-package-manager-work/" data-id="cl6ft4n0d000vcxua97n64ko7" data-title="리눅스 패키지 매니저" class="article-share-link">공유</a>
       
       
       
@@ -632,7 +632,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl6euzz5a001cdykk9d0xchtp" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/12/travis-ci-error/" data-id="cl6ft4n0k001ccxuac94s7nr3" data-title="Travis CI 에러 조치" class="article-share-link">공유</a>
       
       
       
@@ -754,7 +754,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl6euzz55000zdykk5cj6h4io" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/06/09/magical-shell-script/" data-id="cl6ft4n0f000zcxua0qpwae9q" data-title="쉘 스크립트 기초" class="article-share-link">공유</a>
       
       
       
