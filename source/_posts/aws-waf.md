@@ -44,8 +44,8 @@ AWS resource에 연결된 Web ACL은 WAF 관점에서 해당 resource를 추상�
 
 Rule Group을 최초 생성 시 변경 불가능한 WCU 상한선(Capacity)을 지정하여야 하는데, Rule Group이 갖는 Rule들의 WCU 총합(Used Capacity)은 (당연하게도) Capacity를 초과할 수 없다.
 
-Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity **아님**)가 Web ACL의 WCL 사용량에 합산되어 WCU를 잡아먹는다.
-따라서 Rule Group의 Capacity를 필요 이상으로 크게 생성하면 WCU 상한선을 넘겨서 Rule Group을 다시 생성하여야 할 수도 있으므로, 적정 수준의 Capacity를 설정하는 것이 바람직하다.
+Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity **아님**)가 Web ACL의 WCU 사용량을 잡아먹는다.
+따라서 Rule Group의 Capacity를 필요 이상으로 크게 생성하면 WCU 상한선을 넘겨서 Rule Group을 다시 생성하여야 하므로, 적정 수준의 Capacity를 설정하는 것이 바람직하다.
 
 ### 출처
 컴퓨터 네트워킹: 하향식 접근 - 제6판 (Kurose, Ross / Pearson / 2012)
