@@ -36,15 +36,16 @@ AWS resource에 연결된 Web ACL은 WAF 관점에서 해당 resource를 추상�
 반면, Rule Group은 함께 사용되면 편리한 Rule들을 한 번에 적용하기 위한 관리 단위로, Rule Group을 AWS resource에 적용하기 위해서는 Web ACL에 이를 'Rule Group을 참조하는 Rule' 형태로 추가하여 사용한다. 
 
 다만 Web ACL과 AWS resource의 대응 관계는 1:N으로, 하나의 resource에는 하나의 Web ACL만 연결할 수 있지만, 하나의 Web ACL을 여러 resource에 연결하여 재사용하는 것은 가능하다.
-(단, CloudFront Distribution에 연결된 Web ACL은 다른 종류에 resource들에게 연결할 수 없다.)
+(단, CloudFront Distribution에 연결된 Web ACL은 다른 종류의 resource들에 연결할 수 없다.)
 
 ## Web ACL Capacity Unit(WCU)
 모든 Rule은 전부 그 복잡도에 따라 사용하는 컴퓨팅 파워의 양을 나타내는 척도를 갖는데, 이를 WCU라 한다.
-각 Web ACL은 1500의 WCU 상한선(별도 요청을 통한 상향 조정은 가능)을 가지므로, 이를 고려하여 resource 관리 체계를 구성하여야 한다.
+각 Web ACL은 1500의 WCU 상한선(Support 요청을 통한 상향 조정은 가능)을 가지므로, 이를 고려하여 resource 관리 체계를 구성하여야 한다.
 
 Rule Group을 최초 생성 시 변경 불가능한 WCU 상한선(Capacity)을 지정하여야 하는데, Rule Group이 갖는 Rule들의 WCU 총합(Used Capacity)은 (당연하게도) Capacity를 초과할 수 없다.
 
-Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity **아님**)가 Web ACL의 WCL 상한선에 합산되므로, Rule Group의 Capacity를 필요 이상으로 크게 생성하면 Rule Group을 다시 생성하여야 할 수도 있으므로 주의하여야 한다.
+Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity **아님**)가 Web ACL의 WCL 사용량에 합산되어 WCU를 잡아먹는다.
+따라서 Rule Group의 Capacity를 필요 이상으로 크게 생성하면 WCU 상한선을 넘겨서 Rule Group을 다시 생성하여야 할 수도 있으므로, 적정 수준의 Capacity를 설정하는 것이 바람직하다.
 
 ### 출처
 컴퓨터 네트워킹: 하향식 접근 - 제6판 (Kurose, Ross / Pearson / 2012)
