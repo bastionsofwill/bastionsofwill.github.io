@@ -14,7 +14,7 @@
 <meta property="og:description" content="Web Application FirewallAWS에서 제공하는 서비스인 WAF는 Web Application Firewall의 약자이지만, WAF라는 용어는 AWS에서 새로 만든 것은 아니다.따라서 WAF, 그 이전에 Firewall이 무엇인지 아주아주 간략하게나마 이해할 필요가 있다. Firewall(이하 방화벽)은 일반 인터넷과 내부 네트워크를 분리하는">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2022-08-04T18:33:13.000Z">
-<meta property="article:modified_time" content="2022-08-05T01:47:22.396Z">
+<meta property="article:modified_time" content="2022-08-05T01:57:36.143Z">
 <meta property="article:author" content="JY">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="AWS">
@@ -114,13 +114,13 @@
 <p>다만 Web ACL과 AWS resource의 대응 관계는 1:N으로, 하나의 resource에는 하나의 Web ACL만 연결할 수 있지만, 하나의 Web ACL을 여러 resource에 연결하여 재사용하는 것은 가능하다.<br>(단, CloudFront Distribution에 연결된 Web ACL은 다른 종류의 resource들에 연결할 수 없다.)</p>
 <h2 id="Web-ACL-Capacity-Unit-WCU"><a href="#Web-ACL-Capacity-Unit-WCU" class="headerlink" title="Web ACL Capacity Unit(WCU)"></a>Web ACL Capacity Unit(WCU)</h2><p>모든 Rule은 전부 그 복잡도에 따라 사용하는 컴퓨팅 파워의 양을 나타내는 척도를 갖는데, 이를 WCU라 한다.<br>각 Web ACL은 1500의 WCU 상한선(Support 요청을 통한 상향 조정은 가능)을 가지므로, 이를 고려하여 resource 관리 체계를 구성하여야 한다.</p>
 <p>Rule Group을 최초 생성 시 변경 불가능한 WCU 상한선(Capacity)을 지정하여야 하는데, Rule Group이 갖는 Rule들의 WCU 총합(Used Capacity)은 (당연하게도) Capacity를 초과할 수 없다.</p>
-<p>Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity <strong>아님</strong>)가 Web ACL의 WCL 사용량에 합산되어 WCU를 잡아먹는다.<br>따라서 Rule Group의 Capacity를 필요 이상으로 크게 생성하면 WCU 상한선을 넘겨서 Rule Group을 다시 생성하여야 할 수도 있으므로, 적정 수준의 Capacity를 설정하는 것이 바람직하다.</p>
+<p>Web ACL에 Rule Group을 추가하게 되면 Rule Group의 Capacity(Used Capacity <strong>아님</strong>)가 Web ACL의 WCU 사용량을 잡아먹는다.<br>따라서 Rule Group의 Capacity를 필요 이상으로 크게 생성하면 WCU 상한선을 넘겨서 Rule Group을 다시 생성하여야 하므로, 적정 수준의 Capacity를 설정하는 것이 바람직하다.</p>
 <h3 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h3><p>컴퓨터 네트워킹: 하향식 접근 - 제6판 (Kurose, Ross &#x2F; Pearson &#x2F; 2012)<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Firewall_(computing)">https://en.wikipedia.org/wiki/Firewall_(computing)</a><br><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://bastionsofwill.github.io/2022/08/04/aws-waf/" data-id="cl6ft4n04000gcxua327j4z1z" data-title="AWS WAF란?" class="article-share-link">공유</a>
+      <a data-url="https://bastionsofwill.github.io/2022/08/04/aws-waf/" data-id="cl6fthswi000geon911qd4ysg" data-title="AWS WAF란?" class="article-share-link">공유</a>
       
       
       
